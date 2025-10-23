@@ -40,7 +40,7 @@ function Products() {
     },
   ];
   return (
-    <div className="py-10">
+    <div className="py-20">
       <div className="cmpad">
         <div style={{ textAlign: "center" }}>
           <span className="badge">All Products</span>

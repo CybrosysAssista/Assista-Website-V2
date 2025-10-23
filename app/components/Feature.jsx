@@ -3,7 +3,7 @@ import React from "react";
 
 function Feature() {
   return (
-    <div className="py-10">
+    <div className="py-20 bg-[#e97d830d]">
       <div className="cmpad">
         <div style={{ textAlign: "center" }}>
           <span className="badge">Key Features</span>
@@ -57,7 +57,7 @@ function Feature() {
             </a>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-30 max-w-[90%] mx-auto">
           <div className="flex flex-col justify-center">
             <h2 className="text-4xl font-medium mb-3 leading-13">
               Empower your <br /> Development with Assista
