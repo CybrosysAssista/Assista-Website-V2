@@ -31,7 +31,7 @@ function Header() {
             isActive ? "h-15 mt-0" : "h-21"
           }`}
         >
-          <a href="/" className="xl:w-1/3 sm:pl-1">
+          <a href="/" className="xl:w-[150px]">
             <Image
               src="/logo/logo3.svg"
               alt="Logo"
@@ -42,7 +42,7 @@ function Header() {
           </a>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex flex-1 w-2/3 items-center justify-end gap-15">
+          <nav className="hidden lg:flex flex-1 items-center justify-end gap-15">
             <ul className="flex items-center space-x-10 text-[15px]">
               <li>
                 <a
