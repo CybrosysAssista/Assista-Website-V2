@@ -13,7 +13,7 @@ function Footer() {
             <div className="footer-logo">
               <a href="/" className="">
                 <Image
-                  src="/logo/logo.svg"
+                  src="/logo/logo3.svg"
                   alt="Logo"
                   width={180}
                   height={40}
