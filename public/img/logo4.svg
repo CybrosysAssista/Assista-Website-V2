@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 918.7 918.7">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-5694.3" y1="-6029.4" x2="-4970.9" y2="-6029.4" gradientTransform="translate(-4811.5 -5318.3) rotate(-180)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bfbfbf"/>
+      <stop offset=".8" stop-color="#fff"/>
+      <stop offset="1" stop-color="#eaeaea"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-4191.3" y1="-5932.3" x2="-4463.2" y2="-5502.5" gradientTransform="translate(-3802.1 -5318.3) rotate(-180)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bfbfbf"/>
+      <stop offset=".2" stop-color="#cfcfcf"/>
+      <stop offset=".5" stop-color="#e9e9e9"/>
+      <stop offset=".8" stop-color="#f9f9f9"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="-742.7" y1="-5685.1" x2="-19.2" y2="-5685.1" gradientTransform="translate(778.5 -5318.3) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bfbfbf"/>
+      <stop offset=".8" stop-color="#fff"/>
+      <stop offset="1" stop-color="#eaeaea"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="760.4" y1="-5588.1" x2="488.4" y2="-5158.3" gradientTransform="translate(-230.8 -5318.3) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bfbfbf"/>
+      <stop offset=".2" stop-color="#cfcfcf"/>
+      <stop offset=".5" stop-color="#e9e9e9"/>
+      <stop offset=".8" stop-color="#f9f9f9"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
+  <g>
+    <g id="Layer_2">
+      <g id="Layer_1-2">
+        <g>
+          <path class="cls-4" d="M464.2,587.7l-10.3-4.2-178.3-74.6s-3.5-1.4-3.7-5.5v159.2c0,2.1,1.2,3.9,3.1,4.7l607.8,251.3v-160l-418.6-170.9h0Z"/>
+          <path class="cls-1" d="M271.8,503.3h0c0,2.3,1.3,4.6,3.7,5.6l178.3,74.6,192.9-79v-160.3l-371.3,153.5s-.1,0-.2,0c-.1,0-.2.1-.2.1-.2.1-.7.4-1.2.8l-.6.6c-.2.2-.4.5-.6.9-.1.2-.2.4-.3.6-.2.3-.3.7-.4,1.1-.1.4-.2.9-.2,1.4h0s0,0,0,0Z"/>
+          <path class="cls-3" d="M35.9,414.4v160l607.8-251.3c1.9-.8,3.1-2.7,3.1-4.7v-159.2c-.2,4.1-3.7,5.5-3.7,5.5l-178.3,74.6-10.3,4.2L35.9,414.4Z"/>
+          <path class="cls-2" d="M646.8,159.1h0c0,2.3-1.3,4.6-3.7,5.6l-178.3,74.6-192.9-79V0l371.3,153.5s.1,0,.2,0c.1,0,.2.1.2.1.2.1.7.4,1.2.8l.6.6c.2.2.4.5.6.9.1.2.2.4.3.6.2.3.3.7.4,1.1.1.4.2.9.2,1.4h0s0,0,0,0Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
