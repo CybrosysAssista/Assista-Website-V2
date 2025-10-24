@@ -58,22 +58,22 @@ function Page() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-8">
-              <Image src="/img/idelogo.svg" alt="" width={60} height={60} />
+              <Image src="/img/logo8.svg" alt="" width={60} height={60} />
               <span className="font-semibold text-4xl text-[#818181]">
-                Assista IDE
+                Assista News
               </span>
             </div>
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
-              The AI powered IDE to
-              <br /> Code smarter{" "}
+              Your assistant to
+              <br /> Communicate{" "}
               <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
-                build faster.
+                intelligently.
               </span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
-              Assita IDE combines intelligent code assistance and real-time
-              collaboration to your workflow from concept to all in one place.
+              Assista Air brings natural, AI-driven conversations to your
+              workflow. From smart responses to task automation and get things done faster with ease.
             </p>
 
             <div className="flex gap-2 mt-10 mb-15">
@@ -166,7 +166,6 @@ function Page() {
                 real-time insights to make smarter decisions helping your team
                 work faster and more efficiently.
               </p>
-             
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
@@ -180,7 +179,6 @@ function Page() {
                 real-time insights to make smarter decisions helping your team
                 work faster and more efficiently.
               </p>
-             
             </div>
             <div>
               <Image
@@ -232,7 +230,6 @@ function Page() {
                 real-time insights to make smarter decisions helping your team
                 work faster and more efficiently.
               </p>
-             
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
@@ -246,7 +243,6 @@ function Page() {
                 real-time insights to make smarter decisions helping your team
                 work faster and more efficiently.
               </p>
-             
             </div>
             <div>
               <Image

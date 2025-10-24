@@ -104,7 +104,7 @@ function Header() {
                       </div>
                     </a>
                     <a
-                      href=""
+                      href="easy-instance"
                       className="flex items-center gap-3 text-sm text-[#333]"
                       role="menuitem"
                     >
@@ -122,7 +122,7 @@ function Header() {
                       </div>
                     </a>
                     <a
-                      href=""
+                      href="assista-x"
                       className="flex items-center gap-3 text-sm text-[#333]"
                       role="menuitem"
                     >
@@ -140,7 +140,7 @@ function Header() {
                       </div>
                     </a>
                     <a
-                      href=""
+                      href="assista-performance"
                       className="flex items-center gap-3 text-sm text-[#333]"
                       role="menuitem"
                     >
@@ -158,7 +158,7 @@ function Header() {
                       </div>
                     </a>
                     <a
-                      href=""
+                      href="assista-wiki"
                       className="flex items-center gap-3 text-sm text-[#333]"
                       role="menuitem"
                     >
@@ -176,7 +176,7 @@ function Header() {
                       </div>
                     </a>
                     <a
-                      href=""
+                      href="assista-news"
                       className="flex items-center gap-3 text-sm text-[#333]"
                       role="menuitem"
                     >
@@ -194,7 +194,7 @@ function Header() {
                       </div>
                     </a>
                     <a
-                      href=""
+                      href="assista-air"
                       className="flex items-center gap-3 text-sm text-[#333]"
                       role="menuitem"
                     >
