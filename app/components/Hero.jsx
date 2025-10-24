@@ -3,7 +3,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="bg-[#e97d830d] h-screen pt-10 slider">
+    <div className="h-screen pt-10 slider">
       <div className="cmpad h-full flex items-center relative">
         <Image
           src="/img/globe.svg"

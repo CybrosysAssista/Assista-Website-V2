@@ -11,8 +11,10 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <Hero />
-      <TwoBox />
+      <div className="overflow-hidden">
+        <Hero />
+        <TwoBox />
+      </div>
       <Feature />
       <Products />
       <CaseStudies />

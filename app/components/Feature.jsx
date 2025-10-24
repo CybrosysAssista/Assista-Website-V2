@@ -3,7 +3,7 @@ import React from "react";
 
 function Feature() {
   return (
-    <div className="py-20 bg-[#e97d830d]">
+    <div className="py-20">
       <div className="cmpad">
         <div style={{ textAlign: "center" }}>
           <span className="badge">Key Features</span>

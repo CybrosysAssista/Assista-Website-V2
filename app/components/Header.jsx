@@ -28,7 +28,7 @@ function Header() {
       <div className="container-fluid cmpad">
         <div
           className={`flex gap-6 justify-between items-center transition-all duration-300 ${
-            isActive ? "h-15 mt-0" : "h-21"
+            isActive ? "h-18 mt-0" : "h-21"
           }`}
         >
           <a href="/" className="xl:w-[150px]">
@@ -48,9 +48,7 @@ function Header() {
                 <a
                   href=""
                   className="transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
-                >
-                  Home
-                </a>
+                ></a>
               </li>
               <li>
                 <a
@@ -60,7 +58,7 @@ function Header() {
                   About Us
                 </a>
               </li>
-              <li className="relative group hover:text-[var(--primary-color)] h-10 flex items-center">
+              <li className=" group hover:text-[var(--primary-color)] h-21 flex items-center">
                 <a
                   href="#"
                   className="transition duration-300 ease-in-out hover:text-[var(--primary-color)] inline-flex items-center gap-2"
@@ -80,75 +78,230 @@ function Header() {
 
                 {/* Hoverable dropdown (desktop) */}
                 <div
-                  className="absolute top-10 right-0 w-50 bg-white border border-[#e97d8326] rounded-md shadow-lg opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50"
+                  className={`dropdown absolute ${
+                    isActive ? "top-[73px]" : "top-[85px]"
+                  } min-h-[400px] right-0 left-0 m-auto w-full bg-white shadow-lg opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50`}
                   role="menu"
                   aria-label="Resources submenu"
                 >
-                  <ul className="py-2">
-                    <li>
-                      <a
-                        href=""
-                        className="block px-4 py-2 text-sm text-[#333] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
-                        role="menuitem"
-                      >
-                        Assista IDE
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href=""
-                        className="block px-4 py-2 text-sm text-[#333] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
-                        role="menuitem"
-                      >
-                        Easy Instance
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href=""
-                        className="block px-4 py-2 text-sm text-[#333] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
-                        role="menuitem"
-                      >
-                        Assista X
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href=""
-                        className="block px-4 py-2 text-sm text-[#333] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
-                        role="menuitem"
-                      >
-                        Assista Performance
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href=""
-                        className="block px-4 py-2 text-sm text-[#333] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
-                        role="menuitem"
-                      >
-                        Assista Wiki
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href=""
-                        className="block px-4 py-2 text-sm text-[#333] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
-                        role="menuitem"
-                      >
-                        Assista News
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href=""
-                        className="block px-4 py-2 text-sm text-[#333] hover:bg-[var(--primary-color)] hover:text-white transition-colors"
-                        role="menuitem"
-                      >
-                        Assista Air
-                      </a>
-                    </li>
-                  </ul>
+                  <div className="grid grid-cols-4 gap-13 p-3 cmpad pt-10">
+                    <a
+                      href="/assista-ide"
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/icon1.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista IDE</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          IDE for Odoo Developers
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo1.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Easy Instance</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Deploying Odoo Instances
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo3.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista X</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Talk with Odoo assistant
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo5.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista Performance</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Monitor the Odoo Instance
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo7.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista Wiki</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Generate Repo Documentation
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo8.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista News</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Know the latest News of AI
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo9.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista Air</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Browser Extensions Store
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo7.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista Wiki</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Generate Repo Documentation
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo1.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Easy Instance</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Deploying Odoo Instances
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo3.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista X</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Talk with Odoo assistant
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo8.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista News</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Know the latest News of AI
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href=""
+                      className="flex items-center gap-3 text-sm text-[#333]"
+                      role="menuitem"
+                    >
+                      <Image
+                        src="/img/logo9.svg"
+                        alt=""
+                        width={40}
+                        height={40}
+                      />
+                      <div>
+                        <h5 className="font-semibold">Assista Air</h5>
+                        <p className="text-sm text-[#7e7e7e]">
+                          Browser Extensions Store
+                        </p>
+                      </div>
+                    </a>
+                  </div>
                 </div>
               </li>
               <li>
@@ -166,7 +319,7 @@ function Header() {
                 >
                   FAQ
                 </a>
-              </li>              
+              </li>
               <li>
                 <a
                   href=""
