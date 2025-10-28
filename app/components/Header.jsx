@@ -26,13 +26,13 @@ function Header() {
   return (
     <header className="fixed  top-0 left-0 w-full z-50 transition-all ">
       <div className="cmpad">
-        <div className="bg-white border ps-8 pe-4 rounded-full border-[#e97d8326] [box-shadow:0px_5px_20px_rgb(0_0_0_/_3%)] mt-3">
+        <div className="bg-white border border-[#9e9e9e26] ps-8 pe-4 rounded-full [box-shadow:0px_0px_20px_rgb(0_0_0_/_8%)] mt-3">
           <div
             className={`flex gap-6 justify-between items-center transition-all duration-300 ${
               isActive ? "h-18 mt-0" : "h-21"
             }`}
           >
-            <a href="/" className="text-4xl font-bold text-[#212121] font-logo">
+            <a href="/" className="text-[33px] font-bold text-[#212121] font-logo">
               Cybrosys Assista
             </a>
 
@@ -73,13 +73,13 @@ function Header() {
 
                   {/* Hoverable dropdown (desktop) */}
                   <div
-                    className={`dropdown absolute ${
-                      isActive ? "top-[73px]" : "top-[85px]"
+                    className={`dropdown absolute max-w-[1425px] rounded-md ${
+                      isActive ? "top-[85px]" : "top-[98px]"
                     } min-h-[400px] right-0 left-0 m-auto w-full bg-white shadow-lg opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50`}
                     role="menu"
                     aria-label="Resources submenu"
                   >
-                    <div className="grid grid-cols-4 gap-13 p-3 cmpad pt-10">
+                    <div className=" grid grid-cols-4 gap-13 p-3 cmpad pt-10">
                       <a
                         href="/assista-ide"
                         className="flex items-center gap-3 text-sm text-[#333]"
@@ -140,7 +140,7 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/logo5.svg"
+                          src="/img/assista-performance.svg"
                           alt=""
                           width={40}
                           height={40}
@@ -326,7 +326,7 @@ function Header() {
               </ul>
               <a
                 href="/login"
-                className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-full flex gap-2 items-center hover:bg-[#aa6e71] transition duration-300"
+                className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-full flex gap-2 items-center hover:bg-[#666] transition duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

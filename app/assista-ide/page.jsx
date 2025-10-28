@@ -54,7 +54,7 @@ function Page() {
   return (
     <div>
       <Header />
-      <div className="cmpad pt-30">
+      <div className="cmpad pt-30 slider inslider">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-8">
@@ -67,7 +67,7 @@ function Page() {
             <h1 className="text-5xl font-medium mb-3 leading-15">
               The AI powered IDE to
               <br /> Code smarter{" "}
-              <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+              <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
                 build faster.
               </span>
             </h1>
@@ -79,15 +79,15 @@ function Page() {
             <div className="flex gap-2 mt-10 mb-15">
               <a
                 href=""
-                className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-md hover:bg-[#ce797e] transition duration-300"
+                className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
               >
                 Get Started
               </a>
               <a
                 href=""
-                className="text-center w-45 py-3 text-[#ee767c] bg-[#e97d8228] border-[#e97d8225] border-2 rounded-md hover:bg-[#ce797e] hover:border-[#ce797e] hover:text-white transition duration-300"
+                className="text-center w-45 py-3 text-[#333] bg-[#94939328] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
               >
-                Read More
+                Contact Us
               </a>
             </div>
           </div>
@@ -105,7 +105,7 @@ function Page() {
 
       {/* Tab Navigation */}
       <div className="cmpad py-20">
-        <div className="sticky top-20 z-10">
+        <div className="sticky top-25 z-10">
           <nav className="bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-20">
             {tabs.map((t) => (
               <a
@@ -135,7 +135,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
               automation tools
             </span>
           </h2>
@@ -166,7 +166,6 @@ function Page() {
                 real-time insights to make smarter decisions helping your team
                 work faster and more efficiently.
               </p>
-             
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
@@ -180,7 +179,6 @@ function Page() {
                 real-time insights to make smarter decisions helping your team
                 work faster and more efficiently.
               </p>
-             
             </div>
             <div>
               <Image
@@ -201,7 +199,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
               automation tools
             </span>
           </h2>
@@ -232,7 +230,6 @@ function Page() {
                 real-time insights to make smarter decisions helping your team
                 work faster and more efficiently.
               </p>
-             
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
@@ -246,7 +243,6 @@ function Page() {
                 real-time insights to make smarter decisions helping your team
                 work faster and more efficiently.
               </p>
-             
             </div>
             <div>
               <Image
@@ -267,13 +263,14 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Work together with{" "}
-            <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
               real-time collaboration
             </span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
-            Enable seamless teamwork with real-time editing, instant messaging, and shared workspaces that keep your entire team in sync.
+            Enable seamless teamwork with real-time editing, instant messaging,
+            and shared workspaces that keep your entire team in sync.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
@@ -292,7 +289,8 @@ function Page() {
               </h2>
 
               <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
-                Share your workspace, edit code together, and communicate seamlessly with built-in chat and video calling features.
+                Share your workspace, edit code together, and communicate
+                seamlessly with built-in chat and video calling features.
               </p>
             </div>
           </div>
@@ -305,13 +303,14 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Enterprise-grade{" "}
-            <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
               security features
             </span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
-            Protect your code and data with advanced security measures, encryption, and compliance standards.
+            Protect your code and data with advanced security measures,
+            encryption, and compliance standards.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
@@ -321,7 +320,8 @@ function Page() {
               </h2>
 
               <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
-                Advanced encryption, secure authentication, and compliance with industry standards to keep your projects safe.
+                Advanced encryption, secure authentication, and compliance with
+                industry standards to keep your projects safe.
               </p>
             </div>
             <div>
@@ -343,13 +343,14 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Trusted by{" "}
-            <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
               thousands of developers
             </span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
-            Join thousands of developers and teams who trust Assista IDE for their development needs.
+            Join thousands of developers and teams who trust Assista IDE for
+            their development needs.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[90%] mx-auto">
@@ -375,7 +376,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
               Questions
             </span>
           </h2>
@@ -387,21 +388,32 @@ function Page() {
           <div className="max-w-[800px] mx-auto">
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                <h3 className="text-xl font-semibold mb-3">What is Assista IDE?</h3>
+                <h3 className="text-xl font-semibold mb-3">
+                  What is Assista IDE?
+                </h3>
                 <p className="text-[#7e7e7e]">
-                  Assista IDE is an AI-powered integrated development environment that combines intelligent code assistance with real-time collaboration features.
+                  Assista IDE is an AI-powered integrated development
+                  environment that combines intelligent code assistance with
+                  real-time collaboration features.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                <h3 className="text-xl font-semibold mb-3">How does the AI assistance work?</h3>
+                <h3 className="text-xl font-semibold mb-3">
+                  How does the AI assistance work?
+                </h3>
                 <p className="text-[#7e7e7e]">
-                  Our AI analyzes your code patterns and provides intelligent suggestions, auto-completion, and error detection to help you code faster and more efficiently.
+                  Our AI analyzes your code patterns and provides intelligent
+                  suggestions, auto-completion, and error detection to help you
+                  code faster and more efficiently.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                <h3 className="text-xl font-semibold mb-3">Is there a free trial available?</h3>
+                <h3 className="text-xl font-semibold mb-3">
+                  Is there a free trial available?
+                </h3>
                 <p className="text-[#7e7e7e]">
-                  Yes, we offer a 14-day free trial with full access to all features. No credit card required.
+                  Yes, we offer a 14-day free trial with full access to all
+                  features. No credit card required.
                 </p>
               </div>
             </div>

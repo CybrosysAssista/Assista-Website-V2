@@ -21,13 +21,14 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 85px;
+  scroll-padding-top: 200px;
 }
 
 body {
   /* background: var(--background); */
   color: var(--text-color);
   font-family: var(--primary-font);
+  overflow-x: hidden;
 }
 .font-logo {
   font-family: var(--font-logo);
@@ -93,6 +94,27 @@ body {
   /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); */
 }
 
+.brush {
+  color: #fff;
+  background-image: url(/img/brush.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 4px 10px 5px 28px;
+  font-size: 2.8rem;
+}
+.underlineimg::before {
+  content: "";
+  background-image: url(/img/underline.svg);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 350px;
+  height: 25px;
+  position: absolute;
+  bottom: -10px;
+  z-index: -1;
+}
+
 .avatars {
   display: flex;
   align-items: center;
@@ -128,7 +150,7 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #cf93e9;
+  background-color: #af4b58;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -388,8 +410,8 @@ body {
 }
 
 .feature .card {
-  background: rgb(211 211 211 / 16%);
-  border: 1px solid rgb(195 195 195 / 15%);
+  background: #e3f2fd61;
+  border: 1px solid #198ed61c;
   border-radius: 10px;
   padding: 40px;
   padding-bottom: 50px;
@@ -456,7 +478,7 @@ body {
 }
 
 /* /////// FOOTER //////// */
-.demo-content {
+/* .demo-content {
   min-height: 50vh;
   display: flex;
   align-items: center;
@@ -465,10 +487,10 @@ body {
   color: white;
   font-size: 24px;
   font-weight: 600;
-}
+} */
 
 footer {
-  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  background: #212121;
   color: #e2e8f0;
   padding-top: 5rem;
   padding-bottom: 2rem;
@@ -499,7 +521,7 @@ footer {
   bottom: 0;
   width: 30px;
   height: 3px;
-  background-color: var(--primary-color);
+  background-color: #db5a6b;
   border-radius: 2px;
 }
 
@@ -524,7 +546,7 @@ footer {
 }
 
 .footer-section ul li a:hover {
-  color: var(--primary-color);
+  color: #e95b6e;
   transform: translateX(5px);
 }
 
@@ -581,7 +603,7 @@ footer {
 }
 
 .social-links a:hover {
-  background: var(--primary-color);
+  background: #db5a6b;
   color: #fff;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(236, 72, 153, 0.4);
@@ -611,7 +633,7 @@ footer {
 }
 
 .newsletter-form input:focus {
-  border-color: var(--primary-color);
+  border-color: #db5a6b;
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -682,7 +704,7 @@ footer {
 }
 
 .footer-links a:hover {
-  color: var(--primary-color);
+  color: #e95b6e;
 }
 
 /* Responsive Design */
@@ -797,17 +819,13 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgb(251 233 234) 0%,
-    rgb(249 234 255) 100%
-  );
+  background: linear-gradient(135deg, #d95b6c29 0%, #1e76d133 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .products .card:hover {
-  transform: translateY(-5px);
+  /* transform: translateY(-5px); */
   /* box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); */
 }
 
@@ -1182,7 +1200,7 @@ input::placeholder {
 /* ///////// WIKI DETAILS PAGE STYLES ///////// */
 
 .wiki-container {
-  background: #f8f9fa;
+  padding-top: 2rem;
 }
 
 .wiki-layout {
@@ -1201,6 +1219,7 @@ input::placeholder {
   padding: 20px 0;
   overflow-y: auto;
   max-height: calc(100vh - 80px);
+  border-radius: 10px 10px 0 0;
 }
 
 .sidebar-header {
@@ -1275,6 +1294,7 @@ input::placeholder {
   max-height: calc(100vh - 80px);
   background: white;
   scroll-behavior: smooth;
+  position: relative;
 }
 
 .content-header {
@@ -1429,9 +1449,11 @@ input::placeholder {
   background: white;
   border-left: 1px solid #e0e0e0;
   border-right: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
   padding: 20px 0;
   overflow-y: auto;
-  max-height: calc(100vh - 85px);
+  max-height: calc(100vh - 80px);
+  border-radius: 10px 10px 0 0;
 }
 
 .sidebar-title {
@@ -1564,4 +1586,14 @@ input::placeholder {
   .section-text {
     font-size: 14px;
   }
+}
+
+.slider.inslider::before {
+  bottom: -50%;
+  left: -25%;
+}
+
+.slider.inslider::after {
+  bottom: -80%;
+  right: -25%;
 }

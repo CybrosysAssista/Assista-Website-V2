@@ -61,7 +61,7 @@ function Page() {
   return (
     <div>
       <Header />
-      <div className="cmpad pt-30">
+      <div className="cmpad pt-30 slider inslider">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-8">
@@ -74,7 +74,7 @@ function Page() {
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
               <br /> Organize{" "}
-              <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+              <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
                 knowledge.
               </span>
             </h1>
@@ -87,15 +87,15 @@ function Page() {
             <div className="flex gap-2 mt-10 mb-15">
               <a
                 href=""
-                className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-md hover:bg-[#ce797e] transition duration-300"
+                className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
               >
                 Get Started
               </a>
               <a
                 href=""
-                className="text-center w-45 py-3 text-[#ee767c] bg-[#e97d8228] border-[#e97d8225] border-2 rounded-md hover:bg-[#ce797e] hover:border-[#ce797e] hover:text-white transition duration-300"
+                className="text-center w-45 py-3 text-[#333] bg-[#94939328] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
               >
-                Read More
+                Contact Us
               </a>
             </div>
           </div>
@@ -118,7 +118,7 @@ function Page() {
 
         <h2 className="mainhead relative w-max m-auto">
           Learn more with{" "}
-          <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+          <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
             depth AI knowledge
           </span>
         </h2>
@@ -148,7 +148,7 @@ function Page() {
 
           <input
             type="text"
-            className="border border-[#e9e9e9] focus:border-[#e97d83] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 w-[800px]"
+            className="border border-[#e9e9e9] focus:border-[#949494] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 w-[800px]"
             placeholder="Search Here..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

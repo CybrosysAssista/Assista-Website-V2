@@ -11,15 +11,9 @@ function Footer() {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <a href="/" className="">
-                <Image
-                  src="/logo/logo3.svg"
-                  alt="Logo"
-                  width={180}
-                  height={40}
-                  className="transition-all duration-300"
-                />
-              </a>
+               <a href="/" className="text-[35px] font-bold text-[#eeeeee] font-logo">
+              Cybrosys Assista
+            </a>
             </div>
             <div className="contact-info">
               <div className="contact-item">
@@ -182,7 +176,7 @@ function Footer() {
             </p>
             <div className="newsletter-form">
               <input type="email" placeholder="Your email address" required />
-              <button type="submit" className="cursor-pointer px-6 py-3 bg-[var(--primary-color)] text-white rounded-md flex gap-2 items-center hover:bg-[#aa6e71] transition duration-300">Subscribe</button>
+              <button type="submit" className="cursor-pointer px-6 py-3 bg-[#db5a6b] text-white rounded-md flex gap-2 items-center hover:bg-[#aa6e71] transition duration-300">Subscribe</button>
             </div>
           </div>
         </div>

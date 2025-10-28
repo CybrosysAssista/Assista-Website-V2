@@ -64,7 +64,7 @@ function page() {
       <Header />
 
       <div className="cmpad mt-21">
-        <div className="wiki-container">
+        <div className="wiki-container relative">
           <div className="wiki-layout">
             {/* Left Sidebar - Navigation */}
             <aside className="wiki-sidebar-left custscrollA">
@@ -81,6 +81,19 @@ function page() {
                       <path
                         fill="currentColor"
                         d="M18.364 15.536L16.95 14.12l1.414-1.414a5 5 0 0 0-7.071-7.071L9.878 7.05L8.464 5.636l1.414-1.414a7 7 0 0 1 9.9 9.9zm-2.829 2.828l-1.414 1.414a7 7 0 0 1-9.9-9.9l1.415-1.414L7.05 9.88l-1.414 1.414a5 5 0 0 0 7.07 7.071l1.415-1.414zm-.707-10.607l1.415 1.415l-7.072 7.07l-1.414-1.414z"
+                      />
+                    </svg>
+                  </a>
+                  <a href="">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71M5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1"
                       />
                     </svg>
                   </a>
@@ -761,6 +774,30 @@ function page() {
                   codebase.
                 </p>
               </section>
+              <div className="sticky bottom-1 z-40">
+                <div className="flex gap-3 bg-white py-4 ps-6 pe-4 border border-[#d1d1d1] rounded-full [box-shadow:0px_0px_20px_#00000014] w-full max-w-[750px]">
+                  <input
+                    type="text"
+                    placeholder="Ask wiki about microsoft / vs code"
+                    className="w-full focus:outline-none bg-transparent"
+                  />
+                  <button className="cursor-pointer flex-shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        fillRule="evenodd"
+                        d="M12 1.25c5.937 0 10.75 4.813 10.75 10.75S17.937 22.75 12 22.75S1.25 17.937 1.25 12S6.063 1.25 12 1.25m-.47 6.72a.75.75 0 1 0-1.06 1.06L13.44 12l-2.97 2.97a.75.75 0 1 0 1.06 1.06l3.5-3.5a.75.75 0 0 0 0-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </main>
 
             {/* Right Sidebar - On This Page */}
@@ -773,9 +810,8 @@ function page() {
                   <li>
                     <a
                       href="#overview"
-                      className={`page-nav-link ${
-                        activeSection === "overview" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "overview" ? "active" : ""
+                        }`}
                     >
                       VS Code Architecture Overview
                     </a>
@@ -783,9 +819,8 @@ function page() {
                   <li>
                     <a
                       href="#purpose"
-                      className={`page-nav-link ${
-                        activeSection === "purpose" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "purpose" ? "active" : ""
+                        }`}
                     >
                       Purpose and Scope
                     </a>
@@ -793,9 +828,8 @@ function page() {
                   <li>
                     <a
                       href="#multi-process"
-                      className={`page-nav-link ${
-                        activeSection === "multi-process" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "multi-process" ? "active" : ""
+                        }`}
                     >
                       Multi-Process Architecture
                     </a>
@@ -803,11 +837,10 @@ function page() {
                   <li>
                     <a
                       href="#process-responsibilities"
-                      className={`page-nav-link ${
-                        activeSection === "process-responsibilities"
-                          ? "active"
-                          : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "process-responsibilities"
+                        ? "active"
+                        : ""
+                        }`}
                     >
                       Process Responsibilities
                     </a>
@@ -815,9 +848,8 @@ function page() {
                   <li>
                     <a
                       href="#core-workbench"
-                      className={`page-nav-link ${
-                        activeSection === "core-workbench" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "core-workbench" ? "active" : ""
+                        }`}
                     >
                       Core Workbench Architecture
                     </a>
@@ -825,9 +857,8 @@ function page() {
                   <li>
                     <a
                       href="#workbench-parts"
-                      className={`page-nav-link ${
-                        activeSection === "workbench-parts" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "workbench-parts" ? "active" : ""
+                        }`}
                     >
                       Workbench Parts
                     </a>
@@ -835,9 +866,8 @@ function page() {
                   <li>
                     <a
                       href="#extension-system"
-                      className={`page-nav-link ${
-                        activeSection === "extension-system" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "extension-system" ? "active" : ""
+                        }`}
                     >
                       Extension System Architecture
                     </a>
@@ -845,9 +875,8 @@ function page() {
                   <li>
                     <a
                       href="#extension-api"
-                      className={`page-nav-link ${
-                        activeSection === "extension-api" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "extension-api" ? "active" : ""
+                        }`}
                     >
                       Extension API Surface
                     </a>
@@ -855,9 +884,8 @@ function page() {
                   <li>
                     <a
                       href="#type-converters"
-                      className={`page-nav-link ${
-                        activeSection === "type-converters" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "type-converters" ? "active" : ""
+                        }`}
                     >
                       Type Converters
                     </a>
@@ -865,9 +893,8 @@ function page() {
                   <li>
                     <a
                       href="#dependency-injection"
-                      className={`page-nav-link ${
-                        activeSection === "dependency-injection" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "dependency-injection" ? "active" : ""
+                        }`}
                     >
                       Service Dependency Injection
                     </a>
@@ -875,9 +902,8 @@ function page() {
                   <li>
                     <a
                       href="#core-services"
-                      className={`page-nav-link ${
-                        activeSection === "core-services" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "core-services" ? "active" : ""
+                        }`}
                     >
                       Core Service Interfaces
                     </a>
@@ -885,9 +911,8 @@ function page() {
                   <li>
                     <a
                       href="#editor-monaco"
-                      className={`page-nav-link ${
-                        activeSection === "editor-monaco" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "editor-monaco" ? "active" : ""
+                        }`}
                     >
                       Editor and Monaco Integration
                     </a>
@@ -895,9 +920,8 @@ function page() {
                   <li>
                     <a
                       href="#editor-config"
-                      className={`page-nav-link ${
-                        activeSection === "editor-config" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "editor-config" ? "active" : ""
+                        }`}
                     >
                       Editor Configuration
                     </a>
@@ -905,9 +929,8 @@ function page() {
                   <li>
                     <a
                       href="#build-system"
-                      className={`page-nav-link ${
-                        activeSection === "build-system" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "build-system" ? "active" : ""
+                        }`}
                     >
                       Build System and Packaging
                     </a>
@@ -915,9 +938,8 @@ function page() {
                   <li>
                     <a
                       href="#build-artifacts"
-                      className={`page-nav-link ${
-                        activeSection === "build-artifacts" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "build-artifacts" ? "active" : ""
+                        }`}
                     >
                       Key Build Artifacts
                     </a>
@@ -925,9 +947,8 @@ function page() {
                   <li>
                     <a
                       href="#initialization"
-                      className={`page-nav-link ${
-                        activeSection === "initialization" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "initialization" ? "active" : ""
+                        }`}
                     >
                       Initialization Sequence
                     </a>
@@ -935,9 +956,8 @@ function page() {
                   <li>
                     <a
                       href="#service-registration"
-                      className={`page-nav-link ${
-                        activeSection === "service-registration" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "service-registration" ? "active" : ""
+                        }`}
                     >
                       Service Registration Example
                     </a>
@@ -945,9 +965,8 @@ function page() {
                   <li>
                     <a
                       href="#platform-support"
-                      className={`page-nav-link ${
-                        activeSection === "platform-support" ? "active" : ""
-                      }`}
+                      className={`page-nav-link ${activeSection === "platform-support" ? "active" : ""
+                        }`}
                     >
                       Platform Support
                     </a>
@@ -957,7 +976,11 @@ function page() {
             </aside>
           </div>
         </div>
+
       </div>
+
+
+
 
       <Footer />
     </div>

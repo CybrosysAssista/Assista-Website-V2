@@ -10,27 +10,27 @@ function Products() {
     },
     {
       title: "Easy Instance",
-      description: "Platform for deploying Odoo Instances",
+      description: "Deploying Odoo Instances",
       icon: "/img/logo2.svg",
     },
     {
       title: "Assista X",
-      description: "Talk with your Odoo Like an assistant",
+      description: "Talk with Odoo assistant",
       icon: "/img/logo3.svg",
     },
     {
       title: "Assista Performance",
-      description: "Monitor and Analyse Performance of your Odoo Instance",
-      icon: "/img/logo5.svg",
+      description: "Monitor the Odoo Instance",
+      icon: "/img/assista-performance.svg",
     },
     {
       title: "Assista Wiki",
-      description: "Generate and Print Public Github Repository Documentation",
+      description: "Generate Repo Documentation",
       icon: "/img/logo7.svg",
     },
     {
       title: "Assista News",
-      description: "Know the latest News and Tools from AI World",
+      description: "Know the latest News of AI",
       icon: "/img/logo8.svg",
     },
     {
@@ -55,7 +55,7 @@ function Products() {
             className="absolute -left-30 -top-6"
           />
           Manage with{" "}
-          <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+          <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
             powerful solutions
           </span>
         </h2>

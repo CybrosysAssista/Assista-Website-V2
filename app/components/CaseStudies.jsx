@@ -57,7 +57,7 @@ function CaseStudies() {
   return (
     <div className="pb-20 pt-10">
       <div className="cmpad">
-        <div className="trust-container flex-col relative  text-center p-20 bg-gradient-to-r from-[#e97d822c] to-[#e19bff36] rounded-2xl">
+        <div className="trust-container flex-col relative  text-center p-20 bg-gradient-to-r from-[#d95b6c29] to-[#1e76d133] rounded-2xl">
           <Image
             src="/img/qoute.svg"
             alt="qoute"

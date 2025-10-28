@@ -19,7 +19,17 @@ function Hero() {
               <h1 className="text-5xl font-medium mb-3 leading-15">
                 Your smart partner to
                 <br /> Learn more{" "}
-                <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+                {/* <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
+                  <Image
+                    src="/img/arrow.svg"
+                    alt=""
+                    width={100}
+                    height={100}
+                    className="absolute -right-25 -top-6"
+                  />
+                  build faster.
+                </span> */}
+                <span className="brush relative">
                   <Image
                     src="/img/arrow.svg"
                     alt=""
@@ -38,13 +48,13 @@ function Hero() {
               <div className="flex gap-2 mt-10 mb-15">
                 <a
                   href=""
-                  className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#ce797e] transition duration-300"
+                  className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
                 >
                   Get Started
                 </a>
                 <a
                   href=""
-                  className="text-center w-45 py-3 text-[#ee767c] bg-[#e97d8228] border-[#e97d8225] border-2 rounded-full hover:bg-[#ce797e] hover:border-[#ce797e] hover:text-white transition duration-300"
+                  className="text-center w-45 py-3 text-[#333] bg-[#94939328] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
                 >
                   Contact Us
                 </a>
@@ -69,14 +79,14 @@ function Hero() {
                 <div className="trust-text">
                   <div className="trust-number">Trusted by 20k+</div>
                   <div className="trust-description">
-                    Customers Across the Globe
+                    Total Clients Across the Globe
                   </div>
                 </div>
               </div>
             </div>
             <div className="relative">
               <div className="icon">
-                <Image src="/img/logo1.svg" alt="JS" width={40} height={40} />
+                <Image src="/img/assista-performance.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
                 <Image src="/img/logo2.svg" alt="JS" width={40} height={40} />

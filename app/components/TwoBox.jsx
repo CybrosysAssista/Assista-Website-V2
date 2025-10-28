@@ -18,7 +18,7 @@ function TwoBox() {
             className="absolute -left-30 -top-6"
           />
           Collect prospects from{" "}
-          <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+          <span className="underlineimg">
             all touchpoints
           </span>
         </h2>

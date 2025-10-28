@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Image from "next/image";
@@ -80,6 +80,23 @@ function Page() {
         "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
     },
   ];
+
+  const [showCategory, setShowCategory] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const catRef = useRef(null);
+  const filterRef = useRef(null);
+
+  useEffect(() => {
+    function onDoc(e) {
+      if (catRef.current && !catRef.current.contains(e.target))
+        setShowCategory(false);
+      if (filterRef.current && !filterRef.current.contains(e.target))
+        setShowFilter(false);
+    }
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -103,7 +120,7 @@ function Page() {
   return (
     <div>
       <Header />
-      <div className="cmpad pt-30">
+      <div className="cmpad pt-30 slider inslider">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-8">
@@ -116,7 +133,7 @@ function Page() {
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
               <br /> Communicate{" "}
-              <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+              <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
                 intelligently.
               </span>
             </h1>
@@ -129,15 +146,15 @@ function Page() {
             <div className="flex gap-2 mt-10 mb-15">
               <a
                 href=""
-                className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-md hover:bg-[#ce797e] transition duration-300"
+                className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
               >
                 Get Started
               </a>
               <a
                 href=""
-                className="text-center w-45 py-3 text-[#ee767c] bg-[#e97d8228] border-[#e97d8225] border-2 rounded-md hover:bg-[#ce797e] hover:border-[#ce797e] hover:text-white transition duration-300"
+                className="text-center w-45 py-3 text-[#333] bg-[#94939328] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
               >
-                Read More
+                Contact Us
               </a>
             </div>
           </div>
@@ -160,7 +177,7 @@ function Page() {
 
         <h2 className="mainhead relative w-max m-auto">
           Stay updated with{"  "}
-          <span className="bg-gradient-to-r from-[#e97d83] to-[#e19bff] bg-clip-text text-transparent relative">
+          <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
             the latest AI News
           </span>
         </h2>
@@ -171,11 +188,11 @@ function Page() {
           we work.
         </p>
 
-        <nav className="relative bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-20">
+        <nav className="relative bg-white flex items-center gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
+            width="22"
+            height="22"
             viewBox="0 0 24 24"
             className="absolute left-7 top-0 bottom-0 my-auto text-slate-400"
           >
@@ -190,11 +207,119 @@ function Page() {
 
           <input
             type="text"
-            className="border border-[#e9e9e9] focus:border-[#e97d83] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 w-[800px]"
+            className="border border-[#e9e9e9] focus:border-[#949494] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 w-[200px] md:w-[400px] lg:w-[600px]"
             placeholder="Search Here..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} // update searchTerm
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
+
+          {/* Category dropdown */}
+          <div ref={catRef} className="relative">
+            <button
+              onClick={() => setShowCategory((v) => !v)}
+              className="cursor-pointer px-6 py-4 rounded-full bg-[var(--primary-color)] hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
+              aria-expanded={showCategory}
+            >
+              Category
+              <span className="text-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z" clipRule="evenodd"/></svg>
+              </span>
+            </button>
+
+            {showCategory && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg p-2 z-50">
+                <button
+                  onClick={() => {
+                    setSearchTerm("");
+                    setShowCategory(false);
+                  }}
+                  className="cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded"
+                >
+                  All
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchTerm("technology");
+                    setShowCategory(false);
+                  }}
+                  className="cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded"
+                >
+                  Technology
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchTerm("business");
+                    setShowCategory(false);
+                  }}
+                  className="cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded"
+                >
+                  Business
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchTerm("science");
+                    setShowCategory(false);
+                  }}
+                  className="cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded"
+                >
+                  Science
+                </button>
+                <button
+                  onClick={() => {
+                    setSearchTerm("culture");
+                    setShowCategory(false);
+                  }}
+                  className="cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded"
+                >
+                  Culture
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Filter dropdown */}
+          <div ref={filterRef} className="relative">
+            <button
+              onClick={() => setShowFilter((v) => !v)}
+              className="cursor-pointer px-6 py-4 rounded-full bg-[var(--primary-color)] hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
+              aria-expanded={showFilter}
+            >
+              Filter
+              <span className="text-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z" clipRule="evenodd"/></svg>
+              </span>
+            </button>
+
+            {showFilter && (
+              <div className="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg p-2 z-50">
+                <button
+                  onClick={() => {
+                    /* example: newest first */ setShowFilter(false);
+                  }}
+                  className="cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded"
+                >
+                  Newest
+                </button>
+                <button
+                  onClick={() => {
+                    /* example: featured */ setSearchTerm("featured");
+                    setShowFilter(false);
+                  }}
+                  className="cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded"
+                >
+                  Featured
+                </button>
+                <button
+                  onClick={() => {
+                    /* example: most read */ setShowFilter(false);
+                  }}
+                  className="cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded"
+                >
+                  Most read
+                </button>
+              </div>
+            )}
+          </div>
         </nav>
 
         {filteredNews.length > 0 ? (
@@ -252,7 +377,7 @@ function Page() {
                       {formatDate(news.date)}
                     </span>
                     <a
-                      href="/assista-news-details"
+                      href=""
                       className="inline-flex items-center gap-1.5 text-[#e97d82] text-md font-medium hover:text-[#aa6e71] transition-all"
                     >
                       Read More
