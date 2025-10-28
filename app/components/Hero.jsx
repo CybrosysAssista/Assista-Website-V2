@@ -38,13 +38,13 @@ function Hero() {
               <div className="flex gap-2 mt-10 mb-15">
                 <a
                   href=""
-                  className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-md hover:bg-[#ce797e] transition duration-300"
+                  className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#ce797e] transition duration-300"
                 >
                   Get Started
                 </a>
                 <a
                   href=""
-                  className="text-center w-45 py-3 text-[#ee767c] bg-[#e97d8228] border-[#e97d8225] border-2 rounded-md hover:bg-[#ce797e] hover:border-[#ce797e] hover:text-white transition duration-300"
+                  className="text-center w-45 py-3 text-[#ee767c] bg-[#e97d8228] border-[#e97d8225] border-2 rounded-full hover:bg-[#ce797e] hover:border-[#ce797e] hover:text-white transition duration-300"
                 >
                   Contact Us
                 </a>

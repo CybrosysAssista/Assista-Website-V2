@@ -1,10 +1,17 @@
-import { Poppins } from "next/font/google";
+import { Poppins, Ubuntu } from "next/font/google";
 import "./globals.css";
 
+// Load both fonts
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const ubuntu = Ubuntu({
+  variable: "--font-ubuntu",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
 });
 
 export const metadata = {
@@ -15,7 +22,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>{children}</body>
+      {/* Use both fonts as CSS variables */}
+      <body className={`${poppins.variable} ${ubuntu.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
