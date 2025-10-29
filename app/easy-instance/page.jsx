@@ -66,10 +66,8 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               The smarter way to
-              <br /> Launch{" "}
-              <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-                instances instantly.
-              </span>
+              <br /> Launch instances
+              <span className="brush"> instantly.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Easy Instance helps you set up and manage your Odoo or custom
@@ -136,9 +134,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-              automation tools
-            </span>
+            <span className="underlineimg">automation tools</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
@@ -200,9 +196,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-              automation tools
-            </span>
+            <span className="underlineimg">automation tools</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">

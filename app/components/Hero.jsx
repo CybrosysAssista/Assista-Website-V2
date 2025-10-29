@@ -19,7 +19,7 @@ function Hero() {
               <h1 className="text-5xl font-medium mb-3 leading-15">
                 Your smart partner to
                 <br /> Learn more{" "}
-                {/* <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
+                {/* <span className="underlineimg">
                   <Image
                     src="/img/arrow.svg"
                     alt=""
@@ -86,7 +86,12 @@ function Hero() {
             </div>
             <div className="relative">
               <div className="icon">
-                <Image src="/img/assista-performance.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-performance.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
                 <Image src="/img/logo2.svg" alt="JS" width={40} height={40} />

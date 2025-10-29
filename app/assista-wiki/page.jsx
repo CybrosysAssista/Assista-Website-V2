@@ -73,10 +73,7 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
-              <br /> Organize{" "}
-              <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-                knowledge.
-              </span>
+              <br /> Organize <span className="brush">knowledge.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Assista Wiki helps you create, manage, and access knowledge
@@ -118,9 +115,7 @@ function Page() {
 
         <h2 className="mainhead relative w-max m-auto">
           Learn more with{" "}
-          <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-            depth AI knowledge
-          </span>
+          <span className="underlineimg">depth AI knowledge</span>
         </h2>
 
         <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">

@@ -54,10 +54,7 @@ function Products() {
             height={100}
             className="absolute -left-30 -top-6"
           />
-          Manage with{" "}
-          <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-            powerful solutions
-          </span>
+          Manage with <span className="underlineimg">powerful solutions</span>
         </h2>
 
         <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-20">

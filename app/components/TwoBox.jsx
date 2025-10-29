@@ -17,9 +17,9 @@ function TwoBox() {
             height={100}
             className="absolute -left-30 -top-6"
           />
-          Collect prospects from{" "}
+          Collect prospects from all{" "}
           <span className="underlineimg">
-            all touchpoints
+             touchpoints
           </span>
         </h2>
 

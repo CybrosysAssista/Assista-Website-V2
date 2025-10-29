@@ -133,9 +133,7 @@ function Page() {
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
               <br /> Communicate{" "}
-              <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-                intelligently.
-              </span>
+              <span className="brush">intelligently.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Assista Air brings natural, AI-driven conversations to your
@@ -177,9 +175,7 @@ function Page() {
 
         <h2 className="mainhead relative w-max m-auto">
           Stay updated with{"  "}
-          <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-            the latest AI News
-          </span>
+          <span className="underlineimg">the latest AI News</span>
         </h2>
 
         <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
@@ -222,7 +218,19 @@ function Page() {
             >
               Category
               <span className="text-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z" clipRule="evenodd"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </span>
             </button>
 
@@ -286,7 +294,19 @@ function Page() {
             >
               Filter
               <span className="text-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z" clipRule="evenodd"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </span>
             </button>
 

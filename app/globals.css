@@ -102,17 +102,22 @@ body {
   padding: 4px 10px 5px 28px;
   font-size: 2.8rem;
 }
+.underlineimg {
+  position: relative;
+}
 .underlineimg::before {
   content: "";
+  z-index: -1;
   background-image: url(/img/underline.svg);
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: contain;
-  width: 350px;
-  height: 25px;
+  height: 20px;
   position: absolute;
   bottom: -10px;
-  z-index: -1;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .avatars {
@@ -410,11 +415,9 @@ body {
 }
 
 .feature .card {
-  background: #e3f2fd61;
-  border: 1px solid #198ed61c;
+  background: #e6f0fa;
   border-radius: 10px;
-  padding: 40px;
-  padding-bottom: 50px;
+  padding: 40px 40px 50px;
 }
 
 .feature .card h2 {
@@ -819,7 +822,7 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #d95b6c29 0%, #1e76d133 100%);
+  background: #1e76d133;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -846,12 +849,12 @@ footer {
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  /* font-size: 24px; */
   display: flex;
-  background: white;
-  padding: 8px;
+  /* background: white;
+  padding: 8px; */
 }
 
 .info h3 {

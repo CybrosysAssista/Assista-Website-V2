@@ -18,9 +18,7 @@ function Feature() {
             className="absolute -right-30 -top-6"
           />
           Grow business with{" "}
-          <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-            automation tools
-          </span>
+          <span className="underlineimg">automation tools</span>
         </h2>
 
         <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">

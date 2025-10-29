@@ -67,9 +67,7 @@ function Page() {
             <h1 className="text-5xl font-medium mb-3 leading-15">
               The AI powered IDE to
               <br /> Code smarter{" "}
-              <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-                build faster.
-              </span>
+              <span className="brush">build faster.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Assita IDE combines intelligent code assistance and real-time
@@ -135,9 +133,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-              automation tools
-            </span>
+            <span className="underlineimg">automation tools</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
@@ -199,9 +195,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-              automation tools
-            </span>
+            <span className="underlineimg">automation tools</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
@@ -263,9 +257,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Work together with{" "}
-            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-              real-time collaboration
-            </span>
+            <span className="underlineimg">real-time collaboration</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
@@ -303,9 +295,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Enterprise-grade{" "}
-            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-              security features
-            </span>
+            <span className="underlineimg">security features</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
@@ -343,9 +333,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Trusted by{" "}
-            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-              thousands of developers
-            </span>
+            <span className="underlineimg">thousands of developers</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
@@ -375,10 +363,7 @@ function Page() {
           </div>
 
           <h2 className="mainhead relative w-max m-auto">
-            Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-[#db5a6b] to-[#1976d2] bg-clip-text text-transparent relative">
-              Questions
-            </span>
+            Frequently Asked <span className="underlineimg">Questions</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
