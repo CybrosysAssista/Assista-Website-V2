@@ -58,7 +58,7 @@ function Page() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-8">
-              <Image src="/img/logo3.svg" alt="" width={60} height={60} />
+              <Image src="/img/logo3.svg" alt="" width={50} height={50} />
               <span className="font-semibold text-4xl text-[#818181]">
                 Assista X
               </span>

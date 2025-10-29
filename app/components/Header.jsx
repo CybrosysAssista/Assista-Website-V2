@@ -32,7 +32,7 @@ function Header() {
               isActive ? "h-18 mt-0" : "h-21"
             }`}
           >
-            <a href="/" className="text-[33px] font-bold text-[#212121] font-logo">
+            <a href="/" className="text-[30px] font-bold text-[#212121] font-logo">
               Cybrosys Assista
             </a>
 
