@@ -66,7 +66,7 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               The power of AI to
-              <br /> Simplify all
+              <br /> Simplify all{" "}
               <span className="brush"> interaction.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
@@ -136,7 +136,7 @@ function Page() {
             <span className="underlineimg">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.
@@ -198,7 +198,7 @@ function Page() {
             <span className="underlineimg">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.

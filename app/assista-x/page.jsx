@@ -58,7 +58,7 @@ function Page() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-8">
-              <Image src="/img/logo3.svg" alt="" width={50} height={50} />
+              <Image src="/img/assista-x.svg" alt="" width={50} height={50} />
               <span className="font-semibold text-4xl text-[#818181]">
                 Assista X
               </span>
@@ -136,7 +136,7 @@ function Page() {
             <span className="underlineimg">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.
@@ -198,7 +198,7 @@ function Page() {
             <span className="underlineimg">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.

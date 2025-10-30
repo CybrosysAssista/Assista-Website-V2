@@ -124,7 +124,7 @@ function Page() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-8">
-              <Image src="/img/logo8.svg" alt="" width={50} height={50} />
+              <Image src="/img/assista-news.svg" alt="" width={50} height={50} />
               <span className="font-semibold text-4xl text-[#818181]">
                 Assista News
               </span>
@@ -132,7 +132,7 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
-              <br /> Communicate{" "}
+              <br /> Communicate
               <span className="brush">intelligently.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
@@ -174,11 +174,11 @@ function Page() {
         </div>
 
         <h2 className="mainhead relative w-max m-auto">
-          Stay updated with{"  "}
-          <span className="underlineimg">the latest AI News</span>
+          Stay updated with the{"  "}
+          <span className="underlineimg"> latest AI News</span>
         </h2>
 
-        <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+        <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
           Discover how Assista is transforming industries with cutting edge AI
           innovations. From product updates to industry insights shaping the way
           we work.

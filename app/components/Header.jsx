@@ -122,7 +122,7 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/logo3.svg"
+                          src="/img/assista-x.svg"
                           alt=""
                           width={40}
                           height={40}
@@ -158,7 +158,7 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/logo7.svg"
+                          src="/img/assista-wiki.svg"
                           alt=""
                           width={40}
                           height={40}
@@ -176,7 +176,7 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/logo8.svg"
+                          src="/img/assista-news.svg"
                           alt=""
                           width={40}
                           height={40}

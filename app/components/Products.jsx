@@ -6,17 +6,17 @@ function Products() {
     {
       title: "Assista IDE",
       description: "IDE for Odoo Developers",
-      icon: "/img/logo1.svg",
+      icon: "/img/logo2.svg",
     },
     {
       title: "Easy Instance",
       description: "Deploying Odoo Instances",
-      icon: "/img/logo2.svg",
+      icon: "/img/logo1.svg",
     },
     {
       title: "Assista X",
       description: "Talk with Odoo assistant",
-      icon: "/img/logo3.svg",
+      icon: "/img/assista-x.svg",
     },
     {
       title: "Assista Performance",
@@ -26,12 +26,12 @@ function Products() {
     {
       title: "Assista Wiki",
       description: "Generate Repo Documentation",
-      icon: "/img/logo7.svg",
+      icon: "/img/assista-wiki.svg",
     },
     {
       title: "Assista News",
       description: "Know the latest News of AI",
-      icon: "/img/logo8.svg",
+      icon: "/img/assista-news.svg",
     },
     {
       title: "Assista Air",
@@ -57,7 +57,7 @@ function Products() {
           Manage with <span className="underlineimg">powerful solutions</span>
         </h2>
 
-        <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-20">
+        <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-20  text-lg">
           From marketing to sales support and analytics our products help you
           streamline every part of your business and grow efficiently.
         </p>

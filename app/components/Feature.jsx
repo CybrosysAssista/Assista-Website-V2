@@ -17,20 +17,20 @@ function Feature() {
             height={100}
             className="absolute -right-30 -top-6"
           />
-          Grow business with{" "}
+          Grow with{" "}
           <span className="underlineimg">automation tools</span>
         </h2>
 
-        <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+        <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15  text-lg">
           Simplify your workflows, boost productivity, and manage every process
           with ease all from one intuitive dashboard built to scale with your
           business.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 ">
           <div>
             <Image
-              src="/img/abt3.png"
+              src="/img/banner2.webp"
               alt=""
               width={600}
               height={600}
@@ -49,7 +49,7 @@ function Feature() {
             </p>
             <a
               href=""
-              className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-md hover:bg-[#ce797e] transition duration-300"
+              className="flex justify-center items-center w-45 py-3 bg-[#333] text-white rounded-full hover:bg-[#666] transition duration-300"
             >
               Read More
             </a>
@@ -68,14 +68,14 @@ function Feature() {
             </p>
             <a
               href=""
-              className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-md hover:bg-[#ce797e] transition duration-300"
+              className="flex justify-center items-center w-45 py-3 bg-[#333] text-white rounded-full hover:bg-[#666] transition duration-300"
             >
               Read More
             </a>
           </div>
           <div>
             <Image
-              src="/img/abt3.png"
+              src="/img/banner1.webp"
               alt=""
               width={600}
               height={600}
@@ -86,7 +86,7 @@ function Feature() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
           <div>
             <Image
-              src="/img/abt3.png"
+              src="/img/banner3.webp"
               alt=""
               width={600}
               height={600}
@@ -100,13 +100,13 @@ function Feature() {
 
             <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
               Streamline module creation, manage instances effortlessly, and
-              collaborate in real time — all within a unified platform designed
+              collaborate in real time all within a unified platform designed
               for Odoo professionals.
             </p>
 
             <a
               href=""
-              className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-md hover:bg-[#ce797e] transition duration-300"
+              className="flex justify-center items-center w-45 py-3 bg-[#333] text-white rounded-full hover:bg-[#666] transition duration-300"
             >
               Read More
             </a>

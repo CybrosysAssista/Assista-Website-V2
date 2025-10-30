@@ -94,10 +94,10 @@ function Hero() {
                 />
               </div>
               <div className="icon">
-                <Image src="/img/logo2.svg" alt="JS" width={40} height={40} />
+                <Image src="/img/assista-wiki.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
-                <Image src="/img/logo3.svg" alt="JS" width={40} height={40} />
+                <Image src="/img/assista-news.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
                 <Image src="/img/logo2.svg" alt="JS" width={40} height={40} />

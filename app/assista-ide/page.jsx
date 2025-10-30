@@ -136,7 +136,7 @@ function Page() {
             <span className="underlineimg">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.
@@ -198,7 +198,7 @@ function Page() {
             <span className="underlineimg">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.
@@ -260,7 +260,7 @@ function Page() {
             <span className="underlineimg">real-time collaboration</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Enable seamless teamwork with real-time editing, instant messaging,
             and shared workspaces that keep your entire team in sync.
           </p>
@@ -294,11 +294,11 @@ function Page() {
           </div>
 
           <h2 className="mainhead relative w-max m-auto">
-            Enterprise-grade{" "}
+            Enterprise grade{" "}
             <span className="underlineimg">security features</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Protect your code and data with advanced security measures,
             encryption, and compliance standards.
           </p>
@@ -332,11 +332,11 @@ function Page() {
           </div>
 
           <h2 className="mainhead relative w-max m-auto">
-            Trusted by{" "}
-            <span className="underlineimg">thousands of developers</span>
+            Trusted by thousands of
+            <span className="underlineimg"> developers</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Join thousands of developers and teams who trust Assista IDE for
             their development needs.
           </p>
@@ -366,8 +366,8 @@ function Page() {
             Frequently Asked <span className="underlineimg">Questions</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
-            Find answers to common questions about Assista IDE and its features.
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
+           Find answers to common queries about features, setup, and how Assista enhances your Odoo development experience.
           </p>
 
           <div className="max-w-[800px] mx-auto">
