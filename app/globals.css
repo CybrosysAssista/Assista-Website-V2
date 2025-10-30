@@ -1601,3 +1601,9 @@ input::placeholder {
   right: -25%;
 }
 
+.submenu h5{
+  transition: .3s;
+}
+.submenu:hover h5{
+  color: #1976d2;
+}
