@@ -100,10 +100,10 @@ function Hero() {
                 <Image src="/img/assista-news.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
-                <Image src="/img/logo2.svg" alt="JS" width={40} height={40} />
+                <Image src="img/easy-instance.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
-                <Image src="/img/logo5.svg" alt="JS" width={40} height={40} />
+                <Image src="/img/assista-air.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
                 <Image src="/img/logo8.svg" alt="JS" width={40} height={40} />

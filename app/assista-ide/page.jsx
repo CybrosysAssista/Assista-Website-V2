@@ -57,7 +57,7 @@ function Page() {
       <div className="cmpad pt-30 slider inslider">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6">
               <Image src="/img/idelogo.svg" alt="" width={50} height={50} />
               <span className="font-semibold text-4xl text-[#818181]">
                 Assista IDE
@@ -66,8 +66,7 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               The AI powered IDE to
-              <br /> Code smarter{" "}
-              <span className="brush">build faster.</span>
+              <br /> Code smarter <span className="brush brushide">build faster.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Assita IDE combines intelligent code assistance and real-time
@@ -133,7 +132,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg">automation tools</span>
+            <span className="underlineimg underlineide">automation tools</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
@@ -195,7 +194,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg">automation tools</span>
+            <span className="underlineimg underlineide">automation tools</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
@@ -257,7 +256,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Work together with{" "}
-            <span className="underlineimg">real-time collaboration</span>
+            <span className="underlineimg underlineide">real-time collaboration</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
@@ -295,7 +294,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Enterprise grade{" "}
-            <span className="underlineimg">security features</span>
+            <span className="underlineimg underlineide">security features</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
@@ -333,7 +332,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Trusted by thousands of
-            <span className="underlineimg"> developers</span>
+            <span className="underlineimg underlineide"> developers</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
@@ -363,11 +362,12 @@ function Page() {
           </div>
 
           <h2 className="mainhead relative w-max m-auto">
-            Frequently Asked <span className="underlineimg">Questions</span>
+            Frequently Asked <span className="underlineimg underlineide">Questions</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
-           Find answers to common queries about features, setup, and how Assista enhances your Odoo development experience.
+            Find answers to common queries about features, setup, and how
+            Assista enhances your Odoo development experience.
           </p>
 
           <div className="max-w-[800px] mx-auto">

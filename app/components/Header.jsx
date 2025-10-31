@@ -32,11 +32,21 @@ function Header() {
               isActive ? "h-18 mt-0" : "h-21"
             }`}
           >
-            <a
+            {/* <a
               href="/"
               className="text-[30px] font-bold text-[#212121] font-logo"
             >
               Cybrosys Assista
+            </a> */}
+
+            <a href="/">
+              <Image
+                src="/logo/logo6.svg"
+                alt="Cybrosys Assista"
+                width={280}
+                height={280}
+                className="h-12"
+              />
             </a>
 
             {/* Desktop Nav */}
@@ -50,7 +60,7 @@ function Header() {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="/about"
                     className="transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
                   >
                     About Us
@@ -107,7 +117,7 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/logo1.svg"
+                          src="/img/easy-instance.svg"
                           alt=""
                           width={40}
                           height={40}
@@ -197,7 +207,7 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/logo9.svg"
+                          src="/img/assista-air.svg"
                           alt=""
                           width={40}
                           height={40}
@@ -215,15 +225,15 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/logo7.svg"
+                          src="/img/vscode.svg"
                           alt=""
                           width={40}
                           height={40}
                         />
                         <div>
-                          <h5 className="font-semibold">Assista Wiki</h5>
+                          <h5 className="font-semibold">Helper for VS Code</h5>
                           <p className="text-sm text-[#7e7e7e]">
-                            Generate Repo Documentation
+                            Odoo Helper for VS Code
                           </p>
                         </div>
                       </a>
@@ -233,69 +243,15 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/logo1.svg"
+                          src="/img/pycharm.svg"
                           alt=""
                           width={40}
                           height={40}
                         />
                         <div>
-                          <h5 className="font-semibold">Easy Instance</h5>
+                          <h5 className="font-semibold">Helper for Pycharm</h5>
                           <p className="text-sm text-[#7e7e7e]">
-                            Deploying Odoo Instances
-                          </p>
-                        </div>
-                      </a>
-                      <a
-                        href=""
-                        className="submenu flex items-center gap-3 text-sm text-[#333]"
-                        role="menuitem"
-                      >
-                        <Image
-                          src="/img/logo3.svg"
-                          alt=""
-                          width={40}
-                          height={40}
-                        />
-                        <div>
-                          <h5 className="font-semibold">Assista X</h5>
-                          <p className="text-sm text-[#7e7e7e]">
-                            Talk with Odoo assistant
-                          </p>
-                        </div>
-                      </a>
-                      <a
-                        href=""
-                        className="submenu flex items-center gap-3 text-sm text-[#333]"
-                        role="menuitem"
-                      >
-                        <Image
-                          src="/img/logo8.svg"
-                          alt=""
-                          width={40}
-                          height={40}
-                        />
-                        <div>
-                          <h5 className="font-semibold">Assista News</h5>
-                          <p className="text-sm text-[#7e7e7e]">
-                            Know the latest News of AI
-                          </p>
-                        </div>
-                      </a>
-                      <a
-                        href=""
-                        className="submenu flex items-center gap-3 text-sm text-[#333]"
-                        role="menuitem"
-                      >
-                        <Image
-                          src="/img/logo9.svg"
-                          alt=""
-                          width={40}
-                          height={40}
-                        />
-                        <div>
-                          <h5 className="font-semibold">Assista Air</h5>
-                          <p className="text-sm text-[#7e7e7e]">
-                            Browser Extensions Store
+                            Odoo Helper for Pycharm
                           </p>
                         </div>
                       </a>

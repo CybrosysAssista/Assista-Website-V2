@@ -31,7 +31,7 @@ function Video() {
           loop
           muted
           playsInline
-          className="w-[1220px] m-auto h-auto object-cover rounded-xl"
+          className="w-[1200px] m-auto h-auto object-cover rounded-xl"
         ></video>
 
         {/* <div className="cards-container feature">

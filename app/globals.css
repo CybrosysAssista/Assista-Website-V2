@@ -102,6 +102,28 @@ body {
   padding: 4px 10px 5px 28px;
   /* font-size: 2.8rem; */
 }
+.brush.brushide {
+  background-image: url(/img/brushide.svg);
+}
+.brush.brusheasy {
+  background-image: url(/img/brusheasy.svg);
+}
+.brush.brushx {
+  background-image: url(/img/brushx.svg);
+}
+.brush.brushp {
+  background-image: url(/img/brushp.svg);
+}
+.brush.brushw {
+  background-image: url(/img/brushw.svg);
+}
+.brush.brushn {
+  background-image: url(/img/brushn.svg);
+}
+.brush.brusha {
+  background-image: url(/img/brusha.svg);
+}
+
 .underlineimg {
   position: relative;
 }
@@ -118,6 +140,27 @@ body {
   left: 0;
   right: 0;
   margin: auto;
+}
+.underlineimg.underlineide::before {
+  background-image: url(/img/underlineide.svg);
+}
+.underlineimg.underlineeasy::before {
+  background-image: url(/img/underlineeasy.svg);
+}
+.underlineimg.underlinex::before {
+  background-image: url(/img/underlinex.svg);
+}
+.underlineimg.underlinep::before {
+  background-image: url(/img/underlinep.svg);
+}
+.underlineimg.underlinew::before {
+  background-image: url(/img/underlinew.svg);
+}
+.underlineimg.underlinen::before {
+  background-image: url(/img/underlinen.svg);
+}
+.underlineimg.underlinea::before {
+  background-image: url(/img/underlinea.svg);
 }
 
 .avatars {
@@ -216,6 +259,54 @@ body {
   bottom: -20%;
   left: -18%;
   opacity: 0.4;
+}
+.easyslider::before {
+  background: radial-gradient(
+    circle,
+    #5355ce 0%,
+    rgba(226, 153, 245, 0.47) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+.xslider::before {
+  background: radial-gradient(
+    circle,
+    #c278f6 0%,
+    rgba(226, 153, 245, 0.47) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+.pslider::before {
+  background: radial-gradient(
+    circle,
+    #11e261 0%,
+    rgba(226, 153, 245, 0.47) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+.wslider::before {
+  background: radial-gradient(
+    circle,
+    #24bebe 0%,
+    rgba(226, 153, 245, 0.47) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+.nslider::before {
+  background: radial-gradient(
+    circle,
+    #fdb800 0%,
+    rgba(226, 153, 245, 0.47) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+.aslider::before {
+  background: radial-gradient(
+    circle,
+    #42d8e9 0%,
+    rgba(226, 153, 245, 0.47) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
 }
 
 .slider::after {
@@ -1601,9 +1692,9 @@ input::placeholder {
   right: -25%;
 }
 
-.submenu h5{
-  transition: .3s;
+.submenu h5 {
+  transition: 0.3s;
 }
-.submenu:hover h5{
+.submenu:hover h5 {
   color: #1976d2;
 }
