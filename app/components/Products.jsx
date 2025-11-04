@@ -11,7 +11,7 @@ function Products() {
     {
       title: "Easy Instance",
       description: "Deploying Odoo Instances",
-      icon: "/img/easy-instance.svg",
+      icon: "/img/easy-instance-new.svg",
     },
     {
       title: "Assista X",
@@ -37,6 +37,11 @@ function Products() {
       title: "Assista Air",
       description: "Browser Extensions Store",
       icon: "/img/assista-air.svg",
+    },
+    {
+      title: " Assista Builder",
+      description: "Odoo Helper for Pycharm",
+      icon: "/img/assista-builder.svg",
     },
     {
       title: " Helper for VS Code",

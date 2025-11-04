@@ -54,30 +54,23 @@ function Page() {
   return (
     <div>
       <Header />
-      <div className="cmpad pt-30 slider inslider easyslider">
+      <div className="cmpad pt-30 slider inslider vscodeslider">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <Image
-                src="img/easy-instance-new.svg"
-                alt=""
-                width={50}
-                height={50}
-              />
+              <Image src="/img/vscode.svg" alt="" width={50} height={50} />
               <span className="font-semibold text-4xl text-[#818181]">
-                Easy Instance
+                Helper for VS Code
               </span>
             </div>
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
-              The smarter way to
-              <br /> host instances{" "}
-              <span className="brush brusheasy"> instantly.</span>
+              Empower your <br /> Ideas with
+              <span className="brush brushvscode">Odoo Helper.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
-              Easy Instance helps you set up and manage your Odoo or custom
-              environments in seconds no complex setup, just one click to get
-              started.
+              Streamline Odoo development in VS Code with smart suggestions,
+              templates, and insights all in one powerful extension.
             </p>
 
             <div className="flex gap-2 mt-10 mb-15">
@@ -139,7 +132,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg underlineeasy">automation tools</span>
+            <span className="underlineimg underlinea">automation tools</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
@@ -201,7 +194,7 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg underlineeasy">automation tools</span>
+            <span className="underlineimg underlinea">automation tools</span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">

@@ -94,43 +94,93 @@ function Hero() {
                 />
               </div>
               <div className="icon">
-                <Image src="/img/assista-wiki.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-wiki.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="/img/assista-news.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-news.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="img/easy-instance.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="img/easy-instance-new.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="/img/assista-air.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-air.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="/img/logo8.svg" alt="JS" width={40} height={40} />
+                <Image src="/img/vscode.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
-                <Image src="/img/logo7.svg" alt="JS" width={40} height={40} />
+                <Image src="/img/pycharm.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
-                <Image src="/img/logo8.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-performance.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="/img/logo9.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-wiki.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="/img/logo1.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-news.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="/img/logo5.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="img/easy-instance-new.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="/img/logo3.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-air.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
-                <Image src="/img/logo13.svg" alt="JS" width={40} height={40} />
+                <Image src="/img/vscode.svg" alt="JS" width={40} height={40} />
               </div>
               <div className="icon">
-                <Image src="/img/logo14.svg" alt="JS" width={40} height={40} />
+                <Image
+                  src="/img/assista-builder.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
               </div>
               <div className="icon">
                 <Image src="/img/logo1.svg" alt="JS" width={40} height={40} />

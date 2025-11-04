@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -39,15 +40,15 @@ function Header() {
               Cybrosys Assista
             </a> */}
 
-            <a href="/">
+            <Link href="/">
               <Image
-                src="/logo/logo6.svg"
+                src="/logo/logo7.svg"
                 alt="Cybrosys Assista"
                 width={280}
                 height={280}
                 className="h-12"
               />
-            </a>
+            </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex flex-1 items-center justify-end gap-15">
@@ -117,7 +118,7 @@ function Header() {
                         role="menuitem"
                       >
                         <Image
-                          src="/img/easy-instance.svg"
+                          src="/img/easy-instance-new.svg"
                           alt=""
                           width={40}
                           height={40}
@@ -220,7 +221,25 @@ function Header() {
                         </div>
                       </a>
                       <a
-                        href=""
+                        href="assista-builder"
+                        className="submenu flex items-center gap-3 text-sm text-[#333]"
+                        role="menuitem"
+                      >
+                        <Image
+                          src="/img/assista-builder.svg"
+                          alt=""
+                          width={40}
+                          height={40}
+                        />
+                        <div>
+                          <h5 className="font-semibold">Assista Bulider</h5>
+                          <p className="text-sm text-[#7e7e7e]">
+                            Browser Extensions Store
+                          </p>
+                        </div>
+                      </a>
+                      <a
+                        href="/helper-for-vs-code"
                         className="submenu flex items-center gap-3 text-sm text-[#333]"
                         role="menuitem"
                       >
@@ -238,7 +257,7 @@ function Header() {
                         </div>
                       </a>
                       <a
-                        href=""
+                        href="/helper-for-pycharm"
                         className="submenu flex items-center gap-3 text-sm text-[#333]"
                         role="menuitem"
                       >

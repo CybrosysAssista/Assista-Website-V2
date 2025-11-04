@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 800">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="150.35" y1="711.81" x2="855.13" y2="711.81" gradientTransform="translate(0 802) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6466d2"/>
+      <stop offset=".02" stop-color="#686ad3"/>
+      <stop offset=".14" stop-color="#787ad8"/>
+      <stop offset=".27" stop-color="#8284db"/>
+      <stop offset=".43" stop-color="#8688dc"/>
+      <stop offset=".79" stop-color="#9b9ce2"/>
+      <stop offset=".99" stop-color="#a9aae6"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="270.08" y1="402.58" x2="818.15" y2="402.58" gradientTransform="translate(0 802) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6466d2"/>
+      <stop offset=".05" stop-color="#6f71d5"/>
+      <stop offset=".13" stop-color="#7c7ed9"/>
+      <stop offset=".23" stop-color="#8385db"/>
+      <stop offset=".45" stop-color="#8688dc"/>
+      <stop offset="1" stop-color="#a9aae6"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="182.19" y1="896.43" x2="182.19" y2="-136" gradientTransform="translate(0 802) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset=".04" stop-color="#a9aae6"/>
+      <stop offset=".13" stop-color="#9e9fe2"/>
+      <stop offset=".35" stop-color="#8c8edd"/>
+      <stop offset=".5" stop-color="#8688dc"/>
+      <stop offset=".59" stop-color="#7a7cd8"/>
+      <stop offset=".82" stop-color="#6466d2"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="77.05" y1="-34.27" x2="698.56" y2="228.68" gradientTransform="translate(0 802) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a9aae6"/>
+      <stop offset=".09" stop-color="#a0a1e3"/>
+      <stop offset=".35" stop-color="#8d8ede"/>
+      <stop offset=".53" stop-color="#8688dc"/>
+      <stop offset=".64" stop-color="#7b7dd9"/>
+      <stop offset=".92" stop-color="#6466d2"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1-2">
+    <polygon class="cls-4" points="659.9 0 659.9 180.38 92.01 180.38 272.38 0 659.9 0"/>
+    <rect class="cls-1" x="338.58" y="309.23" width="258.76" height="180.38"/>
+    <polygon class="cls-3" points="272.38 0 272.38 800 92.01 619.62 92.01 180.38 272.38 0"/>
+    <polygon class="cls-2" points="659.9 619.62 659.9 800 272.38 800 92.01 619.62 659.9 619.62"/>
+  </g>
+</svg>
