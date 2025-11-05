@@ -287,7 +287,7 @@ function Header() {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="/faq"
                     className="transition duration-300 ease-in-out hover:text-[var(--primary-color)] t"
                   >
                     FAQ
@@ -295,7 +295,7 @@ function Header() {
                 </li>
                 <li>
                   <a
-                    href=""
+                    href="/contact"
                     className="transition duration-300 ease-in-out hover:text-[var(--primary-color)] t"
                   >
                     Contact Us

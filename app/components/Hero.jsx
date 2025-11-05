@@ -86,37 +86,9 @@ function Hero() {
             </div>
             <div className="relative">
               <div className="icon">
-                <Image
-                  src="/img/assista-performance.svg"
-                  alt="JS"
-                  width={40}
-                  height={40}
-                />
+                <Image src="/img/icon1.svg" alt="JS" width={40} height={40} />
               </div>
-              <div className="icon">
-                <Image
-                  src="/img/assista-wiki.svg"
-                  alt="JS"
-                  width={40}
-                  height={40}
-                />
-              </div>
-              <div className="icon">
-                <Image
-                  src="/img/assista-news.svg"
-                  alt="JS"
-                  width={40}
-                  height={40}
-                />
-              </div>
-              <div className="icon">
-                <Image
-                  src="img/easy-instance-new.svg"
-                  alt="JS"
-                  width={40}
-                  height={40}
-                />
-              </div>
+
               <div className="icon">
                 <Image
                   src="/img/assista-air.svg"
@@ -126,8 +98,13 @@ function Hero() {
                 />
               </div>
               <div className="icon">
-                <Image src="/img/vscode.svg" alt="JS" width={40} height={40} />
-              </div>
+                <Image
+                  src="/img/assista-x.svg"
+                  alt="JS"
+                  width={40}
+                  height={40}
+                />
+              </div>              
               <div className="icon">
                 <Image src="/img/pycharm.svg" alt="JS" width={40} height={40} />
               </div>
@@ -163,14 +140,7 @@ function Hero() {
                   height={40}
                 />
               </div>
-              <div className="icon">
-                <Image
-                  src="/img/assista-air.svg"
-                  alt="JS"
-                  width={40}
-                  height={40}
-                />
-              </div>
+
               <div className="icon">
                 <Image src="/img/vscode.svg" alt="JS" width={40} height={40} />
               </div>
@@ -181,9 +151,6 @@ function Hero() {
                   width={40}
                   height={40}
                 />
-              </div>
-              <div className="icon">
-                <Image src="/img/logo1.svg" alt="JS" width={40} height={40} />
               </div>
             </div>
           </div>
