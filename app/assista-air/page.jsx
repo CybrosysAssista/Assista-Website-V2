@@ -54,11 +54,11 @@ function Page() {
   return (
     <div>
       <Header />
-      <div className="cmpad pt-30 slider inslider">
+      <div className="cmpad pt-30 slider inslider aslider">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="flex items-center gap-3 mb-8">
-              <Image src="/img/logo8.svg" alt="" width={50} height={50} />
+            <div className="flex items-center gap-3 mb-6">
+              <Image src="/img/assista-air.svg" alt="" width={50} height={50} />
               <span className="font-semibold text-4xl text-[#818181]">
                 Assista Air
               </span>
@@ -66,8 +66,7 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               The power of AI to
-              <br /> Simplify all
-              <span className="brush"> interaction.</span>
+              <br /> Simplify all <span className="brush brusha"> interaction.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Assista Air transforms the way you communicate with AI-powered
@@ -133,10 +132,10 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg">automation tools</span>
+            <span className="underlineimg underlinea">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.
@@ -195,10 +194,10 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg">automation tools</span>
+            <span className="underlineimg underlinea">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.

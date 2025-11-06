@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Footer() {
@@ -11,9 +12,15 @@ function Footer() {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-               <a href="/" className="text-[35px] font-bold text-[#eeeeee] font-logo">
-              Cybrosys Assista
-            </a>
+              <Link href="/">
+              <Image
+                src="/logo/logo7-white.svg"
+                alt="Cybrosys Assista"
+                width={280}
+                height={280}
+                className="h-12"
+              />
+            </Link>
             </div>
             <div className="contact-info">
               <div className="contact-item">

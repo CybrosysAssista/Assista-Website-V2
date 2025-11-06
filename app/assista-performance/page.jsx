@@ -54,10 +54,10 @@ function Page() {
   return (
     <div>
       <Header />
-      <div className="cmpad pt-30 slider inslider">
+      <div className="cmpad pt-30 slider inslider pslider">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6">
               <Image
                 src="/img/assista-performance.svg"
                 alt=""
@@ -71,7 +71,8 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
-              <br /> Optimize more<span className="brush">efficiency.</span>
+              <br /> Optimize more{" "}
+              <span className="brush brushp">efficiency.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Assista Performance empowers you with real-time insights,
@@ -138,10 +139,10 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg">automation tools</span>
+            <span className="underlineimg underlinep">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.
@@ -200,10 +201,10 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg">automation tools</span>
+            <span className="underlineimg underlinep">automation tools</span>
           </h2>
 
-          <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+          <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
             Simplify your workflows, boost productivity, and manage every
             process with ease all from one intuitive dashboard built to scale
             with your business.

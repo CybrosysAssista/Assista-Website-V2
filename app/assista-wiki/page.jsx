@@ -138,11 +138,16 @@ function Page() {
   return (
     <div>
       <Header />
-      <div className="cmpad pt-30 slider inslider">
+      <div className="cmpad pt-30 slider inslider wslider">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="flex items-center gap-3 mb-8">
-              <Image src="/img/logo7.svg" alt="" width={50} height={50} />
+            <div className="flex items-center gap-3 mb-6">
+              <Image
+                src="/img/assista-wiki.svg"
+                alt=""
+                width={60}
+                height={60}
+              />
               <span className="font-semibold text-4xl text-[#818181]">
                 Assista wiki
               </span>
@@ -150,7 +155,7 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
-              <br /> Organize <span className="brush">knowledge.</span>
+              <br /> Organize <span className="brush brushw">knowledge.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Assista Wiki helps you create, manage, and access knowledge
@@ -192,10 +197,10 @@ function Page() {
 
         <h2 className="mainhead relative w-max m-auto">
           Learn more with{" "}
-          <span className="underlineimg">depth AI knowledge</span>
+          <span className="underlineimg underlinew">depth AI knowledge</span>
         </h2>
 
-        <p className="leading-7 text-[#7e7e7e] text-center max-w-[700px] mx-auto mb-15">
+        <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
           Explore the Assista Wiki your go-to resource for understanding
           automation and productivity practical insights guides to help you
           master.
