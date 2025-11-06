@@ -1,0 +1,133 @@
+{
+  "info": {
+    "name": "Assista Wiki API",
+    "description": "API collection for Assista Wiki documentation generation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Generate Documentation - odoo/odoo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"repo\": \"odoo/odoo\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5173/api/generate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5173",
+          "path": [
+            "api",
+            "generate"
+          ]
+        },
+        "description": "Generate documentation for the odoo/odoo repository"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"repo\": \"odoo/odoo\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5173/api/generate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5173",
+              "path": [
+                "api",
+                "generate"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"markdown\": \"# Odoo Documentation\\n\\n## Overview\\n\\nOdoo is a suite of open source business apps...\",\n  \"fallback\": false,\n  \"source\": \"deepwiki\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Generate Documentation - Any Repository",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"repo\": \"{{owner}}/{{repo_name}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5173/api/generate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5173",
+          "path": [
+            "api",
+            "generate"
+          ]
+        },
+        "description": "Generate documentation for any GitHub repository. Use variables: {{owner}} and {{repo_name}}"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5173",
+      "type": "string"
+    },
+    {
+      "key": "owner",
+      "value": "odoo",
+      "type": "string"
+    },
+    {
+      "key": "repo_name",
+      "value": "odoo",
+      "type": "string"
+    }
+  ]
+}
+
