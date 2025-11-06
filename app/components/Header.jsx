@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 function Header() {
   const [isActive, setIsActive] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,23 +47,17 @@ function Header() {
                 alt="Cybrosys Assista"
                 width={280}
                 height={280}
-                className="h-12"
+                className="w-[230px] md:w-[280px] h-auto"
               />
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex flex-1 items-center justify-end gap-15">
-              <ul className="flex items-center space-x-10 text-[15px]">
-                <li>
-                  <a
-                    href=""
-                    className="transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
-                  ></a>
-                </li>
+              <ul className="flex items-center space-x-6 xl:space-x-10 text-[15px]">
                 <li>
                   <a
                     href="/about"
-                    className="transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
+                    className="w-max flex transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
                   >
                     About Us
                   </a>
@@ -296,7 +291,7 @@ function Header() {
                 <li>
                   <a
                     href="/contact"
-                    className="transition duration-300 ease-in-out hover:text-[var(--primary-color)] t"
+                    className="w-max flex transition duration-300 ease-in-out hover:text-[var(--primary-color)] t"
                   >
                     Contact Us
                   </a>
@@ -304,7 +299,7 @@ function Header() {
               </ul>
               <a
                 href="/login"
-                className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-full flex gap-2 items-center hover:bg-[#666] transition duration-300"
+                className="w-max px-6 py-3 bg-[var(--primary-color)] text-white rounded-full flex gap-2 items-center hover:bg-[#666] transition duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -345,64 +340,162 @@ function Header() {
               </svg>
             </button>
           </div>
-          {/* Mobile menu panel with animation */}
-          <div
-            className={`lg:hidden bg-white rounded-2xl overflow-hidden transform transition-all duration-300 ${
-              isMobileOpen
-                ? "mt-2 opacity-100 translate-y-0 max-h-[420px]"
-                : "mt-0 opacity-0 -translate-y-2 max-h-0 pointer-events-none"
-            }`}
-          >
-            <div className="p-4">
-              <ul className="space-y-3 text-[15px] text-left">
-                <li>
-                  <a
-                    href="/about"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+        </div>
+        {/* Mobile menu panel with animation */}
+        <div
+          className={`lg:hidden overflow-hidden overflow-y-auto bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 ${
+            isMobileOpen
+              ? "mt-2 opacity-100 translate-y-0 max-h-[420px]"
+              : "mt-0 opacity-0 -translate-y-2 max-h-0 pointer-events-none"
+          }`}
+        >
+          <div className="p-4">
+            <ul className="space-y-3 text-[15px] text-left">
+              <li>
+                <a
+                  href="/about"
+                  className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  aria-expanded={isMobileResourcesOpen}
+                  aria-controls="mobile-resources"
+                  onClick={() => setIsMobileResourcesOpen((v) => !v)}
+                  className="w-full flex justify-between items-center py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                >
+                  <span>Our Resources</span>
+                  <svg
+                    className={`w-4 h-4 transform transition-transform duration-200 ${
+                      isMobileResourcesOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
                   >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/services"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                  >
-                    Our Services
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/features"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/blogs"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                  >
-                    Blogs
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/contact"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-              <a
-                href="#"
-                className="mt-4 w-full inline-flex justify-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-full items-center hover:bg-[#454685] transition duration-300"
+                    <path d="M5.23 7.21a.75.75 0 011.06-.02L10 10.88l3.71-3.69a.75.75 0 111.06 1.06l-4.24 4.22a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" />
+                  </svg>
+                </button>
+                
+                <div
+                  id="mobile-resources"
+                  className={`overflow-hidden transition-[max-height] duration-300 ${
+                    isMobileResourcesOpen ? "max-h-96 mt-2" : "max-h-0"
+                  }`}
+                >
+                  <ul className="pl-3 space-y-2">
+                    <li>
+                      <a
+                        href="/assista-ide"
+                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                      >
+                        Assista IDE
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/easy-instance"
+                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                      >
+                        Easy Instance
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/assista-x"
+                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                      >
+                        Assista X
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/assista-performance"
+                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                      >
+                        Assista Performance
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/assista-wiki"
+                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                      >
+                        Assista Wiki
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/assista-news"
+                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                      >
+                        Assista News
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/assista-air"
+                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                      >
+                        Assista Air
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/assista-builder"
+                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                      >
+                        Assista Builder
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <a
+                  href="/"
+                  className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                >
+                  Docs
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/faq"
+                  className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                >
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/contact"
+                  className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                >
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+            <a
+              href="#"
+              className="mt-4 w-full gap-3 inline-flex justify-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-full items-center hover:bg-[#454685] transition duration-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
               >
-                Let’s Go
-              </a>
-            </div>
+                <path
+                  fill="currentColor"
+                  d="M1 11c5.523 0 10-4.477 10-10h2c0 5.523 4.477 10 10 10v2c-5.523 0-10 4.477-10 10h-2c0-5.523-4.477-10-10-10z"
+                />
+              </svg>
+              Try Assista
+            </a>
           </div>
         </div>
       </div>

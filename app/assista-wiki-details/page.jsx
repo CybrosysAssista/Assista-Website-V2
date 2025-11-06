@@ -232,12 +232,14 @@ function page() {
           return (
             <button
               onClick={() => setShowDiagramsView(true)}
-              className="w-fit flex items-center justify-center gap-2 px-4 py-2 text-sm text-blue-600 hover:text-blue-800 border border-blue-200 rounded-lg transition my-4 cursor-pointer">
+              className="w-fit flex items-center justify-center gap-2 px-4 py-2 text-sm text-blue-600 hover:text-blue-800 border border-blue-200 rounded-lg transition my-4 cursor-pointer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
-                viewBox="0 0 24 24">
+                viewBox="0 0 24 24"
+              >
                 <path
                   fill="currentColor"
                   d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12c0 1.11-.89 2-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 17v-6H6v6h9m-9 2h9v2H6v-2Z"
@@ -375,27 +377,32 @@ function page() {
         // If the href looks like a relative file path (e.g., addons/account/models/account_move.py)
         // and we have a repo, convert it to a GitHub URL
         let finalHref = href || "";
-        
+
         // If href is empty, try to extract from children text
         if (!finalHref && children) {
-          const childText = typeof children === "string" 
-            ? children 
-            : (Array.isArray(children) 
-              ? children.map(c => typeof c === "string" ? c : "").join("")
-              : "");
+          const childText =
+            typeof children === "string"
+              ? children
+              : Array.isArray(children)
+              ? children.map((c) => (typeof c === "string" ? c : "")).join("")
+              : "";
           if (childText) {
             finalHref = childText;
           }
         }
-        
-        if (finalHref && repo && !finalHref.startsWith("http") && !finalHref.startsWith("#")) {
+
+        if (
+          finalHref &&
+          repo &&
+          !finalHref.startsWith("http") &&
+          !finalHref.startsWith("#")
+        ) {
           // Handle format like "README.md:8-15" or "file.py:10-20"
           const parts = finalHref.split(":");
           const filePath = parts[0].trim();
-          const lineRange = parts.length > 1 
-            ? `#L${parts[1].trim().replace("-", "-L")}` 
-            : "";
-          
+          const lineRange =
+            parts.length > 1 ? `#L${parts[1].trim().replace("-", "-L")}` : "";
+
           // Only process if it looks like a file path
           if (filePath && (filePath.includes(".") || filePath.includes("/"))) {
             // Use blob for files with line ranges, tree for directories
@@ -412,19 +419,20 @@ function page() {
             }
           }
         }
-        
+
         // Don't render link if href is still empty
         if (!finalHref) {
           return <span {...props}>{children}</span>;
         }
-        
+
         return (
           <a
             className="inline-link"
             target="_blank"
             rel="noopener noreferrer"
             href={finalHref}
-            {...props}>
+            {...props}
+          >
             {children}
           </a>
         );
@@ -491,7 +499,7 @@ function page() {
             children.forEach((child) => {
               if (typeof child === "object" && child?.type === "a") {
                 const href = child.props?.href || "";
-                
+
                 // Extract link text - could be a string or more complex structure
                 let linkText = "";
                 if (typeof child.props?.children === "string") {
@@ -502,22 +510,31 @@ function page() {
                     .map((c) => (typeof c === "string" ? c : ""))
                     .join("");
                 }
-                
+
                 // Use linkText as fallback if href is empty
                 const sourceText = href || linkText;
-                
+
                 // Convert to full GitHub URL if we have a repo
                 let finalHref = href;
-                if (repo && sourceText && !sourceText.startsWith("http") && !sourceText.startsWith("#")) {
+                if (
+                  repo &&
+                  sourceText &&
+                  !sourceText.startsWith("http") &&
+                  !sourceText.startsWith("#")
+                ) {
                   // Handle format like "README.md:8-15" or just "README.md"
                   const parts = sourceText.split(":");
                   const filePath = parts[0].trim();
-                  const lineRange = parts.length > 1 
-                    ? `#L${parts[1].trim().replace("-", "-L")}` 
-                    : "";
-                  
+                  const lineRange =
+                    parts.length > 1
+                      ? `#L${parts[1].trim().replace("-", "-L")}`
+                      : "";
+
                   // Only process if filePath looks like a file path
-                  if (filePath && (filePath.includes(".") || filePath.includes("/"))) {
+                  if (
+                    filePath &&
+                    (filePath.includes(".") || filePath.includes("/"))
+                  ) {
                     // Use blob instead of tree to link to specific lines
                     if (lineRange) {
                       finalHref = `https://github.com/${repo}/blob/master/${filePath}${lineRange}`;
@@ -532,10 +549,10 @@ function page() {
                   // No repo available, can't build URL
                   finalHref = href || sourceText;
                 }
-                
+
                 links.push({
                   href: finalHref,
-                  text: linkText || sourceText || href
+                  text: linkText || sourceText || href,
                 });
               }
             });
@@ -778,17 +795,17 @@ function page() {
   // Scroll to top when page changes
   useEffect(() => {
     if (!activePageId) return;
-    
+
     // Small delay to ensure content is rendered
     const timeoutId = setTimeout(() => {
-      const contentContainer = document.querySelector('.wiki-main-content');
+      const contentContainer = document.querySelector(".wiki-main-content");
       if (contentContainer) {
-        contentContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        contentContainer.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }, 100);
-    
+
     return () => clearTimeout(timeoutId);
   }, [activePageId]);
 
@@ -1064,7 +1081,7 @@ function page() {
       <div>
         <Header />
         <div className="cmpad mt-21">
-          <div className="text-center py-20">
+          <div className="text-center py-10 md:py-20">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-(--primary-color) mb-4"></div>
             <p className="text-lg text-slate-600">Loading documentation...</p>
           </div>
@@ -1078,13 +1095,14 @@ function page() {
       <div>
         <Header />
         <div className="cmpad mt-21">
-          <div className="text-center py-20">
+          <div className="text-center py-10 md:py-20">
             <div className="text-red-500 mb-4">
               <svg
                 className="w-16 h-16 mx-auto"
                 fill="none"
                 stroke="currentColor"
-                viewBox="0 0 24 24">
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -1101,7 +1119,8 @@ function page() {
             </p>
             <a
               href="/assista-wiki"
-              className="px-6 py-3 bg-(--primary-color) text-white rounded-full hover:bg-[#666] transition duration-300 inline-block">
+              className="px-6 py-3 bg-(--primary-color) text-white rounded-full hover:bg-[#666] transition duration-300 inline-block"
+            >
               Go Back
             </a>
           </div>
@@ -1126,12 +1145,14 @@ function page() {
                     href={`https://github.com/${repo}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title="View on GitHub">
+                    title="View on GitHub"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
                       height="20"
-                      viewBox="0 0 24 24">
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         fill="currentColor"
                         d="M18.364 15.536L16.95 14.12l1.414-1.414a5 5 0 0 0-7.071-7.071L9.878 7.05L8.464 5.636l1.414-1.414a7 7 0 0 1 9.9 9.9zm-2.829 2.828l-1.414 1.414a7 7 0 0 1-9.9-9.9l1.415-1.414L7.05 9.88l-1.414 1.414a5 5 0 0 0 7.07 7.071l1.415-1.414zm-.707-10.607l1.415 1.415l-7.072 7.07l-1.414-1.414z"
@@ -1142,12 +1163,14 @@ function page() {
                     href={`${API_BASE_URL}/api/download/${repo}/md`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title="Download Markdown">
+                    title="Download Markdown"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
                       height="20"
-                      viewBox="0 0 24 24">
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         fill="currentColor"
                         d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71M5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1"
@@ -1168,7 +1191,8 @@ function page() {
                           }}
                           className={`nav-link w-full text-left ${
                             activePageId === page.id ? "nav-link-main" : ""
-                          }`}>
+                          }`}
+                        >
                           {page.title}
                         </button>
                       </li>
@@ -1208,32 +1232,42 @@ function page() {
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           rehypePlugins={[rehypeRaw]}
-                          components={components}>
+                          components={components}
+                        >
                           {sanitizeMarkdown(activePage.content)}
                         </ReactMarkdown>
                       </div>
 
                       {(hasPrev || hasNext) && (
                         <div className="mt-8 mb-20 flex justify-between items-center gap-4 pt-6 border-t border-gray-200">
-                                                      {hasPrev ? (
-                              <button
-                                onClick={() => {
-                                  setActivePageId(pages[currentIndex - 1].id);
-                                  setShowDiagramsView(false);
-                                  // Scroll to top of the content area
-                                  const contentContainer = document.querySelector('.wiki-main-content');
-                                  if (contentContainer) {
-                                    contentContainer.scrollTo({ top: 0, behavior: 'smooth' });
-                                  } else {
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                  }
-                                }}
-                                className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+                          {hasPrev ? (
+                            <button
+                              onClick={() => {
+                                setActivePageId(pages[currentIndex - 1].id);
+                                setShowDiagramsView(false);
+                                // Scroll to top of the content area
+                                const contentContainer =
+                                  document.querySelector(".wiki-main-content");
+                                if (contentContainer) {
+                                  contentContainer.scrollTo({
+                                    top: 0,
+                                    behavior: "smooth",
+                                  });
+                                } else {
+                                  window.scrollTo({
+                                    top: 0,
+                                    behavior: "smooth",
+                                  });
+                                }
+                              }}
+                              className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition"
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="20"
                                 height="20"
-                                viewBox="0 0 24 24">
+                                viewBox="0 0 24 24"
+                              >
                                 <path
                                   fill="currentColor"
                                   d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.42Z"
@@ -1252,14 +1286,22 @@ function page() {
                                 setActivePageId(pages[currentIndex + 1].id);
                                 setShowDiagramsView(false);
                                 // Scroll to top of the content area
-                                const contentContainer = document.querySelector('.wiki-main-content');
+                                const contentContainer =
+                                  document.querySelector(".wiki-main-content");
                                 if (contentContainer) {
-                                  contentContainer.scrollTo({ top: 0, behavior: 'smooth' });
+                                  contentContainer.scrollTo({
+                                    top: 0,
+                                    behavior: "smooth",
+                                  });
                                 } else {
-                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                  window.scrollTo({
+                                    top: 0,
+                                    behavior: "smooth",
+                                  });
                                 }
                               }}
-                              className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+                              className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition"
+                            >
                               <span className="font-medium">
                                 {pages[currentIndex + 1].title}
                               </span>
@@ -1267,7 +1309,8 @@ function page() {
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="20"
                                 height="20"
-                                viewBox="0 0 24 24">
+                                viewBox="0 0 24 24"
+                              >
                                 <path
                                   fill="currentColor"
                                   d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6-6 6-1.41-1.42Z"
@@ -1309,12 +1352,14 @@ function page() {
                     className="cursor-pointer shrink-0"
                     onClick={handleAsk}
                     disabled={!question.trim()}
-                    aria-label="Ask documentation assistant">
+                    aria-label="Ask documentation assistant"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="28"
                       height="28"
-                      viewBox="0 0 24 24">
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         fill="currentColor"
                         fillRule="evenodd"
@@ -1344,7 +1389,8 @@ function page() {
                             href={`#${section.id}`}
                             className={`page-nav-link ${
                               activeSection === section.id ? "active" : ""
-                            }`}>
+                            }`}
+                          >
                             {section.title}
                           </a>
                         </li>
@@ -1362,7 +1408,6 @@ function page() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
@@ -1373,26 +1418,30 @@ function DiagramsView({ pages, activePageId, onClose }) {
   const [loading, setLoading] = useState(true);
 
   // Function to download diagram as SVG or PNG
-  const downloadDiagram = async (diagramId, diagramTitle, format = 'svg') => {
-    const diagramElement = document.querySelector(`#diagram-${diagramId} .mermaid svg`);
+  const downloadDiagram = async (diagramId, diagramTitle, format = "svg") => {
+    const diagramElement = document.querySelector(
+      `#diagram-${diagramId} .mermaid svg`
+    );
     if (!diagramElement) {
-      console.error('Diagram SVG not found. Make sure the diagram is fully rendered.');
-      alert('Diagram is still loading. Please wait a moment and try again.');
+      console.error(
+        "Diagram SVG not found. Make sure the diagram is fully rendered."
+      );
+      alert("Diagram is still loading. Please wait a moment and try again.");
       return;
     }
 
     const svg = diagramElement.cloneNode(true);
-    
+
     // Get SVG dimensions - try multiple methods to handle different SVG configurations
     let width, height;
-    
+
     try {
       const bbox = svg.getBBox();
       width = bbox.width || 1200;
       height = bbox.height || 800;
     } catch (e) {
       // If getBBox fails, try to get from attributes or computed style
-      const viewBox = svg.getAttribute('viewBox');
+      const viewBox = svg.getAttribute("viewBox");
       if (viewBox) {
         const parts = viewBox.split(/\s+/);
         if (parts.length >= 4) {
@@ -1400,108 +1449,125 @@ function DiagramsView({ pages, activePageId, onClose }) {
           height = parseFloat(parts[3]) || 800;
         }
       }
-      
+
       // Try to get from width/height attributes
       if (!width) {
-        const widthAttr = svg.getAttribute('width');
-        const heightAttr = svg.getAttribute('height');
+        const widthAttr = svg.getAttribute("width");
+        const heightAttr = svg.getAttribute("height");
         width = widthAttr ? parseFloat(widthAttr) : 1200;
         height = heightAttr ? parseFloat(heightAttr) : 800;
       }
-      
+
       // Fallback to computed style
       if (!width || width === 1200) {
         const computedStyle = window.getComputedStyle(svg);
-        width = parseFloat(computedStyle.width) || parseFloat(svg.clientWidth) || 1200;
-        height = parseFloat(computedStyle.height) || parseFloat(svg.clientHeight) || 800;
+        width =
+          parseFloat(computedStyle.width) ||
+          parseFloat(svg.clientWidth) ||
+          1200;
+        height =
+          parseFloat(computedStyle.height) ||
+          parseFloat(svg.clientHeight) ||
+          800;
       }
     }
-    
+
     // Ensure we have valid dimensions
     width = width || 1200;
     height = height || 800;
-    
+
     // Ensure SVG has proper dimensions
-    svg.setAttribute('width', width.toString());
-    svg.setAttribute('height', height.toString());
-    
+    svg.setAttribute("width", width.toString());
+    svg.setAttribute("height", height.toString());
+
     // Set viewBox if not already set
-    if (!svg.getAttribute('viewBox')) {
+    if (!svg.getAttribute("viewBox")) {
       try {
         const bbox = svg.getBBox();
-        svg.setAttribute('viewBox', `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+        svg.setAttribute(
+          "viewBox",
+          `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`
+        );
       } catch (e) {
-        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
       }
     }
-    
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const filename = `${diagramTitle.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.${format}`;
 
-    if (format === 'svg') {
-      const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const filename = `${diagramTitle
+      .replace(/[^a-z0-9]/gi, "-")
+      .toLowerCase()}.${format}`;
+
+    if (format === "svg") {
+      const blob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
       const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
       link.download = filename;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-    } else if (format === 'png') {
+    } else if (format === "png") {
       // Convert SVG to PNG using a safer method
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
       const img = new Image();
-      
+
       // Set canvas dimensions
       const scale = 2; // For better quality
       canvas.width = width * scale;
       canvas.height = height * scale;
       ctx.scale(scale, scale);
-      
+
       // Convert SVG to data URL to avoid CORS issues
       // First, ensure SVG has proper namespace and encoding
-      let svgDataUrl = 'data:image/svg+xml;charset=utf-8,';
-      
+      let svgDataUrl = "data:image/svg+xml;charset=utf-8,";
+
       // Encode SVG for data URL (encode special characters)
       const encodedSvg = encodeURIComponent(svgData);
       svgDataUrl += encodedSvg;
-      
+
       // Set crossOrigin to anonymous to prevent tainting
-      img.crossOrigin = 'anonymous';
-      
+      img.crossOrigin = "anonymous";
+
       img.onload = () => {
         try {
           ctx.drawImage(img, 0, 0);
-          
+
           canvas.toBlob((blob) => {
             if (!blob) {
-              console.error('Failed to convert to PNG');
-              alert('Error converting diagram to PNG. Please try downloading as SVG instead.');
+              console.error("Failed to convert to PNG");
+              alert(
+                "Error converting diagram to PNG. Please try downloading as SVG instead."
+              );
               return;
             }
-            
+
             const pngUrl = URL.createObjectURL(blob);
-            const link = document.createElement('a');
+            const link = document.createElement("a");
             link.href = pngUrl;
             link.download = filename;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(pngUrl);
-          }, 'image/png');
+          }, "image/png");
         } catch (error) {
-          console.error('Error drawing image to canvas:', error);
-          alert('Error converting diagram to PNG. The diagram may contain external resources. Please try downloading as SVG instead.');
+          console.error("Error drawing image to canvas:", error);
+          alert(
+            "Error converting diagram to PNG. The diagram may contain external resources. Please try downloading as SVG instead."
+          );
         }
       };
-      
+
       img.onerror = (error) => {
-        console.error('Error loading SVG image:', error);
-        alert('Error converting diagram to PNG. Please try downloading as SVG instead.');
+        console.error("Error loading SVG image:", error);
+        alert(
+          "Error converting diagram to PNG. Please try downloading as SVG instead."
+        );
       };
-      
+
       img.src = svgDataUrl;
     }
   };
@@ -1634,24 +1700,26 @@ function DiagramsView({ pages, activePageId, onClose }) {
         <h2 className="text-2xl font-bold text-gray-800">Diagrams & Graphs</h2>
         <button
           onClick={onClose}
-          className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+          className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition"
+        >
           Back to Content
         </button>
       </div>
 
       {loading ? (
-        <div className="text-center py-20">
+        <div className="text-center py-10 md:py-20">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-(--primary-color) mb-4"></div>
           <p className="text-lg text-slate-600">Loading diagrams...</p>
         </div>
       ) : diagramsInCurrentPage.length === 0 ? (
-        <div className="text-center py-20">
+        <div className="text-center py-10 md:py-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="64"
             height="64"
             viewBox="0 0 24 24"
-            className="mx-auto mb-4 text-gray-400">
+            className="mx-auto mb-4 text-gray-400"
+          >
             <path
               fill="currentColor"
               d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12c0 1.11-.89 2-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m0 10v2h8v-2H6Z"
@@ -1669,16 +1737,20 @@ function DiagramsView({ pages, activePageId, onClose }) {
               <div
                 key={`curr-${idx}`}
                 id={`diagram-${diagramId}`}
-                className="border border-gray-200 rounded-lg p-4 bg-white">
+                className="border border-gray-200 rounded-lg p-4 bg-white"
+              >
                 <div className="flex justify-between items-center mb-3">
                   <h4 className="text-lg font-semibold text-gray-800">
                     {diagram.title}
                   </h4>
                   <div className="flex gap-2">
                     <button
-                      onClick={() => downloadDiagram(diagramId, diagram.title, 'svg')}
+                      onClick={() =>
+                        downloadDiagram(diagramId, diagram.title, "svg")
+                      }
                       className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
-                      title="Download as SVG">
+                      title="Download as SVG"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -1688,7 +1760,8 @@ function DiagramsView({ pages, activePageId, onClose }) {
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
-                        strokeLinejoin="round">
+                        strokeLinejoin="round"
+                      >
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
                         <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -1696,9 +1769,12 @@ function DiagramsView({ pages, activePageId, onClose }) {
                       <span>SVG</span>
                     </button>
                     <button
-                      onClick={() => downloadDiagram(diagramId, diagram.title, 'png')}
+                      onClick={() =>
+                        downloadDiagram(diagramId, diagram.title, "png")
+                      }
                       className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
-                      title="Download as PNG">
+                      title="Download as PNG"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -1708,7 +1784,8 @@ function DiagramsView({ pages, activePageId, onClose }) {
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
-                        strokeLinejoin="round">
+                        strokeLinejoin="round"
+                      >
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
                         <line x1="12" y1="15" x2="12" y2="3"></line>

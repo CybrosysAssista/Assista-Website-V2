@@ -44,7 +44,13 @@ function Page() {
       } catch (err) {
         console.error("Error fetching categories:", err);
         // Set default categories if API fails
-        setCategories(["General", "Technology", "Business", "Science", "Culture"]);
+        setCategories([
+          "General",
+          "Technology",
+          "Business",
+          "Science",
+          "Culture",
+        ]);
       }
     };
     fetchCategories();
@@ -65,54 +71,59 @@ function Page() {
   useEffect(() => {
     let controller = null;
     let requestTimeout = null;
-    
+
     const fetchNews = async () => {
       // Cancel any previous request
       if (controller) {
         controller.abort();
       }
-      
+
       controller = new AbortController();
-      
+
       try {
         setLoading(true);
         setError(null);
-        
+
         // Build query parameters
         const params = new URLSearchParams();
-        params.append('page', currentPage.toString());
-        params.append('page_size', pageSize.toString());
-        
+        params.append("page", currentPage.toString());
+        params.append("page_size", pageSize.toString());
+
         if (searchQuery.trim()) {
-          params.append('q', searchQuery.trim());
+          params.append("q", searchQuery.trim());
         }
-        
+
         if (selectedCategory) {
-          params.append('category', selectedCategory);
+          params.append("category", selectedCategory);
         }
-        
+
         // Note: API may not support sort/filter yet, but we can add it for future
         // if (sortFilter === 'featured') {
         //   params.append('featured', 'true');
         // }
-        
-        const response = await fetch(`${API_BASE_URL}/api/news?${params.toString()}`, {
-          signal: controller.signal,
-        });
-        
+
+        const response = await fetch(
+          `${API_BASE_URL}/api/news?${params.toString()}`,
+          {
+            signal: controller.signal,
+          }
+        );
+
         if (!response.ok) {
           if (response.status === 429) {
-            throw new Error('Too many requests. Please wait a moment and try again.');
+            throw new Error(
+              "Too many requests. Please wait a moment and try again."
+            );
           }
           throw new Error(`Failed to fetch news: ${response.statusText}`);
         }
-        
+
         const data = await response.json();
-        
+
         // Extract articles array from response
         // API returns: { items: [...], total: number, page: number, generated_at: "..." }
         let articles = [];
-        
+
         if (Array.isArray(data.items)) {
           // Most common format: items array
           articles = data.items;
@@ -125,7 +136,7 @@ function Page() {
         } else if (data && data.data && Array.isArray(data.data)) {
           articles = data.data;
         }
-        
+
         // Update pagination metadata
         if (data.total !== undefined) {
           setTotalItems(data.total);
@@ -134,7 +145,7 @@ function Page() {
         if (data.page !== undefined) {
           setCurrentPage(data.page);
         }
-        
+
         // Map articles to the format expected by the UI
         const mappedNews = articles.map((article, index) => ({
           id: article.id || article.link || `article-${index}`,
@@ -143,28 +154,38 @@ function Page() {
           excerpt: article.summary || article.description || "",
           author: article.source || "Unknown",
           date: article.published || new Date().toISOString(),
-          readTime: calculateReadTime(article.summary || article.description || ""),
-          image: article.image_url || "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
+          readTime: calculateReadTime(
+            article.summary || article.description || ""
+          ),
+          image:
+            article.image_url ||
+            "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
           featured: article.featured || false,
           link: article.link || "",
         }));
-        
+
         // Apply client-side sorting if needed (for features API doesn't support)
         let sortedNews = mappedNews;
-        if (sortFilter === 'newest') {
-          sortedNews = [...mappedNews].sort((a, b) => new Date(b.date) - new Date(a.date));
-        } else if (sortFilter === 'featured') {
-          sortedNews = [...mappedNews].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+        if (sortFilter === "newest") {
+          sortedNews = [...mappedNews].sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+          );
+        } else if (sortFilter === "featured") {
+          sortedNews = [...mappedNews].sort(
+            (a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
+          );
         }
-        
+
         setNews(sortedNews);
       } catch (err) {
         console.error("Error fetching news:", err);
-        if (err.name === 'AbortError') {
+        if (err.name === "AbortError") {
           // Request was cancelled, don't show error
           return;
         } else {
-          setError(err.message || "Failed to fetch news. Please try again later.");
+          setError(
+            err.message || "Failed to fetch news. Please try again later."
+          );
         }
       } finally {
         setLoading(false);
@@ -230,7 +251,7 @@ function Page() {
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -255,7 +276,7 @@ function Page() {
   const getPageNumbers = () => {
     const pages = [];
     const maxVisible = 7;
-    
+
     if (totalPages <= maxVisible) {
       // Show all pages if total is less than max visible
       for (let i = 1; i <= totalPages; i++) {
@@ -264,36 +285,35 @@ function Page() {
     } else {
       // Always show first page
       pages.push(1);
-      
+
       if (currentPage > 3) {
-        pages.push('...');
+        pages.push("...");
       }
-      
+
       // Show pages around current page
       const start = Math.max(2, currentPage - 1);
       const end = Math.min(totalPages - 1, currentPage + 1);
-      
+
       for (let i = start; i <= end; i++) {
         pages.push(i);
       }
-      
+
       if (currentPage < totalPages - 2) {
-        pages.push('...');
+        pages.push("...");
       }
-      
+
       // Always show last page
       pages.push(totalPages);
     }
-    
+
     return pages;
   };
-
 
   return (
     <div>
       <Header />
       <div className="cmpad pt-30 slider inslider nslider">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <Image
@@ -345,7 +365,7 @@ function Page() {
         </div>
       </div>
 
-      <div className="cmpad py-20">
+      <div className="cmpad py-10 md:py-20">
         <div style={{ textAlign: "center" }}>
           <span className="badge">Assista News</span>
         </div>
@@ -427,14 +447,18 @@ function Page() {
                       key={category}
                       onClick={() => handleCategorySelect(category)}
                       className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                        selectedCategory === category ? "bg-slate-100 font-semibold" : ""
+                        selectedCategory === category
+                          ? "bg-slate-100 font-semibold"
+                          : ""
                       }`}
                     >
                       {category}
                     </button>
                   ))
                 ) : (
-                  <div className="px-3 py-2 text-sm text-gray-500">Loading categories...</div>
+                  <div className="px-3 py-2 text-sm text-gray-500">
+                    Loading categories...
+                  </div>
                 )}
               </div>
             )}
@@ -478,7 +502,9 @@ function Page() {
                 <button
                   onClick={() => handleFilterSelect("featured")}
                   className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    sortFilter === "featured" ? "bg-slate-100 font-semibold" : ""
+                    sortFilter === "featured"
+                      ? "bg-slate-100 font-semibold"
+                      : ""
                   }`}
                 >
                   Featured
@@ -486,7 +512,9 @@ function Page() {
                 <button
                   onClick={() => handleFilterSelect("most_read")}
                   className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    sortFilter === "most_read" ? "bg-slate-100 font-semibold" : ""
+                    sortFilter === "most_read"
+                      ? "bg-slate-100 font-semibold"
+                      : ""
                   }`}
                 >
                   Most read
@@ -497,19 +525,33 @@ function Page() {
         </nav>
 
         {loading ? (
-          <div className="text-center py-20">
+          <div className="text-center py-10 md:py-20">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--primary-color)] mb-4"></div>
             <p className="text-lg text-slate-600">Loading news articles...</p>
           </div>
         ) : error ? (
-          <div className="text-center py-20">
+          <div className="text-center py-10 md:py-20">
             <div className="text-red-500 mb-4">
-              <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-16 h-16 mx-auto"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
             </div>
-            <h3 className="text-2xl font-semibold text-slate-700 mb-3">Error Loading News</h3>
-            <p className="text-[#7e7e7e] text-lg max-w-[700px] mx-auto mb-6">{error}</p>
+            <h3 className="text-2xl font-semibold text-slate-700 mb-3">
+              Error Loading News
+            </h3>
+            <p className="text-[#7e7e7e] text-lg max-w-[700px] mx-auto mb-6">
+              {error}
+            </p>
             <button
               onClick={() => window.location.reload()}
               className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
@@ -523,7 +565,10 @@ function Page() {
               <article
                 key={newsItem.id}
                 className="cursor-pointer lg:col-span-4 group bg-white rounded-md [box-shadow:0px_0px_20px_#00000014] hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col"
-                onClick={() => newsItem.link && window.open(newsItem.link, '_blank', 'noopener,noreferrer')}
+                onClick={() =>
+                  newsItem.link &&
+                  window.open(newsItem.link, "_blank", "noopener,noreferrer")
+                }
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -641,7 +686,7 @@ function Page() {
               {/* Page Numbers */}
               {getPageNumbers().map((page, index) => (
                 <React.Fragment key={`page-${page}-${index}`}>
-                  {page === '...' ? (
+                  {page === "..." ? (
                     <span className="px-4 py-2 text-gray-500">...</span>
                   ) : (
                     <button
@@ -652,7 +697,7 @@ function Page() {
                           : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
                       }`}
                       aria-label={`Go to page ${page}`}
-                      aria-current={currentPage === page ? 'page' : undefined}
+                      aria-current={currentPage === page ? "page" : undefined}
                     >
                       {page}
                     </button>
@@ -690,7 +735,8 @@ function Page() {
 
             {/* Page Info */}
             <div className="mt-6 text-sm text-slate-600">
-              Showing page {currentPage} of {totalPages} ({totalItems} total articles)
+              Showing page {currentPage} of {totalPages} ({totalItems} total
+              articles)
             </div>
           </div>
         )}

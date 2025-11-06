@@ -3,8 +3,8 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="h-screen pt-10 slider">
-      <div className="cmpad h-full flex items-center relative">
+    <div className="h-screen mt-40 md:mt-50 xl:mt-0 slider mb-40 xl:mb-0">
+      <div className="cmpad sm:h-full flex items-center relative">
         <Image
           src="/img/globe.svg"
           alt="Globe"
@@ -14,11 +14,11 @@ function Hero() {
         />
 
         <div className="w-full">
-          <div className="grid grid-cols-2 gap-10 w-full">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 w-full">
             <div>
-              <h1 className="text-5xl font-medium mb-3 leading-15">
+              <h1 className="text-[35px] sm:text-[45px] font-medium mb-3 leading-12 md:leading-15">
                 Your smart partner to
-                <br /> Learn more{" "}
+                <br className="hidden md:block" /> Learn more
                 {/* <span className="underlineimg">
                   <Image
                     src="/img/arrow.svg"
@@ -40,7 +40,7 @@ function Hero() {
                   build faster.
                 </span>
               </h1>
-              <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
+              <p className="max-w-[600px] leading-6 md:leading-7 text-[#7e7e7e]">
                 A platform that offers a range of utilities including
                 development plugins a learning hub ready to use installation
                 scripts cheat sheets and more.
@@ -54,7 +54,7 @@ function Hero() {
                 </a>
                 <a
                   href=""
-                  className="text-center w-45 py-3 text-[#333] bg-[#94939328] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
+                  className="text-center w-45 py-3 text-[#333] bg-[#f0f0f0] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
                 >
                   Contact Us
                 </a>
@@ -84,7 +84,7 @@ function Hero() {
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative h-[400px] lg:h-[300px] xl:h-auto">
               <div className="icon">
                 <Image src="/img/icon1.svg" alt="JS" width={40} height={40} />
               </div>
@@ -104,7 +104,7 @@ function Hero() {
                   width={40}
                   height={40}
                 />
-              </div>              
+              </div>
               <div className="icon">
                 <Image src="/img/pycharm.svg" alt="JS" width={40} height={40} />
               </div>

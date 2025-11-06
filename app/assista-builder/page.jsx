@@ -55,7 +55,7 @@ function Page() {
     <div>
       <Header />
       <div className="cmpad pt-30 slider inslider builderbuilder">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <Image
@@ -106,9 +106,9 @@ function Page() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="cmpad py-20">
+      <div className="cmpad py-10 md:py-20">
         <div className="sticky top-25 z-10">
-          <nav className="bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-20">
+          <nav className="bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-4 lg:mb-20">
             {tabs.map((t) => (
               <a
                 key={t.id}
@@ -137,7 +137,9 @@ function Page() {
 
           <h2 className="mainhead relative w-max m-auto">
             Grow business with{" "}
-            <span className="underlineimg underlinebuilder">automation tools</span>
+            <span className="underlineimg underlinebuilder">
+              automation tools
+            </span>
           </h2>
 
           <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
@@ -146,7 +148,7 @@ function Page() {
             with your business.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
             <div>
               <Image
                 src="/img/banner1.webp"
@@ -157,7 +159,7 @@ function Page() {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <h2 className="text-4xl font-medium mb-3 leading-13">
+              <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
                 Streamline your <br /> Wrok with smart features
               </h2>
 
@@ -168,9 +170,9 @@ function Page() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
             <div className="flex flex-col justify-center">
-              <h2 className="text-4xl font-medium mb-3 leading-13">
+              <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
                 Streamline your <br /> Wrok with smart features
               </h2>
 
@@ -208,7 +210,7 @@ function Page() {
             with your business.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
             <div>
               <Image
                 src="/img/banner1.webp"
@@ -219,7 +221,7 @@ function Page() {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <h2 className="text-4xl font-medium mb-3 leading-13">
+              <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
                 Streamline your <br /> Wrok with smart features
               </h2>
 
@@ -230,9 +232,9 @@ function Page() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
             <div className="flex flex-col justify-center">
-              <h2 className="text-4xl font-medium mb-3 leading-13">
+              <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
                 Streamline your <br /> Wrok with smart features
               </h2>
 

@@ -19,11 +19,27 @@ function Page() {
   // Popular/suggested repositories (fallback if no API endpoint exists)
   const suggestedRepos = [
     { repo: "microsoft/vscode", description: "Visual Studio Code" },
-    { repo: "langchain-ai/langchain", description: "Build context-aware reasoning applications" },
-    { repo: "huggingface/transformers", description: "State-of-the-art Machine Learning for PyTorch, TensorFlow, and JAX" },
-    { repo: "openai/whisper", description: "Robust Speech Recognition via Large-Scale Weak Supervision" },
-    { repo: "facebook/react", description: "A declarative, efficient, and flexible JavaScript library" },
-    { repo: "vercel/next.js", description: "The React Framework for Production" },
+    {
+      repo: "langchain-ai/langchain",
+      description: "Build context-aware reasoning applications",
+    },
+    {
+      repo: "huggingface/transformers",
+      description:
+        "State-of-the-art Machine Learning for PyTorch, TensorFlow, and JAX",
+    },
+    {
+      repo: "openai/whisper",
+      description: "Robust Speech Recognition via Large-Scale Weak Supervision",
+    },
+    {
+      repo: "facebook/react",
+      description: "A declarative, efficient, and flexible JavaScript library",
+    },
+    {
+      repo: "vercel/next.js",
+      description: "The React Framework for Production",
+    },
   ];
 
   // Initialize with suggested repos
@@ -46,15 +62,15 @@ function Page() {
 
   const isValidRepo = (value) => {
     const trimmed = value.trim();
-    if (!trimmed.includes('/')) return false;
-    const parts = trimmed.split('/');
+    if (!trimmed.includes("/")) return false;
+    const parts = trimmed.split("/");
     if (parts.length !== 2) return false;
     const [owner, repo] = parts;
-    return owner && repo && !owner.includes(' ') && !repo.includes(' ');
+    return owner && repo && !owner.includes(" ") && !repo.includes(" ");
   };
 
   const handleSearchKeyDown = async (e) => {
-    if (e.key !== 'Enter') return;
+    if (e.key !== "Enter") return;
     const value = e.currentTarget.value;
     if (!isValidRepo(value)) return;
     const now = Date.now();
@@ -71,14 +87,15 @@ function Page() {
       return;
     }
     if (isValidRepo(q)) {
-      const [owner, repoName] = q.split('/');
+      const [owner, repoName] = q.split("/");
       const item = { repo: q, description: `Repository: ${owner}/${repoName}` };
-      setRepos([item, ...suggestedRepos.filter(r => r.repo !== q)]);
+      setRepos([item, ...suggestedRepos.filter((r) => r.repo !== q)]);
       return;
     }
-    const filtered = suggestedRepos.filter(r =>
-      r.repo.toLowerCase().includes(q.toLowerCase()) ||
-      r.description.toLowerCase().includes(q.toLowerCase())
+    const filtered = suggestedRepos.filter(
+      (r) =>
+        r.repo.toLowerCase().includes(q.toLowerCase()) ||
+        r.description.toLowerCase().includes(q.toLowerCase())
     );
     setRepos(filtered.length ? filtered : suggestedRepos);
   };
@@ -91,39 +108,53 @@ function Page() {
       setLoading(true);
 
       const response = await fetch(`${API_BASE_URL}/api/generate`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ repo }),
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: response.statusText }));
-        throw new Error(errorData.error || `Failed to generate documentation: ${response.statusText}`);
+        const errorData = await response
+          .json()
+          .catch(() => ({ error: response.statusText }));
+        throw new Error(
+          errorData.error ||
+            `Failed to generate documentation: ${response.statusText}`
+        );
       }
 
       const data = await response.json();
-      
+
       // Store the generated documentation in sessionStorage to pass to details page
       if (data.markdown) {
         // Store markdown and metadata
-        sessionStorage.setItem(`doc_${repo}`, JSON.stringify({
-          markdown: data.markdown,
-          repo: repo,
-          fallback: data.fallback || false,
-          source: data.source || 'deepwiki',
-          generatedAt: new Date().toISOString(),
-        }));
-        
+        sessionStorage.setItem(
+          `doc_${repo}`,
+          JSON.stringify({
+            markdown: data.markdown,
+            repo: repo,
+            fallback: data.fallback || false,
+            source: data.source || "deepwiki",
+            generatedAt: new Date().toISOString(),
+          })
+        );
+
         // Navigate to details page with the repo name
-        window.location.href = `/assista-wiki-details?repo=${encodeURIComponent(repo)}`;
+        window.location.href = `/assista-wiki-details?repo=${encodeURIComponent(
+          repo
+        )}`;
       } else {
-        throw new Error('No documentation was generated. The API response was empty.');
+        throw new Error(
+          "No documentation was generated. The API response was empty."
+        );
       }
     } catch (err) {
       console.error("Error generating documentation:", err);
-      setError(err.message || "Failed to generate documentation. Please try again.");
+      setError(
+        err.message || "Failed to generate documentation. Please try again."
+      );
       setGenerating(null);
       setLoading(false);
     }
@@ -132,14 +163,17 @@ function Page() {
   const filteredRepo = repos.filter((r) => {
     if (!searchTerm.trim()) return true;
     const term = searchTerm.toLowerCase().trim();
-    return r.repo.toLowerCase().includes(term) || r.description.toLowerCase().includes(term);
+    return (
+      r.repo.toLowerCase().includes(term) ||
+      r.description.toLowerCase().includes(term)
+    );
   });
 
   return (
     <div>
       <Header />
       <div className="cmpad pt-30 slider inslider wslider">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <Image
@@ -190,7 +224,7 @@ function Page() {
         </div>
       </div>
 
-      <div className="cmpad py-20">
+      <div className="cmpad py-10 md:py-20">
         <div style={{ textAlign: "center" }}>
           <span className="badge">Assista Wiki</span>
         </div>
@@ -206,7 +240,7 @@ function Page() {
           master.
         </p>
 
-        <nav className="relative bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-20">
+        <nav className="relative bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-4 lg:mb-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -274,7 +308,9 @@ function Page() {
                       onClick={() => handleGenerateDocs(repoItem.repo)}
                       disabled={generating === repoItem.repo}
                       className={`inline-flex items-center gap-1.5 text-[#e97d82] text-md font-medium hover:text-[#aa6e71] transition-all ${
-                        generating === repoItem.repo ? 'opacity-50 cursor-not-allowed' : ''
+                        generating === repoItem.repo
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
                       }`}
                     >
                       {generating === repoItem.repo ? (
