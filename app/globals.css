@@ -101,6 +101,7 @@ body {
   background-repeat: no-repeat;
   padding: 4px 10px 5px 28px;
   /* font-size: 2.8rem; */
+  display: inline-flex;
 }
 .brush.brushide {
   background-image: url(/img/brushide.svg);
@@ -2035,6 +2036,7 @@ input::placeholder {
 
 .markdown-details li {
   margin: 0.25rem 0;
+}
 .submenu h5 {
   transition: 0.3s;
 }
