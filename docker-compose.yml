@@ -1,0 +1,14 @@
+services:
+  web:
+    build:
+      context: /Users/jestinjoseph/Documents/personal/assista-al/assista-main
+      dockerfile: Dockerfile
+    container_name: assista-main
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+    environment:
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+    restart: unless-stopped
+
