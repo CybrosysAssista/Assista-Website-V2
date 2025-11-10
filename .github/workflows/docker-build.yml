@@ -43,6 +43,6 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home/ubuntu/deploy/assista/assista-website-v2
-            docker-compose pull
-            docker-compose up -d --remove-orphans
+            docker compose pull
+            docker compose up -d --remove-orphans
             docker image prune -f
