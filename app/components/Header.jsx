@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function Header() {
   const router = useRouter();
@@ -15,6 +15,7 @@ function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +45,16 @@ function Header() {
       }
     } finally {
       setIsProcessing(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    if (isSigningOut) return;
+    setIsSigningOut(true);
+    try {
+      await signOut({ callbackUrl: "/signin" });
+    } finally {
+      setIsSigningOut(false);
     }
   };
 
@@ -355,6 +366,41 @@ function Header() {
                 {renderCallToActionIcon()}
                 {isAuthenticated ? "Open Assista IDE" : "Try Assista"}
               </button>
+              {isAuthenticated && (
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="w-max px-6 py-3 border border-slate-300 text-slate-700 rounded-full flex gap-2 items-center hover:bg-slate-100 transition duration-300 disabled:opacity-70"
+                  disabled={isSigningOut}
+                >
+                  {isSigningOut ? (
+                    <svg
+                      className="h-4 w-4 animate-spin"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <circle cx="12" cy="12" r="9" className="opacity-25" />
+                      <path d="M12 3a9 9 0 0 1 9 9" className="opacity-75" />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M16 13v-2H7V8l-5 4l5 4v-3zm3-11H9v2h10v16H9v2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2"
+                      />
+                    </svg>
+                  )}
+                  Sign out
+                </button>
+              )}
             </nav>
 
             {/* Mobile hamburger */}
@@ -529,6 +575,41 @@ function Header() {
               {renderCallToActionIcon()}
               {isAuthenticated ? "Open Assista IDE" : "Try Assista"}
             </button>
+            {isAuthenticated && (
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="mt-3 w-full gap-3 inline-flex justify-center px-6 py-3 border border-slate-300 text-slate-700 rounded-full items-center hover:bg-slate-100 transition duration-300 disabled:opacity-70"
+                disabled={isSigningOut}
+              >
+                {isSigningOut ? (
+                  <svg
+                    className="h-4 w-4 animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <circle cx="12" cy="12" r="9" className="opacity-25" />
+                    <path d="M12 3a9 9 0 0 1 9 9" className="opacity-75" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M16 13v-2H7V8l-5 4l5 4v-3zm3-11H9v2h10v16H9v2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2"
+                    />
+                  </svg>
+                )}
+                Sign out
+              </button>
+            )}
           </div>
         </div>
       </div>
