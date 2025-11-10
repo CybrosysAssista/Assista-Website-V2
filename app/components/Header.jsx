@@ -353,7 +353,7 @@ function Header() {
                 disabled={isProcessing || isLoadingSession}
               >
                 {renderCallToActionIcon()}
-                {isAuthenticated ? "Open Assista" : "Try Assista"}
+                {isAuthenticated ? "Open Assista IDE" : "Try Assista"}
               </button>
             </nav>
 
@@ -527,7 +527,7 @@ function Header() {
               disabled={isProcessing || isLoadingSession}
             >
               {renderCallToActionIcon()}
-              {isAuthenticated ? "Open Assista" : "Try Assista"}
+              {isAuthenticated ? "Open Assista IDE" : "Try Assista"}
             </button>
           </div>
         </div>
