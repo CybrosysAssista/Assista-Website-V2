@@ -27,8 +27,10 @@ const extractDeepWikiLink = (text) => {
   return match ? match[0] : null;
 };
 
-const markdownWrapperClasses = "space-y-3 text-[0.95rem] leading-7 text-slate-800";
-const codeBlockClasses = "overflow-x-auto rounded-md border border-slate-200 bg-slate-100 py-1 px-2 text-[0.8rem] text-slate-900 ";
+const markdownWrapperClasses =
+  "space-y-3 text-[0.95rem] leading-7 text-slate-800";
+const codeBlockClasses =
+  "overflow-x-auto rounded-md border border-slate-200 bg-slate-100 py-1 px-2 text-[0.8rem] text-slate-900 ";
 
 const MarkdownRenderer = ({ content }) => (
   <div className={markdownWrapperClasses}>
@@ -97,7 +99,12 @@ function AskPageContent() {
     }
 
     if (answerText) {
-      return stripMarkdown(answerText).split("\n").filter(Boolean)[0]?.slice(0, 400) || "";
+      return (
+        stripMarkdown(answerText)
+          .split("\n")
+          .filter(Boolean)[0]
+          ?.slice(0, 400) || ""
+      );
     }
 
     return "";
@@ -116,7 +123,9 @@ function AskPageContent() {
       const params = new URLSearchParams();
       if (repo) params.set("repo", repo);
       if (question) params.set("question", question);
-      router.replace(`/assista-wiki-ask?${params.toString()}`, { scroll: false });
+      router.replace(`/assista-wiki-ask?${params.toString()}`, {
+        scroll: false,
+      });
     },
     [repo, router]
   );
@@ -182,9 +191,7 @@ function AskPageContent() {
 
         setAnswerText(data.answer || "No answer returned.");
         setFallback(Boolean(data.fallback || data.source === "local_analysis"));
-        setTimestamp(
-          data.metadata?.timestamp || new Date().toISOString()
-        );
+        setTimestamp(data.metadata?.timestamp || new Date().toISOString());
         setStructuredContent(data.deepwiki_content || null);
         setDeepWikiLink(extractDeepWikiLink(data.answer));
 
@@ -194,8 +201,11 @@ function AskPageContent() {
               ? {
                   ...conv,
                   answer: data.answer || "No answer returned.",
-                  fallback: Boolean(data.fallback || data.source === "local_analysis"),
-                  timestamp: data.metadata?.timestamp || new Date().toISOString(),
+                  fallback: Boolean(
+                    data.fallback || data.source === "local_analysis"
+                  ),
+                  timestamp:
+                    data.metadata?.timestamp || new Date().toISOString(),
                   structuredContent: data.deepwiki_content || null,
                   deepWikiLink: extractDeepWikiLink(data.answer),
                   status: "success",
@@ -204,7 +214,6 @@ function AskPageContent() {
               : conv
           )
         );
-
       } catch (askError) {
         setError(
           askError instanceof Error
@@ -256,7 +265,8 @@ function AskPageContent() {
   };
 
   const activeConversation = useMemo(
-    () => conversations.find((conv) => conv.id === activeConversationId) || null,
+    () =>
+      conversations.find((conv) => conv.id === activeConversationId) || null,
     [conversations, activeConversationId]
   );
 
@@ -278,13 +288,13 @@ function AskPageContent() {
       <div>
         <Header />
         <div className="cmpad mt-72">
-          <div className="max-w-2xl mx-auto text-center py-20">
+          <div className="max-w-2xl mx-auto text-center py-10 md:py-20">
             <h1 className="text-2xl font-semibold text-slate-800 mb-4">
               Repository not specified
             </h1>
             <p className="text-slate-500 mb-6">
-              Please return to the wiki page and choose a repository before asking
-              questions.
+              Please return to the wiki page and choose a repository before
+              asking questions.
             </p>
             <button
               type="button"
@@ -308,7 +318,11 @@ function AskPageContent() {
           <button
             type="button"
             className="text-sm text-slate-500 hover:text-slate-700 transition"
-            onClick={() => router.push(`/assista-wiki-details?repo=${encodeURIComponent(repo)}`)}
+            onClick={() =>
+              router.push(
+                `/assista-wiki-details?repo=${encodeURIComponent(repo)}`
+              )
+            }
           >
             ← Back to repository wiki
           </button>
@@ -332,21 +346,30 @@ function AskPageContent() {
                     </div>
                     <div className="flex-1">
                       <h2 className="text-sm font-semibold text-slate-800">
-                        {conversations.find((conv) => conv.id === activeConversationId)?.question ||
+                        {conversations.find(
+                          (conv) => conv.id === activeConversationId
+                        )?.question ||
                           initialQuestion ||
                           "Ask documentation about this repository"}
                       </h2>
                       {activeConversation?.status === "loading" && (
-                        <p className="text-xs text-slate-400">Waiting for response…</p>
-                      )}
-                      {activeConversation?.status === "error" && (
-                        <p className="text-xs text-red-500">Failed to fetch answer.</p>
-                      )}
-                      {activeConversation?.status === "success" && timestamp && !loading && !error && (
                         <p className="text-xs text-slate-400">
-                          Answered at {new Date(timestamp).toLocaleString()}
+                          Waiting for response…
                         </p>
                       )}
+                      {activeConversation?.status === "error" && (
+                        <p className="text-xs text-red-500">
+                          Failed to fetch answer.
+                        </p>
+                      )}
+                      {activeConversation?.status === "success" &&
+                        timestamp &&
+                        !loading &&
+                        !error && (
+                          <p className="text-xs text-slate-400">
+                            Answered at {new Date(timestamp).toLocaleString()}
+                          </p>
+                        )}
                     </div>
                   </div>
 
@@ -374,8 +397,9 @@ function AskPageContent() {
                         {error}
                       </div>
                     )}
-                    {!loading && !error && (
-                      structuredContent ? (
+                    {!loading &&
+                      !error &&
+                      (structuredContent ? (
                         <div className="space-y-6">
                           {summaryText && (
                             <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
@@ -390,7 +414,10 @@ function AskPageContent() {
                               </h3>
                               <ul className="mt-3 space-y-2 text-sm text-slate-600">
                                 {keyPointItems.map((point, idx) => (
-                                  <li key={`key-point-${idx}`} className="flex gap-2">
+                                  <li
+                                    key={`key-point-${idx}`}
+                                    className="flex gap-2"
+                                  >
                                     <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-(--primary-color)" />
                                     <span>{point}</span>
                                   </li>
@@ -405,7 +432,12 @@ function AskPageContent() {
                                 Implementation Details
                               </h3>
                               <div className="mt-3">
-                                <MarkdownRenderer content={structuredContent.implementationDetails || ""} />
+                                <MarkdownRenderer
+                                  content={
+                                    structuredContent.implementationDetails ||
+                                    ""
+                                  }
+                                />
                               </div>
                             </div>
                           )}
@@ -425,10 +457,10 @@ function AskPageContent() {
                         <MarkdownRenderer content={answerText} />
                       ) : (
                         <div className="text-sm text-slate-500">
-                          Ask a question about this repository to see DeepWiki’s explanation here.
+                          Ask a question about this repository to see DeepWiki’s
+                          explanation here.
                         </div>
-                      )
-                    )}
+                      ))}
                     {!loading && !error && deepWikiLink && (
                       <a
                         href={deepWikiLink}
@@ -452,8 +484,8 @@ function AskPageContent() {
                     )}
                     {fallback && !loading && !error && (
                       <p className="text-xs text-amber-600">
-                        Generated from local analysis because DeepWiki doesn’t have this
-                        repository indexed yet.
+                        Generated from local analysis because DeepWiki doesn’t
+                        have this repository indexed yet.
                       </p>
                     )}
                     {timestamp && !loading && !error && (
@@ -500,7 +532,9 @@ function AskPageContent() {
             </section>
             <aside className="w-full shrink-0 lg:w-[320px]">
               <div className="rounded-3xl border border-[#dcdcdc] bg-white p-5 shadow-sm">
-                <h2 className="text-sm font-semibold text-slate-800">Conversation history</h2>
+                <h2 className="text-sm font-semibold text-slate-800">
+                  Conversation history
+                </h2>
                 <p className="mt-2 text-xs text-slate-500">
                   Previous questions in this session.
                 </p>
@@ -523,7 +557,9 @@ function AskPageContent() {
                             setTimestamp(conv.timestamp);
                             setStructuredContent(conv.structuredContent);
                             setDeepWikiLink(conv.deepWikiLink);
-                            setError(conv.status === "error" ? conv.errorMessage : null);
+                            setError(
+                              conv.status === "error" ? conv.errorMessage : null
+                            );
                             setLoading(conv.status === "loading");
                           }}
                         >
@@ -556,12 +592,15 @@ function AskPageContent() {
                                   />
                                 </svg>
                               )}
-                              {conv.status === "success" && conv.timestamp && (
-                                new Date(conv.timestamp).toLocaleTimeString([], {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                })
-                              )}
+                              {conv.status === "success" &&
+                                conv.timestamp &&
+                                new Date(conv.timestamp).toLocaleTimeString(
+                                  [],
+                                  {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  }
+                                )}
                             </span>
                           </div>
                         </button>
@@ -582,7 +621,6 @@ function AskPageContent() {
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e4e4e4] bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-6 py-4">
-
           <div className="flex-1">
             <input
               type="text"
@@ -620,7 +658,6 @@ function AskPageContent() {
           </button>
         </div>
       </div>
-
     </div>
   );
 }

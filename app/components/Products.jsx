@@ -7,55 +7,65 @@ function Products() {
       title: "Assista IDE",
       description: "IDE for Odoo Developers",
       icon: "/img/logo2.svg",
+      link: "/assista-ide",
     },
     {
       title: "Easy Instance",
       description: "Deploying Odoo Instances",
       icon: "/img/easy-instance-new.svg",
+      link: "/easy-instance",
     },
     {
       title: "Assista X",
       description: "Talk with Odoo assistant",
       icon: "/img/assista-x.svg",
+      link: "/assista-x",
     },
     {
       title: "Assista Performance",
       description: "Monitor the Odoo Instance",
       icon: "/img/assista-performance.svg",
+      link: "/assista-performance",
     },
     {
       title: "Assista Wiki",
       description: "Generate Repo Documentation",
       icon: "/img/assista-wiki.svg",
+      link: "/assista-wiki",
     },
     {
       title: "Assista News",
       description: "Know the latest News of AI",
       icon: "/img/assista-news.svg",
+      link: "/assista-news",
     },
     {
       title: "Assista Air",
       description: "Browser Extensions Store",
       icon: "/img/assista-air.svg",
+      link: "/assista-air",
     },
     {
       title: " Assista Builder",
       description: "Odoo Helper for Pycharm",
       icon: "/img/assista-builder.svg",
+      link: "/assista-builder",
     },
     {
       title: " Helper for VS Code",
       description: "Odoo Helper for VS Code",
       icon: "/img/vscode.svg",
+      link: "/assista-builder",
     },
     {
       title: " Helper for Pycharm",
       description: "Odoo Helper for Pycharm",
       icon: "/img/pycharm.svg",
+      link: "/assista-builder",
     },
   ];
   return (
-    <div className="py-20">
+    <div className="py-10 md:py-20">
       <div className="cmpad">
         <div style={{ textAlign: "center" }}>
           <span className="badge">All Products</span>
@@ -72,7 +82,7 @@ function Products() {
           Manage with <span className="underlineimg">powerful solutions</span>
         </h2>
 
-        <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-20  text-lg">
+        <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-10 sm:mb-20  text-lg">
           From marketing to sales support and analytics our products help you
           streamline every part of your business and grow efficiently.
         </p>
@@ -97,7 +107,7 @@ function Products() {
                     <p className="text-gray-600">{product.description}</p>
                   </div>
                 </div>
-                <div className="arrow">
+                <a href={product.link} className="arrow">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -110,7 +120,7 @@ function Products() {
                       d="M106.68 277.328h216.973l-70.25 70.25l30.167 30.167l121.75-121.75l-121.75-121.74l-30.167 30.167l70.247 70.239H106.68z"
                     />
                   </svg>
-                </div>
+                </a>
               </div>
             </div>
           ))}

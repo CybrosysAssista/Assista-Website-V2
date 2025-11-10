@@ -48,7 +48,7 @@ export default function FAQ() {
           <span className="underlineimg"> Questions</span>
         </h2>
 
-        <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-20 text-lg">
+        <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-10 sm:mb-20 text-lg">
           Find answers to common queries about features, setup, and how Assista
           enhances your Odoo development experience.
         </p>

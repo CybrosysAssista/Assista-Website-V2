@@ -13,6 +13,7 @@ function Header() {
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,23 +53,17 @@ function Header() {
                 alt="Cybrosys Assista"
                 width={280}
                 height={280}
-                className="h-12"
+                className="w-[230px] md:w-[280px] h-auto"
               />
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex flex-1 items-center justify-end gap-15">
-              <ul className="flex items-center space-x-10 text-[15px]">
-                <li>
-                  <a
-                    href=""
-                    className="transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
-                  ></a>
-                </li>
+              <ul className="flex items-center space-x-6 xl:space-x-10 text-[15px]">
                 <li>
                   <a
                     href="/about"
-                    className="transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
+                    className="w-max flex transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
                   >
                     About Us
                   </a>
@@ -302,7 +297,7 @@ function Header() {
                 <li>
                   <a
                     href="/contact"
-                    className="transition duration-300 ease-in-out hover:text-[var(--primary-color)] t"
+                    className="w-max flex transition duration-300 ease-in-out hover:text-[var(--primary-color)] t"
                   >
                     Contact Us
                   </a>
@@ -359,52 +354,41 @@ function Header() {
               </svg>
             </button>
           </div>
-          {/* Mobile menu panel with animation */}
-          <div
-            className={`lg:hidden bg-white rounded-2xl overflow-hidden transform transition-all duration-300 ${
-              isMobileOpen
-                ? "mt-2 opacity-100 translate-y-0 max-h-[420px]"
-                : "mt-0 opacity-0 -translate-y-2 max-h-0 pointer-events-none"
-            }`}
-          >
-            <div className="p-4">
-              <ul className="space-y-3 text-[15px] text-left">
-                <li>
-                  <a
-                    href="/about"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/services"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                  >
-                    Our Services
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/features"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/blogs"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                  >
-                    Blogs
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/contact"
-                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+        </div>
+        {/* Mobile menu panel with animation */}
+        <div
+          className={`lg:hidden overflow-hidden overflow-y-auto bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 ${
+            isMobileOpen
+              ? "mt-2 opacity-100 translate-y-0 max-h-[420px]"
+              : "mt-0 opacity-0 -translate-y-2 max-h-0 pointer-events-none"
+          }`}
+        >
+          <div className="p-4">
+            <ul className="space-y-3 text-[15px] text-left">
+              <li>
+                <a
+                  href="/about"
+                  className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  aria-expanded={isMobileResourcesOpen}
+                  aria-controls="mobile-resources"
+                  onClick={() => setIsMobileResourcesOpen((v) => !v)}
+                  className="w-full flex justify-between items-center py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                >
+                  <span>Our Resources</span>
+                  <svg
+                    className={`w-4 h-4 transform transition-transform duration-200 ${
+                      isMobileResourcesOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
                   >
                     Contact Us
                   </a>

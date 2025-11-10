@@ -3,7 +3,7 @@ import React from "react";
 
 function Feature() {
   return (
-    <div className="py-20">
+    <div className="py-10 md:py-20">
       <div className="cmpad">
         <div style={{ textAlign: "center" }}>
           <span className="badge">Key Features</span>
@@ -17,8 +17,7 @@ function Feature() {
             height={100}
             className="absolute -right-30 -top-6"
           />
-          Grow with{" "}
-          <span className="underlineimg">automation tools</span>
+          Grow with <span className="underlineimg">automation tools</span>
         </h2>
 
         <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15  text-lg">
@@ -27,7 +26,7 @@ function Feature() {
           business.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10  max-w-[90%] mx-auto">
           <div>
             <Image
               src="/img/banner2.webp"
@@ -38,7 +37,7 @@ function Feature() {
             />
           </div>
           <div className="flex flex-col justify-center">
-            <h2 className="text-4xl font-medium mb-3 leading-13">
+            <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
               Streamline your <br /> Wrok with smart features
             </h2>
 
@@ -55,9 +54,9 @@ function Feature() {
             </a>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-30 max-w-[90%] mx-auto">
-          <div className="flex flex-col justify-center">
-            <h2 className="text-4xl font-medium mb-3 leading-13">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-20 md:py-30 max-w-[90%] mx-auto">
+          <div className="lg:order-1 order-2 flex flex-col justify-center">
+            <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
               Empower your <br /> Development with Assista
             </h2>
 
@@ -73,7 +72,7 @@ function Feature() {
               Read More
             </a>
           </div>
-          <div>
+          <div className="lg:order-2 order-1">
             <Image
               src="/img/banner1.webp"
               alt=""
@@ -83,7 +82,7 @@ function Feature() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[90%] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
           <div>
             <Image
               src="/img/banner3.webp"
@@ -94,7 +93,7 @@ function Feature() {
             />
           </div>
           <div className="flex flex-col justify-center">
-            <h2 className="text-4xl font-medium mb-3 leading-13">
+            <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
               Accelerate your <br /> Odoo Projects with Ease
             </h2>
 

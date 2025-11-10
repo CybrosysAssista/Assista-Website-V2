@@ -3,7 +3,7 @@ import React from "react";
 
 function Video() {
   return (
-    <div className="py-20">
+    <div className="py-10 md:py-20">
       <div className="cmpad">
         <div style={{ textAlign: "center" }}>
           <span className="badge">Take a Tour</span>
@@ -17,7 +17,7 @@ function Video() {
             height={100}
             className="absolute -left-30 -top-6"
           />
-          Discover the  <span className="underlineimg">Power of Assista</span>
+          Discover the <span className="underlineimg">Power of Assista</span>
         </h2>
 
         <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">

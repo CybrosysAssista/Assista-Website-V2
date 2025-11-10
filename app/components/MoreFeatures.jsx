@@ -75,8 +75,8 @@ function CaseStudies() {
     <div className="pb-10 pt-10">
       <div className="cmpad bg-[#3e78c90c] rounded-2xl pt-20 px-10">
         {/* Tabs */}
-        <div className="sticky top-25 z-10">
-          <nav className="bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-20">
+        <div className="sticky top-25 z-10 overflow-hidden overflow-x-auto">
+          <nav className="bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-4 lg:mb-20">
             {tabs.map((t) => (
               <button
                 key={t.id}
@@ -108,7 +108,7 @@ function CaseStudies() {
 
         <Section
           id="assista-wiki"
-             title={
+          title={
             <>
               Streamline your <br /> Work with smart features
             </>
@@ -120,7 +120,7 @@ function CaseStudies() {
 
         <Section
           id="assista-news"
-             title={
+          title={
             <>
               Streamline your <br /> Work with smart features
             </>
@@ -132,7 +132,7 @@ function CaseStudies() {
 
         <Section
           id="assista-air"
-             title={
+          title={
             <>
               Streamline your <br /> Work with smart features
             </>
@@ -150,48 +150,23 @@ function CaseStudies() {
 function Section({ id, title, desc, img, flip }) {
   return (
     <section id={id} className="scroll-mt-[180px]">
-      <div
-        className={`grid grid-cols-1 md:grid-cols-2 gap-10 ${
-          flip ? "md:flex-row-reverse" : ""
-        }`}
-      >
-        {flip ? (
-          <>
-            <div className="flex flex-col justify-center">
-              <h2 className="text-4xl font-medium mb-3 leading-13">{title}</h2>
-              <p className="leading-7 text-[#7e7e7e] max-w-[700px] mb-8 text-lg">
-                {desc}
-              </p>
-            </div>
-            <div>
-              <Image
-                src={img}
-                alt=""
-                width={600}
-                height={600}
-                className="m-auto"
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <Image
-                src={img}
-                alt=""
-                width={600}
-                height={600}
-                className="m-auto"
-              />
-            </div>
-            <div className="flex flex-col justify-center">
-              <h2 className="text-4xl font-medium mb-3 leading-13">{title}</h2>
-              <p className="leading-7 text-[#7e7e7e] max-w-[700px] mb-8 text-lg">
-                {desc}
-              </p>
-            </div>
-          </>
-        )}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div
+          className={`flex flex-col justify-center ${
+            flip ? "lg:order-2" : "lg:order-1"
+          }`}
+        >
+          <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
+            {title}
+          </h2>
+          <p className="leading-7 text-[#7e7e7e] max-w-[700px] mb-8 text-lg">
+            {desc}
+          </p>
+        </div>
+
+        <div className={`${flip ? "lg:order-1" : "lg:order-2"}`}>
+          <Image src={img} alt="" width={600} height={600} className="m-auto" />
+        </div>
       </div>
     </section>
   );

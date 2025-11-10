@@ -125,7 +125,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="footer-section ps-10">
+          <div className="footer-section ps-0 lg:ps-10">
             <h3>Quick Links</h3>
             <ul>
               <li>
