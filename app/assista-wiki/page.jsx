@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Image from "next/image";
 
 // API base URL - adjust this to match your server configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5173";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://assistawebsitebackend.easyinstance.com";
 
 function Page() {
   const [repos, setRepos] = useState([]);

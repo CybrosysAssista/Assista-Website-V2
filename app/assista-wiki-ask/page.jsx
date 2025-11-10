@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Header from "../components/Header";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5173";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://assistawebsitebackend.easyinstance.com";
 
 const stripMarkdown = (value) => {
   if (!value) return "";
