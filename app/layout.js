@@ -1,5 +1,6 @@
 import { Poppins, Ubuntu } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 
 // Load both fonts
 const poppins = Poppins({
@@ -24,7 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       {/* Use both fonts as CSS variables */}
       <body className={`${poppins.variable} ${ubuntu.variable} antialiased`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

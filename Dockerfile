@@ -1,34 +1,32 @@
-# ---------- BUILD STAGE ----------
-FROM node:20-slim AS builder
+# syntax=docker/dockerfile:1
 
+FROM node:20-bookworm-slim AS base
+ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 
-# Copy only dependency files first (for better caching)
-COPY package*.json ./
-
-# Install dependencies (using npm ci for clean, reproducible builds)
+FROM base AS deps
+ENV NODE_ENV=development
+COPY package.json package-lock.json ./
 RUN npm ci
 
-# Copy the entire project and build
+FROM base AS builder
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
+RUN npm prune --omit=dev
 
-# ---------- RUNTIME STAGE ----------
-FROM node:20-slim AS runner
-
+FROM base AS runner
 WORKDIR /app
-
-# Copy only what’s needed for runtime
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/next.config.* ./
-
 ENV NODE_ENV=production
 ENV PORT=3000
-ENV HOSTNAME=0.0.0.0
-
 EXPOSE 3000
 
-CMD ["npm", "start"]
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/package-lock.json ./
+COPY --from=builder /app/next.config.mjs ./next.config.mjs
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+
+CMD ["npm", "run", "start"]
+

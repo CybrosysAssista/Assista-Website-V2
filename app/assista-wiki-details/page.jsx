@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -21,6 +21,263 @@ function page() {
   const [question, setQuestion] = useState("");
   const [activePageId, setActivePageId] = useState("");
   const [showDiagramsView, setShowDiagramsView] = useState(false);
+  const [downloadMenuOpen, setDownloadMenuOpen] = useState(false);
+  const downloadMenuRef = useRef(null);
+
+  const MERMAID_CDN_SRC =
+    "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js";
+
+  const ensureMermaidForPdf = () =>
+    new Promise((resolve, reject) => {
+      if (typeof window === "undefined") {
+        resolve(null);
+        return;
+      }
+
+      const initialise = () => {
+        if (!window.mermaid) {
+          reject(new Error("Mermaid failed to load"));
+          return;
+        }
+        window.mermaid.initialize({
+          startOnLoad: false,
+          theme: "default",
+          securityLevel: "loose",
+          flowchart: { useMaxWidth: true, htmlLabels: true },
+          fontFamily: "Inter, sans-serif",
+        });
+        resolve(window.mermaid);
+      };
+
+      if (window.mermaid) {
+        initialise();
+        return;
+      }
+
+      const existingScript = document.querySelector(
+        'script[data-mermaid-pdf="true"]'
+      );
+      if (existingScript) {
+        existingScript.addEventListener("load", initialise, { once: true });
+        existingScript.addEventListener(
+          "error",
+          () => reject(new Error("Failed to load mermaid for PDF")),
+          { once: true }
+        );
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = MERMAID_CDN_SRC;
+      script.async = true;
+      script.dataset.mermaidPdf = "true";
+      script.addEventListener("load", initialise, { once: true });
+      script.addEventListener(
+        "error",
+        () => reject(new Error("Failed to load mermaid for PDF")),
+        { once: true }
+      );
+      document.head.appendChild(script);
+    });
+
+  const renderMermaidDiagramsForPdf = async (container) => {
+    const mermaidBlocks = Array.from(container.querySelectorAll(".mermaid"));
+    if (mermaidBlocks.length === 0) return;
+
+    await ensureMermaidForPdf();
+
+    await Promise.allSettled(
+      mermaidBlocks.map(async (block, index) => {
+        const code = block.textContent || "";
+        try {
+          const { svg } = await window.mermaid.render(
+            `pdf-mermaid-${Date.now()}-${index}`,
+            code
+          );
+          block.innerHTML = svg;
+          block.classList.add("mermaid-rendered");
+        } catch (error) {
+          console.error("Failed to render mermaid diagram for PDF", error);
+          block.innerHTML = `<pre class="mermaid-error">${code}</pre>`;
+        }
+      })
+    );
+  };
+
+  const decodeHtmlEntities = (value) =>
+    value
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&#39;/g, "'")
+      .replace(/&quot;/g, '"');
+
+  const generateStyledPdfFromMarkdown = async (markdownText, fileBaseName) => {
+    const [{ default: html2pdf }, { marked }] = await Promise.all([
+      import("html2pdf.js"),
+      import("marked"),
+    ]);
+
+    const renderedHtml = marked.parse(markdownText, {
+      gfm: true,
+      breaks: true,
+    });
+
+    const htmlWithMermaid = renderedHtml.replace(
+      /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
+      (_match, code) => {
+        const cleaned = decodeHtmlEntities(code)
+          .replace(/^\s+|\s+$/g, "")
+          .replace(/<br\s*\/?>(\n)?/g, "\n");
+        return `<div class="mermaid">${cleaned}</div>`;
+      }
+    );
+
+    const container = document.createElement("div");
+    container.className = "pdf-export-root";
+    container.style.position = "fixed";
+    container.style.left = "-10000px";
+    container.style.top = "0";
+    container.style.width = "794px"; // A4 width in px at 96 DPI
+    container.style.padding = "0";
+    container.style.background = "#ffffff";
+
+    const pdfStyles = `
+      .pdf-export-root {
+        color: #0f172a;
+        font-family: "Inter", "Segoe UI", sans-serif;
+      }
+      .pdf-export-root .pdf-document {
+        padding: 32px 40px;
+        line-height: 1.55;
+        font-size: 13px;
+      }
+      .pdf-export-root h1,
+      .pdf-export-root h2,
+      .pdf-export-root h3,
+      .pdf-export-root h4 {
+        color: #111827;
+        margin-top: 28px;
+        margin-bottom: 12px;
+        line-height: 1.25;
+        page-break-after: avoid;
+      }
+      .pdf-export-root h1 { font-size: 28px; }
+      .pdf-export-root h2 { font-size: 22px; }
+      .pdf-export-root h3 { font-size: 18px; }
+      .pdf-export-root h4 { font-size: 16px; }
+      .pdf-export-root p {
+        margin: 0 0 14px;
+        color: #1f2937;
+      }
+      .pdf-export-root ul,
+      .pdf-export-root ol {
+        margin: 0 0 16px 24px;
+      }
+      .pdf-export-root li {
+        margin-bottom: 6px;
+      }
+      .pdf-export-root pre {
+        background: #0f172a;
+        color: #f8fafc;
+        padding: 14px 18px;
+        border-radius: 10px;
+        font-size: 12px;
+        overflow-x: auto;
+        margin: 18px 0;
+      }
+      .pdf-export-root code {
+        background: rgba(15, 23, 42, 0.08);
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-family: "Fira Code", "SFMono-Regular", Consolas, monospace;
+      }
+      .pdf-export-root pre code {
+        background: transparent;
+        padding: 0;
+      }
+      .pdf-export-root table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      .pdf-export-root th,
+      .pdf-export-root td {
+        border: 1px solid #e5e7eb;
+        padding: 10px 12px;
+        text-align: left;
+      }
+      .pdf-export-root th {
+        background: #f9fafb;
+        font-weight: 600;
+      }
+      .pdf-export-root blockquote {
+        border-left: 4px solid #6366f1;
+        background: rgba(99, 102, 241, 0.08);
+        padding: 12px 18px;
+        margin: 20px 0;
+        color: #312e81;
+      }
+      .pdf-export-root .mermaid {
+        margin: 24px auto;
+        padding: 16px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        text-align: center;
+      }
+      .pdf-export-root .mermaid svg {
+        width: 100%;
+        height: auto;
+      }
+      .pdf-export-root .mermaid-error {
+        background: rgba(239, 68, 68, 0.1);
+        color: #991b1b;
+        padding: 12px;
+        border-radius: 8px;
+        white-space: pre-wrap;
+      }
+      .pdf-export-root img {
+        max-width: 100%;
+        height: auto;
+      }
+      .pdf-export-root .page-break {
+        page-break-before: always;
+      }
+    `;
+
+    container.innerHTML = `
+      <style>${pdfStyles}</style>
+      <article class="pdf-document">${htmlWithMermaid}</article>
+    `;
+
+    document.body.appendChild(container);
+
+    try {
+      await renderMermaidDiagramsForPdf(container);
+
+      const options = {
+        margin: [20, 18, 32, 18],
+        filename: `${fileBaseName}.pdf`,
+        pagebreak: { mode: ["css", "legacy"] },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          allowTaint: false,
+          backgroundColor: "#ffffff",
+        },
+        jsPDF: {
+          unit: "pt",
+          format: "a4",
+          orientation: "portrait",
+        },
+      };
+
+      await html2pdf().set(options).from(container).save();
+    } finally {
+      document.body.removeChild(container);
+    }
+  };
   const router = useRouter();
 
   // Shared slugify to keep IDs consistent between parsing and rendering
@@ -43,6 +300,20 @@ function page() {
       setError("No repository specified");
       setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        downloadMenuRef.current &&
+        !downloadMenuRef.current.contains(event.target)
+      ) {
+        setDownloadMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Load documentation from sessionStorage or API
@@ -102,6 +373,75 @@ function page() {
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDownload = async (format) => {
+    if (!repo) return;
+    const normalizedFormat = format === "pdf" ? "pdf" : "md";
+    const repoSegments = repo.split("/");
+    const encodedRepo = repoSegments
+      .map((segment) => encodeURIComponent(segment))
+      .join("/");
+    const safeBaseName =
+      repoSegments[repoSegments.length - 1]?.replace(/[^a-zA-Z0-9._-]+/g, "-") ||
+      "documentation";
+
+    try {
+      setDownloadMenuOpen(false);
+      const response = await fetch(`/api/download/${encodedRepo}/${normalizedFormat}`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        const message = (() => {
+          try {
+            const parsed = JSON.parse(errorText);
+            return (
+              parsed?.details?.error ||
+              parsed?.details ||
+              parsed?.error ||
+              "Failed to download documentation. Please try again."
+            );
+          } catch {
+            return "Failed to download documentation. Please try again.";
+          }
+        })();
+
+        // If the PDF generation fails, fall back to Markdown and create a PDF client-side
+        if (normalizedFormat === "pdf") {
+          console.warn("PDF download failed, falling back to Markdown", errorText);
+          const markdownResponse = await fetch(`/api/download/${encodedRepo}/md`, {
+            method: "GET",
+            credentials: "include",
+          });
+
+          if (markdownResponse.ok) {
+            const markdownText = await markdownResponse.text();
+            await generateStyledPdfFromMarkdown(markdownText, safeBaseName);
+            return;
+          }
+        }
+
+        console.error("Download failed", errorText);
+        alert(message);
+        return;
+      }
+
+      const blob = await response.blob();
+      const downloadUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = `${safeBaseName}.${normalizedFormat}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+      console.error("Unexpected error downloading documentation", error);
+      alert("Unexpected error downloading documentation. Please try again.");
     }
   };
 
@@ -1139,7 +1479,7 @@ function page() {
             {/* Left Sidebar - Navigation */}
             <aside className="wiki-sidebar-left custscrollA">
               <div className="sidebar-header">
-                <p className="last-indexed flex items-center gap-2">
+                <div className="last-indexed flex items-center gap-2">
                   {repo || "Repository"}
                   <a
                     href={`https://github.com/${repo}`}
@@ -1159,25 +1499,42 @@ function page() {
                       />
                     </svg>
                   </a>
-                  <a
-                    href={`${API_BASE_URL}/api/download/${repo}/md`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Download Markdown"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71M5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1"
-                      />
-                    </svg>
-                  </a>
-                </p>
+                  <div ref={downloadMenuRef} className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setDownloadMenuOpen((prev) => !prev)}
+                      title="Download documentation"
+                      className="flex items-center justify-center rounded-md border border-transparent bg-slate-100 p-1.5 text-slate-600 transition hover:bg-slate-200 hover:text-slate-900">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71M5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1"
+                        />
+                      </svg>
+                    </button>
+
+                    {downloadMenuOpen && (
+                      <div className="absolute right-0 z-50 mt-2 w-48 rounded-md border border-slate-200 bg-white shadow-lg">
+                        <button
+                          type="button"
+                          onClick={() => handleDownload("md")}
+                          className="block w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-100">
+                          Download Markdown (.md)
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDownload("pdf")}
+                          className="block w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-100">
+                          Download PDF (.pdf)
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
               <nav className="sidebar-nav">
                 <ul className="nav-list">

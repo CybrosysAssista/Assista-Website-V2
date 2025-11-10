@@ -3,8 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 
 function Header() {
+  const { data: session, status } = useSession();
+  const isLoading = status === "loading";
+  const isAuthenticated = status === "authenticated";
+  const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false);
@@ -297,9 +303,17 @@ function Header() {
                   </a>
                 </li>
               </ul>
-              <a
-                href="/login"
-                className="w-max px-6 py-3 bg-[var(--primary-color)] text-white rounded-full flex gap-2 items-center hover:bg-[#666] transition duration-300"
+              <button
+                type="button"
+                onClick={() => {
+                  if (isAuthenticated) {
+                    signOut();
+                  } else {
+                    router.push("/signin");
+                  }
+                }}
+                disabled={isLoading}
+                className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-full flex gap-2 items-center hover:bg-[#666] transition duration-300 disabled:opacity-70"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -312,8 +326,8 @@ function Header() {
                     d="M1 11c5.523 0 10-4.477 10-10h2c0 5.523 4.477 10 10 10v2c-5.523 0-10 4.477-10 10h-2c0-5.523-4.477-10-10-10z"
                   />
                 </svg>
-                Try Assista
-              </a>
+                {isAuthenticated ? "Sign out" : "Sign in"}
+              </button>
             </nav>
 
             {/* Mobile hamburger */}
@@ -376,126 +390,29 @@ function Header() {
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path d="M5.23 7.21a.75.75 0 011.06-.02L10 10.88l3.71-3.69a.75.75 0 111.06 1.06l-4.24 4.22a.75.75 0 01-1.06 0L5.25 8.25a.75.75 0 01-.02-1.04z" />
-                  </svg>
-                </button>
-                
-                <div
-                  id="mobile-resources"
-                  className={`overflow-hidden transition-[max-height] duration-300 ${
-                    isMobileResourcesOpen ? "max-h-96 mt-2" : "max-h-0"
-                  }`}
-                >
-                  <ul className="pl-3 space-y-2">
-                    <li>
-                      <a
-                        href="/assista-ide"
-                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                      >
-                        Assista IDE
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/easy-instance"
-                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                      >
-                        Easy Instance
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/assista-x"
-                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                      >
-                        Assista X
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/assista-performance"
-                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                      >
-                        Assista Performance
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/assista-wiki"
-                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                      >
-                        Assista Wiki
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/assista-news"
-                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                      >
-                        Assista News
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/assista-air"
-                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                      >
-                        Assista Air
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="/assista-builder"
-                        className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                      >
-                        Assista Builder
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a
-                  href="/"
-                  className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                >
-                  Docs
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/faq"
-                  className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                >
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/contact"
-                  className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
-                >
-                  Contact Us
-                </a>
-              </li>
-            </ul>
-            <a
-              href="#"
-              className="mt-4 w-full gap-3 inline-flex justify-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-full items-center hover:bg-[#454685] transition duration-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+              <button
+                type="button"
+                onClick={() => {
+                  if (isAuthenticated) {
+                    signOut();
+                  } else {
+                    router.push("/signin");
+                  }
+                }}
+                disabled={isLoading}
+                className="mt-4 w-full inline-flex justify-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-full items-center hover:bg-[#454685] transition duration-300 disabled:opacity-70"
               >
-                <path
-                  fill="currentColor"
-                  d="M1 11c5.523 0 10-4.477 10-10h2c0 5.523 4.477 10 10 10v2c-5.523 0-10 4.477-10 10h-2c0-5.523-4.477-10-10-10z"
-                />
-              </svg>
-              Try Assista
-            </a>
+                {isAuthenticated
+                  ? session?.user?.name
+                    ? `Sign out ${session.user.name.split(" ")[0]}`
+                    : "Sign out"
+                  : "Sign in"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
