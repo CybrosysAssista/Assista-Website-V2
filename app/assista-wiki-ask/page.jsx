@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -66,7 +66,7 @@ const MarkdownRenderer = ({ content }) => (
   </div>
 );
 
-function AskPage() {
+function AskPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -625,5 +625,10 @@ function AskPage() {
   );
 }
 
-export default AskPage;
-
+export default function AskPage() {
+  return (
+    <Suspense fallback={<div className="cmpad mt-32 text-center text-slate-500">Loading...</div>}>
+      <AskPageContent />
+    </Suspense>
+  );
+}

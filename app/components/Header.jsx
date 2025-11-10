@@ -3,8 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 
 function Header() {
+  const { data: session, status } = useSession();
+  const isLoading = status === "loading";
+  const isAuthenticated = status === "authenticated";
+  const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -302,9 +308,17 @@ function Header() {
                   </a>
                 </li>
               </ul>
-              <a
-                href="/login"
-                className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-full flex gap-2 items-center hover:bg-[#666] transition duration-300"
+              <button
+                type="button"
+                onClick={() => {
+                  if (isAuthenticated) {
+                    signOut();
+                  } else {
+                    router.push("/signin");
+                  }
+                }}
+                disabled={isLoading}
+                className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-full flex gap-2 items-center hover:bg-[#666] transition duration-300 disabled:opacity-70"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -317,8 +331,8 @@ function Header() {
                     d="M1 11c5.523 0 10-4.477 10-10h2c0 5.523 4.477 10 10 10v2c-5.523 0-10 4.477-10 10h-2c0-5.523-4.477-10-10-10z"
                   />
                 </svg>
-                Try Assista
-              </a>
+                {isAuthenticated ? "Sign out" : "Sign in"}
+              </button>
             </nav>
 
             {/* Mobile hamburger */}
@@ -396,12 +410,24 @@ function Header() {
                   </a>
                 </li>
               </ul>
-              <a
-                href="#"
-                className="mt-4 w-full inline-flex justify-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-full items-center hover:bg-[#454685] transition duration-300"
+              <button
+                type="button"
+                onClick={() => {
+                  if (isAuthenticated) {
+                    signOut();
+                  } else {
+                    router.push("/signin");
+                  }
+                }}
+                disabled={isLoading}
+                className="mt-4 w-full inline-flex justify-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-full items-center hover:bg-[#454685] transition duration-300 disabled:opacity-70"
               >
-                Let’s Go
-              </a>
+                {isAuthenticated
+                  ? session?.user?.name
+                    ? `Sign out ${session.user.name.split(" ")[0]}`
+                    : "Sign out"
+                  : "Sign in"}
+              </button>
             </div>
           </div>
         </div>

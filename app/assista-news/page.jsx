@@ -16,13 +16,14 @@ function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [pageSize] = useState(30);
+  const [pageSize] = useState(12);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortFilter, setSortFilter] = useState("newest"); // newest, featured, most_read
   const catRef = useRef(null);
   const filterRef = useRef(null);
+  const newsSectionRef = useRef(null);
 
   // Helper function to calculate read time
   const calculateReadTime = (text) => {
@@ -144,7 +145,7 @@ function Page() {
           author: article.source || "Unknown",
           date: article.published || new Date().toISOString(),
           readTime: calculateReadTime(article.summary || article.description || ""),
-          image: article.image_url || "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
+          image: article.image_url || "/img/news-thumb.jpg",
           featured: article.featured || false,
           link: article.link || "",
         }));
@@ -230,7 +231,9 @@ function Page() {
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (newsSectionRef.current) {
+        newsSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   };
 
@@ -345,7 +348,7 @@ function Page() {
         </div>
       </div>
 
-      <div className="cmpad py-20">
+      <div ref={newsSectionRef} className="cmpad py-20">
         <div style={{ textAlign: "center" }}>
           <span className="badge">Assista News</span>
         </div>
@@ -531,7 +534,7 @@ function Page() {
                     alt={newsItem.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
                   <span className="absolute top-4 left-4 article-category">
                     {newsItem.category}
                   </span>
