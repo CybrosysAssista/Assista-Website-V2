@@ -5,7 +5,18 @@ import Header from "../components/Header";
 import Image from "next/image";
 
 // API base URL - adjust this to match your server configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://assistawebsitebackend.easyinstance.com";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const buildClientUrl = (path) => {
+  if (!path.startsWith("/")) {
+    path = `/${path}`;
+  }
+  if (API_BASE_URL) {
+    const base = API_BASE_URL.endsWith("/") ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+    return `${base}${path}`;
+  }
+  return path;
+};
 
 function Page() {
   const [news, setNews] = useState([]);
@@ -37,7 +48,7 @@ function Page() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/news/categories`);
+        const response = await fetch(buildClientUrl("/api/news/categories"));
         if (response.ok) {
           const data = await response.json();
           setCategories(data.categories || []);
@@ -103,12 +114,9 @@ function Page() {
         //   params.append('featured', 'true');
         // }
 
-        const response = await fetch(
-          `${API_BASE_URL}/api/news?${params.toString()}`,
-          {
-            signal: controller.signal,
-          }
-        );
+        const response = await fetch(buildClientUrl(`/api/news?${params.toString()}`), {
+          signal: controller.signal,
+        });
 
         if (!response.ok) {
           if (response.status === 429) {
