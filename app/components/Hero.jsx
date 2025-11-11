@@ -45,7 +45,7 @@ function Hero() {
                 development plugins a learning hub ready to use installation
                 scripts cheat sheets and more.
               </p>
-              <div className="flex gap-2 mt-10 mb-15">
+              <div className="flex gap-2 mt-10 mb-3 md:mb-15">
                 <a
                   href=""
                   className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"

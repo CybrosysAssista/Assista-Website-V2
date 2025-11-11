@@ -183,7 +183,7 @@ function Footer() {
             </p>
             <div className="newsletter-form">
               <input type="email" placeholder="Your email address" required />
-              <button type="submit" className="cursor-pointer px-6 py-3 bg-[#db5a6b] text-white rounded-md flex gap-2 items-center hover:bg-[#aa6e71] transition duration-300">Subscribe</button>
+              <button type="submit" className="w-max cursor-pointer px-6 py-3 bg-[#db5a6b] text-white rounded-md flex gap-2 items-center hover:bg-[#aa6e71] transition duration-300">Subscribe</button>
             </div>
           </div>
         </div>

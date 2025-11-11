@@ -320,7 +320,7 @@ function Page() {
     <div>
       <Header />
       <div className="cmpad pt-30 slider inslider nslider">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-10 items-center">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <Image
@@ -345,7 +345,7 @@ function Page() {
               done faster with ease.
             </p>
 
-            <div className="flex gap-2 mt-10 mb-15">
+            <div className="flex gap-2 mt-10 mb-3 md:mb-15">
               <a
                 href=""
                 className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"

@@ -38,7 +38,7 @@ function page() {
           <div className="p-4 sm:p-6 md:p-10 mb-5">
             <div className="grid lg:grid-cols-12 gap-8 md:gap-10">
               <div className="col-span-12 lg:col-span-6 flex flex-col justify-center order-1">
-                <h2 className="text-5xl mb-6 relative leading-normal">
+                <h2 className="text-5xl mb-6 relative leading-15 md:leading-normal">
                   Experience the
                   <br /> Future with{" "}
                   <span className="underlineimg">Assista</span>
