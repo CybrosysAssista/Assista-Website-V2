@@ -12,7 +12,9 @@ const buildClientUrl = (path) => {
     path = `/${path}`;
   }
   if (API_BASE_URL) {
-    const base = API_BASE_URL.endsWith("/") ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+    const base = API_BASE_URL.endsWith("/")
+      ? API_BASE_URL.slice(0, -1)
+      : API_BASE_URL;
     return `${base}${path}`;
   }
   return path;
@@ -114,9 +116,12 @@ function Page() {
         //   params.append('featured', 'true');
         // }
 
-        const response = await fetch(buildClientUrl(`/api/news?${params.toString()}`), {
-          signal: controller.signal,
-        });
+        const response = await fetch(
+          buildClientUrl(`/api/news?${params.toString()}`),
+          {
+            signal: controller.signal,
+          }
+        );
 
         if (!response.ok) {
           if (response.status === 429) {
@@ -163,7 +168,9 @@ function Page() {
           excerpt: article.summary || article.description || "",
           author: article.source || "Unknown",
           date: article.published || new Date().toISOString(),
-          readTime: calculateReadTime(article.summary || article.description || ""),
+          readTime: calculateReadTime(
+            article.summary || article.description || ""
+          ),
           image: article.image_url || "/img/news-thumb.jpg",
           featured: article.featured || false,
           link: article.link || "",
@@ -257,7 +264,10 @@ function Page() {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
       if (newsSectionRef.current) {
-        newsSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        newsSectionRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
     }
   };
@@ -336,7 +346,7 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
-              <br /> Communicate
+              <br className="hidden lg:block" />  Communicate
               <span className="brush brushn">intelligently.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
@@ -388,146 +398,154 @@ function Page() {
           we work.
         </p>
 
-        <nav className="relative bg-white flex items-center gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-20">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            className="absolute left-7 top-0 bottom-0 my-auto text-slate-400"
-          >
-            <path
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeWidth="2"
-              d="m21 21l-3.5-3.5M17 10a7 7 0 1 1-14 0a7 7 0 0 1 14 0Z"
-            />
-          </svg>
-
-          <input
-            type="text"
-            className="border border-[#e9e9e9] focus:border-[#949494] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 w-[200px] md:w-[400px] lg:w-[600px]"
-            placeholder="Search Here..."
-            value={searchInput}
-            onChange={(e) => handleSearchChange(e.target.value)}
-          />
-
-          {/* Category dropdown */}
-          <div ref={catRef} className="relative">
-            <button
-              onClick={() => setShowCategory((v) => !v)}
-              className="cursor-pointer px-6 py-4 rounded-full bg-[var(--primary-color)] hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
-              aria-expanded={showCategory}
+        <nav className="relative flex-wrap bg-white grid  sm:flex items-center gap-3 justify-between [box-shadow:0px_0px_20px_#00000014] p-3 rounded-md sm:rounded-full max-w-full w-[900px] mx-auto mb-20">
+          <div className="relative flex-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              className="absolute left-7 top-0 bottom-0 my-auto text-slate-400"
             >
-              Category
-              <span className="text-md">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </button>
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth="2"
+                d="m21 21l-3.5-3.5M17 10a7 7 0 1 1-14 0a7 7 0 0 1 14 0Z"
+              />
+            </svg>
 
-            {showCategory && (
-              <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg p-2 z-50 max-h-96 overflow-y-auto">
-                <button
-                  onClick={() => handleCategorySelect("All")}
-                  className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    selectedCategory === "" ? "bg-slate-100 font-semibold" : ""
-                  }`}
-                >
-                  All Categories
-                </button>
-                {categories.length > 0 ? (
-                  categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => handleCategorySelect(category)}
-                      className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                        selectedCategory === category
-                          ? "bg-slate-100 font-semibold"
-                          : ""
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))
-                ) : (
-                  <div className="px-3 py-2 text-sm text-gray-500">
-                    Loading categories...
-                  </div>
-                )}
-              </div>
-            )}
+            <input
+              type="text"
+              className="w-full border border-[#e9e9e9] focus:border-[#949494] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 "
+              placeholder="Search Here..."
+              value={searchInput}
+              onChange={(e) => handleSearchChange(e.target.value)}
+            />
           </div>
 
-          {/* Filter dropdown */}
-          <div ref={filterRef} className="relative">
-            <button
-              onClick={() => setShowFilter((v) => !v)}
-              className="cursor-pointer px-6 py-4 rounded-full bg-[var(--primary-color)] hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
-              aria-expanded={showFilter}
-            >
-              Filter
-              <span className="text-md">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </button>
+          <div className="flex gap-2 justify-center w-full sm:w-[260px]">
+            {/* Category dropdown */}
+            <div ref={catRef} className="relative">
+              <button
+                onClick={() => setShowCategory((v) => !v)}
+                className="cursor-pointer px-6 py-4 rounded-full bg-[var(--primary-color)] hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
+                aria-expanded={showCategory}
+              >
+                Category
+                <span className="text-md">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </button>
 
-            {showFilter && (
-              <div className="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg p-2 z-50">
-                <button
-                  onClick={() => handleFilterSelect("newest")}
-                  className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    sortFilter === "newest" ? "bg-slate-100 font-semibold" : ""
-                  }`}
-                >
-                  Newest
-                </button>
-                <button
-                  onClick={() => handleFilterSelect("featured")}
-                  className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    sortFilter === "featured"
-                      ? "bg-slate-100 font-semibold"
-                      : ""
-                  }`}
-                >
-                  Featured
-                </button>
-                <button
-                  onClick={() => handleFilterSelect("most_read")}
-                  className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    sortFilter === "most_read"
-                      ? "bg-slate-100 font-semibold"
-                      : ""
-                  }`}
-                >
-                  Most read
-                </button>
-              </div>
-            )}
+              {showCategory && (
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg p-2 z-50 max-h-96 overflow-y-auto">
+                  <button
+                    onClick={() => handleCategorySelect("All")}
+                    className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                      selectedCategory === ""
+                        ? "bg-slate-100 font-semibold"
+                        : ""
+                    }`}
+                  >
+                    All Categories
+                  </button>
+                  {categories.length > 0 ? (
+                    categories.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => handleCategorySelect(category)}
+                        className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                          selectedCategory === category
+                            ? "bg-slate-100 font-semibold"
+                            : ""
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    ))
+                  ) : (
+                    <div className="px-3 py-2 text-sm text-gray-500">
+                      Loading categories...
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Filter dropdown */}
+            <div ref={filterRef} className="relative">
+              <button
+                onClick={() => setShowFilter((v) => !v)}
+                className="cursor-pointer px-6 py-4 rounded-full bg-[var(--primary-color)] hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
+                aria-expanded={showFilter}
+              >
+                Filter
+                <span className="text-md">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </button>
+
+              {showFilter && (
+                <div className="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg p-2 z-50">
+                  <button
+                    onClick={() => handleFilterSelect("newest")}
+                    className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                      sortFilter === "newest"
+                        ? "bg-slate-100 font-semibold"
+                        : ""
+                    }`}
+                  >
+                    Newest
+                  </button>
+                  <button
+                    onClick={() => handleFilterSelect("featured")}
+                    className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                      sortFilter === "featured"
+                        ? "bg-slate-100 font-semibold"
+                        : ""
+                    }`}
+                  >
+                    Featured
+                  </button>
+                  <button
+                    onClick={() => handleFilterSelect("most_read")}
+                    className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                      sortFilter === "most_read"
+                        ? "bg-slate-100 font-semibold"
+                        : ""
+                    }`}
+                  >
+                    Most read
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </nav>
 

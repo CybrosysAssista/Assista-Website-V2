@@ -5,7 +5,9 @@ import Header from "../components/Header";
 import Image from "next/image";
 
 // API base URL - adjust this to match your server configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://assistawebsitebackend.easyinstance.com";
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://assistawebsitebackend.easyinstance.com";
 
 function Page() {
   const [repos, setRepos] = useState([]);
@@ -189,7 +191,8 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
-              <br /> Organize <span className="brush brushw">knowledge.</span>
+              <br className="hidden lg:block" /> Organize{" "}
+              <span className="brush brushw">knowledge.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
               Assista Wiki helps you create, manage, and access knowledge
@@ -240,7 +243,7 @@ function Page() {
           master.
         </p>
 
-        <nav className="relative bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-4 lg:mb-20">
+        <nav className="relative bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full mx-auto mb-4 lg:mb-20  max-w-full w-[800px]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -259,7 +262,7 @@ function Page() {
 
           <input
             type="text"
-            className="border border-[#e9e9e9] focus:border-[#949494] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 w-[800px]"
+            className="border border-[#e9e9e9] focus:border-[#949494] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 w-full"
             placeholder="Search repositories (e.g., owner/repo-name)..."
             value={searchTerm}
             onChange={(e) => handleSearchChange(e.target.value)}
@@ -295,8 +298,8 @@ function Page() {
                     <span className="text-sm text-slate-500 flex items-center gap-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
+                        width="25"
+                        height="25"
                         viewBox="0 0 24 24"
                         fill="currentColor"
                       >
@@ -307,7 +310,7 @@ function Page() {
                     <button
                       onClick={() => handleGenerateDocs(repoItem.repo)}
                       disabled={generating === repoItem.repo}
-                      className={`inline-flex items-center gap-1.5 text-[#e97d82] text-md font-medium hover:text-[#aa6e71] transition-all ${
+                      className={`cursor-pointer inline-flex items-center gap-1.5 text-[#e97d82] text-md font-medium hover:text-[#aa6e71] transition-all ${
                         generating === repoItem.repo
                           ? "opacity-50 cursor-not-allowed"
                           : ""
