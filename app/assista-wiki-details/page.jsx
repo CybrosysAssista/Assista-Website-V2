@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 // API base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5173";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://10.0.20.51:5173";
 
 function page() {
   const [activeSection, setActiveSection] = useState("");

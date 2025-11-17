@@ -39,7 +39,7 @@ function Header() {
     setIsProcessing(true);
     try {
       if (isAuthenticated) {
-        await router.push("/assista-ide");
+        await router.push("/dashboard");
       } else {
         await signIn(undefined, { callbackUrl: "/signin" });
       }
@@ -348,6 +348,16 @@ function Header() {
                     FAQ
                   </a>
                 </li>
+                {isAuthenticated && (
+                  <li>
+                    <Link
+                      href="/dashboard"
+                      className="transition duration-300 ease-in-out hover:text-[var(--primary-color)]"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <a
                     href="/contact"
@@ -364,7 +374,7 @@ function Header() {
                 disabled={isProcessing || isLoadingSession}
               >
                 {renderCallToActionIcon()}
-                {isAuthenticated ? "Open Assista IDE" : "Try Assista"}
+                {isAuthenticated ? "Open Dashboard" : "Try Assista"}
               </button>
               {isAuthenticated && (
                 <button
@@ -557,6 +567,16 @@ function Header() {
                   FAQ
                 </a>
               </li>
+              {isAuthenticated && (
+                <li>
+                  <Link
+                    href="/dashboard"
+                    className="block py-2 px-2 rounded-lg hover:text-[var(--primary-color)]"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
               <li>
                 <a
                   href="/contact"
@@ -573,7 +593,7 @@ function Header() {
               disabled={isProcessing || isLoadingSession}
             >
               {renderCallToActionIcon()}
-              {isAuthenticated ? "Open Assista IDE" : "Try Assista"}
+              {isAuthenticated ? "Open Dashboard" : "Try Assista"}
             </button>
             {isAuthenticated && (
               <button

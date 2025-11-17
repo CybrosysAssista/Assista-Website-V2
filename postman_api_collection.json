@@ -21,7 +21,7 @@
           "raw": "{\n  \"repo\": \"odoo/odoo\"\n}"
         },
         "url": {
-          "raw": "http://localhost:5173/api/generate",
+          "raw": "http://10.0.20.51:5173/api/generate",
           "protocol": "http",
           "host": [
             "localhost"
@@ -51,7 +51,7 @@
               "raw": "{\n  \"repo\": \"odoo/odoo\"\n}"
             },
             "url": {
-              "raw": "http://localhost:5173/api/generate",
+              "raw": "http://10.0.20.51:5173/api/generate",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -97,7 +97,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5173/api/generate",
+          "raw": "http://10.0.20.51:5173/api/generate",
           "protocol": "http",
           "host": [
             "localhost"
@@ -115,7 +115,7 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost:5173",
+      "value": "http://10.0.20.51:5173",
       "type": "string"
     },
     {

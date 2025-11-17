@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://10.0.20.51:3000](http://10.0.20.51:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
@@ -35,7 +35,7 @@ docker run -d \
   --name assista-main \
   -p 3000:3000 \
   -e NEXTAUTH_SECRET=$(openssl rand -base64 32) \
-  -e NEXTAUTH_URL=http://localhost:3000 \
+  -e NEXTAUTH_URL=http://10.0.20.51:3000 \
   -e AUTH_GOOGLE_ID=your-google-client-id \
   -e AUTH_GOOGLE_SECRET=your-google-client-secret \
   -e AUTH_GITHUB_ID=your-github-client-id \
@@ -68,7 +68,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 This project uses [NextAuth.js](https://authjs.dev) with Google and GitHub providers.
 
-1. Create OAuth credentials with Google and GitHub (OAuth app, callback URL `http://localhost:3000/api/auth/callback/{provider}`).
+1. Create OAuth credentials with Google and GitHub (OAuth app, callback URL `http://10.0.20.51:3000/api/auth/callback/{provider}`).
 2. Copy the generated client IDs and secrets.
 3. Add the following variables to your `.env.local` (use the same values when running the Docker image). `NEXTAUTH_SECRET` is preferred, but `AUTH_SECRET` is also accepted for backward compatibility:
 
@@ -85,6 +85,12 @@ This project uses [NextAuth.js](https://authjs.dev) with Google and GitHub provi
 4. Restart the dev server so the new environment values are picked up.
 
 When you visit the site you can sign in/out from the header buttons. The default NextAuth sign-in page provides the Google and GitHub options.
+
+## Dashboard and User Sync
+
+- Set `BACKEND_API_URL` (or `NEXT_PUBLIC_API_URL`) so the app can reach the Assista Wiki backend. This is used for all `/api/news` routes as well as the new user syncing flow.
+- Sign-in now checks for an existing account in the backend first: users who haven’t registered are redirected to `/signup`, which creates their profile by calling `POST /api/users`. Existing accounts simply refresh metadata on every login.
+- Authenticated visitors can access `/dashboard` for profile, settings, and billing management. The dashboard requires a valid session and will redirect unauthenticated users to `/signin`.
 
 ## IDE Single Sign-On (SSO)
 
@@ -131,5 +137,5 @@ export async function GET() {
 ### 5. Tips
 
 - Use `openssl rand -base64 32` to rotate `AUTH_SECRET` if you deploy to multiple environments.
-- For local development, you can set `NEXTAUTH_URL=http://localhost:3000` so the IDE can test against your dev server.
+- For local development, you can set `NEXTAUTH_URL=http://10.0.20.51:3000` so the IDE can test against your dev server.
 - If you need refresh tokens for long-lived sessions, customize the `jwt` and `session` callbacks in `auth.config.js` to persist OAuth access tokens.

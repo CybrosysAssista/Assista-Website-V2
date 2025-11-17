@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Image from "next/image";
@@ -20,23 +21,21 @@ const buildClientUrl = (path) => {
   return path;
 };
 
+const DEFAULT_CATEGORIES = ["General", "Technology", "Business", "Science", "Culture"];
+
 function Page() {
-  const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [showCategory, setShowCategory] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
-  const [pageSize] = useState(12);
-  const [categories, setCategories] = useState([]);
+  const pageSize = 12;
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortFilter, setSortFilter] = useState("newest"); // newest, featured, most_read
   const catRef = useRef(null);
   const filterRef = useRef(null);
   const newsSectionRef = useRef(null);
+  const [searchInput, setSearchInput] = useState("");
+  const searchTimeoutRef = useRef(null);
 
   // Helper function to calculate read time
   const calculateReadTime = (text) => {
@@ -46,70 +45,61 @@ function Page() {
     return `${minutes} min`;
   };
 
-  // Fetch categories from API
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(buildClientUrl("/api/news/categories"));
-        if (response.ok) {
-          const data = await response.json();
-          setCategories(data.categories || []);
-        }
-      } catch (err) {
-        console.error("Error fetching categories:", err);
-        // Set default categories if API fails
-        setCategories([
-          "General",
-          "Technology",
-          "Business",
-          "Science",
-          "Culture",
-        ]);
+  const categoriesQuery = useQuery({
+    queryKey: ["newsCategories"],
+    queryFn: async () => {
+      const response = await fetch(buildClientUrl("/api/news/categories"));
+      if (!response.ok) {
+        throw new Error(`Failed to fetch categories (status ${response.status})`);
       }
-    };
-    fetchCategories();
-  }, []);
+      const payload = await response.json();
+      if (Array.isArray(payload?.categories)) {
+        return payload.categories;
+      }
+      if (Array.isArray(payload)) {
+        return payload;
+      }
+      return [];
+    },
+    staleTime: 1000 * 60 * 10,
+    retry: 1,
+  });
 
-  useEffect(() => {
-    function onDoc(e) {
-      if (catRef.current && !catRef.current.contains(e.target))
-        setShowCategory(false);
-      if (filterRef.current && !filterRef.current.contains(e.target))
-        setShowFilter(false);
-    }
-    document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
-  }, []);
-
-  // Fetch news from API
-  useEffect(() => {
-    let controller = null;
-    let requestTimeout = null;
-
-    const fetchNews = async () => {
-      // Cancel any previous request
-      if (controller) {
-        controller.abort();
+  const newsQuery = useQuery({
+    queryKey: [
+      "newsFeed",
+      {
+        page: currentPage,
+        pageSize,
+        search: searchQuery.trim(),
+        category: selectedCategory,
+        sort: sortFilter,
+      },
+    ],
+    queryFn: async ({ queryKey, signal }) => {
+      const [, params] = queryKey;
+      const searchParams = new URLSearchParams();
+      searchParams.set("page", params.page.toString());
+      searchParams.set("page_size", params.pageSize.toString());
+      if (params.search) {
+        searchParams.set("q", params.search);
+      }
+      if (params.category) {
+        searchParams.set("category", params.category);
       }
 
-      controller = new AbortController();
+      const response = await fetch(
+        buildClientUrl(`/api/news?${searchParams.toString()}`),
+        { signal }
+      );
 
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Build query parameters
-        const params = new URLSearchParams();
-        params.append("page", currentPage.toString());
-        params.append("page_size", pageSize.toString());
-
-        if (searchQuery.trim()) {
-          params.append("q", searchQuery.trim());
+      if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error("Too many requests. Please wait a moment and try again.");
         }
-
-        if (selectedCategory) {
-          params.append("category", selectedCategory);
-        }
+        const message = await response.text();
+        throw new Error(message || `Failed to fetch news (status ${response.status})`);
+      }
 
         // Note: API may not support sort/filter yet, but we can add it for future
         // if (sortFilter === 'featured') {
@@ -132,40 +122,16 @@ function Page() {
           throw new Error(`Failed to fetch news: ${response.statusText}`);
         }
 
-        const data = await response.json();
+      const mappedNews = rawArticles.map((article, index) => {
+        const excerpt = article.summary || article.description || "";
+        const readTime = calculateReadTime(excerpt);
+        const readTimeMinutes = parseInt(readTime, 10) || 1;
 
-        // Extract articles array from response
-        // API returns: { items: [...], total: number, page: number, generated_at: "..." }
-        let articles = [];
-
-        if (Array.isArray(data.items)) {
-          // Most common format: items array
-          articles = data.items;
-        } else if (Array.isArray(data.articles)) {
-          articles = data.articles;
-        } else if (Array.isArray(data)) {
-          articles = data;
-        } else if (Array.isArray(data.results)) {
-          articles = data.results;
-        } else if (data && data.data && Array.isArray(data.data)) {
-          articles = data.data;
-        }
-
-        // Update pagination metadata
-        if (data.total !== undefined) {
-          setTotalItems(data.total);
-          setTotalPages(Math.ceil(data.total / pageSize));
-        }
-        if (data.page !== undefined) {
-          setCurrentPage(data.page);
-        }
-
-        // Map articles to the format expected by the UI
-        const mappedNews = articles.map((article, index) => ({
+        return {
           id: article.id || article.link || `article-${index}`,
           category: article.category || "General",
           title: article.title || "No Title",
-          excerpt: article.summary || article.description || "",
+          excerpt,
           author: article.source || "Unknown",
           date: article.published || new Date().toISOString(),
           readTime: calculateReadTime(
@@ -174,50 +140,97 @@ function Page() {
           image: article.image_url || "/img/news-thumb.jpg",
           featured: article.featured || false,
           link: article.link || "",
-        }));
+        };
+      });
 
-        // Apply client-side sorting if needed (for features API doesn't support)
-        let sortedNews = mappedNews;
-        if (sortFilter === "newest") {
-          sortedNews = [...mappedNews].sort(
-            (a, b) => new Date(b.date) - new Date(a.date)
-          );
-        } else if (sortFilter === "featured") {
-          sortedNews = [...mappedNews].sort(
-            (a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
-          );
-        }
-
-        setNews(sortedNews);
-      } catch (err) {
-        console.error("Error fetching news:", err);
-        if (err.name === "AbortError") {
-          // Request was cancelled, don't show error
-          return;
-        } else {
-          setError(
-            err.message || "Failed to fetch news. Please try again later."
-          );
-        }
-      } finally {
-        setLoading(false);
+      let sortedNews = mappedNews;
+      if (params.sort === "newest") {
+        sortedNews = [...mappedNews].sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+      } else if (params.sort === "featured") {
+        sortedNews = [...mappedNews].sort(
+          (a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)
+        );
+      } else if (params.sort === "most_read") {
+        sortedNews = [...mappedNews].sort(
+          (a, b) => a.readTimeMinutes - b.readTimeMinutes
+        );
       }
-    };
 
-    // Add debounce to the fetch to prevent rapid successive calls
-    requestTimeout = setTimeout(() => {
-      fetchNews();
-    }, 500); // 500ms debounce on filter changes to reduce API calls
+      const total =
+        typeof payload.total === "number"
+          ? payload.total
+          : typeof payload.count === "number"
+            ? payload.count
+            : sortedNews.length;
 
-    return () => {
-      if (requestTimeout) {
-        clearTimeout(requestTimeout);
+      const page =
+        typeof payload.page === "number" ? payload.page : params.page;
+
+      const totalPages =
+        typeof payload.total_pages === "number"
+          ? payload.total_pages
+          : total
+            ? Math.max(1, Math.ceil(total / params.pageSize))
+            : Math.max(1, page);
+
+      return {
+        items: sortedNews,
+        total,
+        page,
+        totalPages,
+        generatedAt: payload.generated_at ?? payload.generatedAt ?? null,
+      };
+    },
+    keepPreviousData: true,
+    staleTime: 30_000,
+    retry: (failureCount, error) => {
+      if (error instanceof Error && error.message.includes("Too many requests")) {
+        return false;
       }
-      if (controller) {
-        controller.abort();
-      }
-    };
-  }, [currentPage, pageSize, searchQuery, selectedCategory, sortFilter]);
+      return failureCount < 2;
+    },
+  });
+
+  const categories = categoriesQuery.data?.length
+    ? categoriesQuery.data
+    : DEFAULT_CATEGORIES;
+  const isCategoriesLoading = categoriesQuery.isLoading;
+
+  const newsItems = newsQuery.data?.items ?? [];
+  const totalPages = newsQuery.data?.totalPages ?? 1;
+  const totalItems = newsQuery.data?.total ?? newsItems.length;
+  const displayedPage = newsQuery.data?.page ?? currentPage;
+  const isNewsLoading = newsQuery.isLoading;
+  const isNewsFetching = newsQuery.isFetching;
+  const isRefetching = isNewsFetching && !isNewsLoading;
+  const newsErrorMessage =
+    newsQuery.error instanceof Error
+      ? newsQuery.error.message
+      : newsQuery.error
+      ? "Failed to fetch news. Please try again later."
+      : null;
+
+  useEffect(() => {
+    if (
+      newsQuery.data?.page !== undefined &&
+      newsQuery.data.page !== currentPage
+    ) {
+      setCurrentPage(newsQuery.data.page);
+    }
+  }, [newsQuery.data?.page, currentPage]);
+
+  useEffect(() => {
+    function onDoc(e) {
+      if (catRef.current && !catRef.current.contains(e.target))
+        setShowCategory(false);
+      if (filterRef.current && !filterRef.current.contains(e.target))
+        setShowFilter(false);
+    }
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -234,10 +247,6 @@ function Page() {
       setCurrentPage(1);
     }
   }, [searchQuery, selectedCategory, sortFilter]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Handle search input with debounce
-  const [searchInput, setSearchInput] = useState("");
-  const searchTimeoutRef = useRef(null);
 
   const handleSearchChange = (value) => {
     setSearchInput(value);
@@ -261,7 +270,7 @@ function Page() {
 
   // Pagination handlers
   const handlePageChange = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
+    if (newPage >= 1 && newPage <= totalPages && newPage !== currentPage) {
       setCurrentPage(newPage);
       if (newsSectionRef.current) {
         newsSectionRef.current.scrollIntoView({
@@ -293,6 +302,7 @@ function Page() {
   const getPageNumbers = () => {
     const pages = [];
     const maxVisible = 7;
+    const activePage = displayedPage;
 
     if (totalPages <= maxVisible) {
       // Show all pages if total is less than max visible
@@ -303,19 +313,19 @@ function Page() {
       // Always show first page
       pages.push(1);
 
-      if (currentPage > 3) {
+      if (activePage > 3) {
         pages.push("...");
       }
 
       // Show pages around current page
-      const start = Math.max(2, currentPage - 1);
-      const end = Math.min(totalPages - 1, currentPage + 1);
+      const start = Math.max(2, activePage - 1);
+      const end = Math.min(totalPages - 1, activePage + 1);
 
       for (let i = start; i <= end; i++) {
         pages.push(i);
       }
 
-      if (currentPage < totalPages - 2) {
+      if (activePage < totalPages - 2) {
         pages.push("...");
       }
 
@@ -358,7 +368,7 @@ function Page() {
             <div className="flex gap-2 mt-10 mb-3 md:mb-15">
               <a
                 href=""
-                className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
+              className="flex justify-center items-center w-45 py-3 bg-(--primary-color) text-white rounded-full hover:bg-[#666] transition duration-300"
               >
                 Get Started
               </a>
@@ -398,58 +408,117 @@ function Page() {
           we work.
         </p>
 
-        <nav className="relative flex-wrap bg-white grid  sm:flex items-center gap-3 justify-between [box-shadow:0px_0px_20px_#00000014] p-3 rounded-md sm:rounded-full max-w-full w-[900px] mx-auto mb-20">
-          <div className="relative flex-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              className="absolute left-7 top-0 bottom-0 my-auto text-slate-400"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeWidth="2"
-                d="m21 21l-3.5-3.5M17 10a7 7 0 1 1-14 0a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-
-            <input
-              type="text"
-              className="w-full border border-[#e9e9e9] focus:border-[#949494] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 "
-              placeholder="Search Here..."
-              value={searchInput}
-              onChange={(e) => handleSearchChange(e.target.value)}
+        <nav className="relative bg-white flex items-center gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-20">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            className="absolute left-7 top-0 bottom-0 my-auto text-slate-400"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+              d="m21 21l-3.5-3.5M17 10a7 7 0 1 1-14 0a7 7 0 0 1 14 0Z"
             />
+          </svg>
+
+          <input
+            type="text"
+            className="border border-[#e9e9e9] focus:border-[#949494] focus:outline-none transition duration-300 rounded-full p-3 ps-13 px-5 w-[200px] md:w-[400px] lg:w-[600px]"
+            placeholder="Search Here..."
+            value={searchInput}
+            onChange={(e) => handleSearchChange(e.target.value)}
+          />
+
+          {/* Category dropdown */}
+          <div ref={catRef} className="relative">
+            <button
+              onClick={() => setShowCategory((v) => !v)}
+              className="cursor-pointer px-6 py-4 rounded-full bg-(--primary-color) hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
+              aria-expanded={showCategory}
+            >
+              Category
+              <span className="text-md">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </button>
+
+            {showCategory && (
+              <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg p-2 z-50 max-h-96 overflow-y-auto">
+                <button
+                  onClick={() => handleCategorySelect("All")}
+                  className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                    selectedCategory === "" ? "bg-slate-100 font-semibold" : ""
+                  }`}
+                >
+                  All Categories
+                </button>
+                {isCategoriesLoading ? (
+                  <div className="px-3 py-2 text-sm text-gray-500">
+                    Loading categories...
+                  </div>
+                ) : categories.length > 0 ? (
+                  categories.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => handleCategorySelect(category)}
+                      className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                        selectedCategory === category
+                          ? "bg-slate-100 font-semibold"
+                          : ""
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  ))
+                ) : (
+                  <div className="px-3 py-2 text-sm text-gray-500">
+                    No categories available.
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
-          <div className="flex gap-2 justify-center w-full sm:w-[260px]">
-            {/* Category dropdown */}
-            <div ref={catRef} className="relative">
-              <button
-                onClick={() => setShowCategory((v) => !v)}
-                className="cursor-pointer px-6 py-4 rounded-full bg-[var(--primary-color)] hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
-                aria-expanded={showCategory}
-              >
-                Category
-                <span className="text-md">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      fillRule="evenodd"
-                      d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </button>
+          {/* Filter dropdown */}
+          <div ref={filterRef} className="relative">
+            <button
+              onClick={() => setShowFilter((v) => !v)}
+              className="cursor-pointer px-6 py-4 rounded-full bg-(--primary-color) hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
+              aria-expanded={showFilter}
+            >
+              Filter
+              <span className="text-md">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+            </button>
 
               {showCategory && (
                 <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg p-2 z-50 max-h-96 overflow-y-auto">
@@ -549,12 +618,18 @@ function Page() {
           </div>
         </nav>
 
-        {loading ? (
+        {isRefetching && !isNewsLoading && (
+          <div className="text-center pb-4 text-sm text-slate-500">
+            Updating results…
+          </div>
+        )}
+
+        {isNewsLoading ? (
           <div className="text-center py-10 md:py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--primary-color)] mb-4"></div>
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-(--primary-color) mb-4"></div>
             <p className="text-lg text-slate-600">Loading news articles...</p>
           </div>
-        ) : error ? (
+        ) : newsErrorMessage ? (
           <div className="text-center py-10 md:py-20">
             <div className="text-red-500 mb-4">
               <svg
@@ -575,18 +650,18 @@ function Page() {
               Error Loading News
             </h3>
             <p className="text-[#7e7e7e] text-lg max-w-[700px] mx-auto mb-6">
-              {error}
+              {newsErrorMessage}
             </p>
             <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
+              onClick={() => newsQuery.refetch()}
+              className="px-6 py-3 bg-(--primary-color) text-white rounded-full hover:bg-[#666] transition duration-300"
             >
               Retry
             </button>
           </div>
-        ) : news.length > 0 ? (
+        ) : newsItems.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            {news.map((newsItem) => (
+            {newsItems.map((newsItem) => (
               <article
                 key={newsItem.id}
                 className="cursor-pointer lg:col-span-4 group bg-white rounded-md [box-shadow:0px_0px_20px_#00000014] hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col"
@@ -601,13 +676,13 @@ function Page() {
                     alt={newsItem.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/10 to-transparent"></div>
                   <span className="absolute top-4 left-4 article-category">
                     {newsItem.category}
                   </span>
                 </div>
 
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-6 flex flex-col grow">
                   <div className="flex items-center gap-3 text-sm text-slate-600 mb-3">
                     <div className="flex items-center gap-1">
                       <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -634,7 +709,7 @@ function Page() {
                     {newsItem.title}
                   </h3>
 
-                  <p className="text-[#7e7e7e] text-md mb-4 leading-relaxed line-clamp-3 flex-grow">
+                  <p className="text-[#7e7e7e] text-md mb-4 leading-relaxed line-clamp-3 grow">
                     {newsItem.excerpt}
                   </p>
 
@@ -678,17 +753,17 @@ function Page() {
         )}
 
         {/* Pagination */}
-        {!loading && !error && totalPages > 1 && (
+        {!isNewsLoading && !newsErrorMessage && totalPages > 1 && (
           <div className="flex flex-col items-center justify-center mt-20 mb-10">
             <div className="flex items-center gap-2 flex-wrap justify-center">
               {/* Previous Button */}
               <button
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
+                onClick={() => handlePageChange(displayedPage - 1)}
+                disabled={displayedPage === 1}
                 className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-2 ${
-                  currentPage === 1
+                  displayedPage === 1
                     ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-[var(--primary-color)] text-white hover:bg-[#666]"
+                    : "bg-(--primary-color) text-white hover:bg-[#666]"
                 }`}
                 aria-label="Previous page"
               >
@@ -717,12 +792,12 @@ function Page() {
                     <button
                       onClick={() => handlePageChange(page)}
                       className={`px-4 py-2 rounded-lg transition-all duration-300 min-w-[40px] ${
-                        currentPage === page
-                          ? "bg-[var(--primary-color)] text-white font-semibold"
+                        displayedPage === page
+                          ? "bg-(--primary-color) text-white font-semibold"
                           : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
                       }`}
                       aria-label={`Go to page ${page}`}
-                      aria-current={currentPage === page ? "page" : undefined}
+                      aria-current={displayedPage === page ? "page" : undefined}
                     >
                       {page}
                     </button>
@@ -732,12 +807,12 @@ function Page() {
 
               {/* Next Button */}
               <button
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(displayedPage + 1)}
+                disabled={displayedPage === totalPages}
                 className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center gap-2 ${
-                  currentPage === totalPages
+                  displayedPage === totalPages
                     ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-[var(--primary-color)] text-white hover:bg-[#666]"
+                    : "bg-(--primary-color) text-white hover:bg-[#666]"
                 }`}
                 aria-label="Next page"
               >
@@ -760,7 +835,7 @@ function Page() {
 
             {/* Page Info */}
             <div className="mt-6 text-sm text-slate-600">
-              Showing page {currentPage} of {totalPages} ({totalItems} total
+              Showing page {displayedPage} of {totalPages} ({totalItems} total
               articles)
             </div>
           </div>
