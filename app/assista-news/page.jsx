@@ -13,7 +13,9 @@ const buildClientUrl = (path) => {
     path = `/${path}`;
   }
   if (API_BASE_URL) {
-    const base = API_BASE_URL.endsWith("/") ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+    const base = API_BASE_URL.endsWith("/")
+      ? API_BASE_URL.slice(0, -1)
+      : API_BASE_URL;
     return `${base}${path}`;
   }
   return path;
@@ -99,20 +101,26 @@ function Page() {
         throw new Error(message || `Failed to fetch news (status ${response.status})`);
       }
 
-      const payload = await response.json();
+        // Note: API may not support sort/filter yet, but we can add it for future
+        // if (sortFilter === 'featured') {
+        //   params.append('featured', 'true');
+        // }
 
-      let rawArticles = [];
-      if (Array.isArray(payload.items)) {
-        rawArticles = payload.items;
-      } else if (Array.isArray(payload.articles)) {
-        rawArticles = payload.articles;
-      } else if (Array.isArray(payload.results)) {
-        rawArticles = payload.results;
-      } else if (Array.isArray(payload.data)) {
-        rawArticles = payload.data;
-      } else if (Array.isArray(payload)) {
-        rawArticles = payload;
-      }
+        const response = await fetch(
+          buildClientUrl(`/api/news?${params.toString()}`),
+          {
+            signal: controller.signal,
+          }
+        );
+
+        if (!response.ok) {
+          if (response.status === 429) {
+            throw new Error(
+              "Too many requests. Please wait a moment and try again."
+            );
+          }
+          throw new Error(`Failed to fetch news: ${response.statusText}`);
+        }
 
       const mappedNews = rawArticles.map((article, index) => {
         const excerpt = article.summary || article.description || "";
@@ -126,8 +134,9 @@ function Page() {
           excerpt,
           author: article.source || "Unknown",
           date: article.published || new Date().toISOString(),
-          readTime,
-          readTimeMinutes,
+          readTime: calculateReadTime(
+            article.summary || article.description || ""
+          ),
           image: article.image_url || "/img/news-thumb.jpg",
           featured: article.featured || false,
           link: article.link || "",
@@ -264,7 +273,10 @@ function Page() {
     if (newPage >= 1 && newPage <= totalPages && newPage !== currentPage) {
       setCurrentPage(newPage);
       if (newsSectionRef.current) {
-        newsSectionRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        newsSectionRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
     }
   };
@@ -344,7 +356,7 @@ function Page() {
 
             <h1 className="text-5xl font-medium mb-3 leading-15">
               Your assistant to
-              <br /> Communicate
+              <br className="hidden lg:block" />  Communicate
               <span className="brush brushn">intelligently.</span>
             </h1>
             <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
@@ -508,38 +520,101 @@ function Page() {
               </span>
             </button>
 
-            {showFilter && (
-              <div className="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg p-2 z-50">
-                <button
-                  onClick={() => handleFilterSelect("newest")}
-                  className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    sortFilter === "newest" ? "bg-slate-100 font-semibold" : ""
-                  }`}
-                >
-                  Newest
-                </button>
-                <button
-                  onClick={() => handleFilterSelect("featured")}
-                  className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    sortFilter === "featured"
-                      ? "bg-slate-100 font-semibold"
-                      : ""
-                  }`}
-                >
-                  Featured
-                </button>
-                <button
-                  onClick={() => handleFilterSelect("most_read")}
-                  className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
-                    sortFilter === "most_read"
-                      ? "bg-slate-100 font-semibold"
-                      : ""
-                  }`}
-                >
-                  Most read
-                </button>
-              </div>
-            )}
+              {showCategory && (
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg p-2 z-50 max-h-96 overflow-y-auto">
+                  <button
+                    onClick={() => handleCategorySelect("All")}
+                    className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                      selectedCategory === ""
+                        ? "bg-slate-100 font-semibold"
+                        : ""
+                    }`}
+                  >
+                    All Categories
+                  </button>
+                  {categories.length > 0 ? (
+                    categories.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => handleCategorySelect(category)}
+                        className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                          selectedCategory === category
+                            ? "bg-slate-100 font-semibold"
+                            : ""
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    ))
+                  ) : (
+                    <div className="px-3 py-2 text-sm text-gray-500">
+                      Loading categories...
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Filter dropdown */}
+            <div ref={filterRef} className="relative">
+              <button
+                onClick={() => setShowFilter((v) => !v)}
+                className="cursor-pointer px-6 py-4 rounded-full bg-[var(--primary-color)] hover:bg-[#666] transition duration-300 text-white text-sm flex items-center gap-2"
+                aria-expanded={showFilter}
+              >
+                Filter
+                <span className="text-md">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+              </button>
+
+              {showFilter && (
+                <div className="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg p-2 z-50">
+                  <button
+                    onClick={() => handleFilterSelect("newest")}
+                    className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                      sortFilter === "newest"
+                        ? "bg-slate-100 font-semibold"
+                        : ""
+                    }`}
+                  >
+                    Newest
+                  </button>
+                  <button
+                    onClick={() => handleFilterSelect("featured")}
+                    className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                      sortFilter === "featured"
+                        ? "bg-slate-100 font-semibold"
+                        : ""
+                    }`}
+                  >
+                    Featured
+                  </button>
+                  <button
+                    onClick={() => handleFilterSelect("most_read")}
+                    className={`cursor-pointer block w-full text-left px-3 py-2 text-sm hover:bg-slate-100 rounded ${
+                      sortFilter === "most_read"
+                        ? "bg-slate-100 font-semibold"
+                        : ""
+                    }`}
+                  >
+                    Most read
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </nav>
 
