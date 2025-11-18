@@ -21,7 +21,6 @@ function SignInPageContent() {
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [ideCallbackUrl, setIdeCallbackUrl] = useState(null);
 
   const errorMessage = useMemo(() => {
     if (!error) return null;
@@ -41,7 +40,7 @@ function SignInPageContent() {
   }, [error]);
 
   useEffect(() => {
-    // If user is already authenticated, prepare IDE callback URL
+    // If user is already authenticated, redirect immediately
     if (status === "authenticated") {
       // Check if callbackUrl is an IDE callback
       const isIDECallback =
@@ -50,62 +49,14 @@ function SignInPageContent() {
         callbackUrl.startsWith("cybrosys-assista://");
       
       if (isIDECallback) {
-        // Prepare IDE callback URL with session tokens (but don't redirect yet)
-        prepareIDECallback(callbackUrl);
+        // Redirect immediately to IDE callback with session tokens
+        handleIDECallback(callbackUrl);
       } else {
         // If not IDE callback, redirect to dashboard
         router.replace("/dashboard");
       }
     }
   }, [status, router, callbackUrl]);
-
-  const prepareIDECallback = async (url) => {
-    try {
-      // Get session to extract JWT tokens and user details for IDE
-      const sessionResponse = await fetch("/api/auth/session");
-      if (sessionResponse.ok) {
-        const session = await sessionResponse.json();
-        const redirectUrl = new URL(url);
-        
-        // Add session tokens to callback URL
-        if (session?.access_token) {
-          redirectUrl.searchParams.set("access_token", session.access_token);
-        }
-        if (session?.refresh_token) {
-          redirectUrl.searchParams.set("refresh_token", session.refresh_token);
-        }
-        if (session?.sessionId) {
-          redirectUrl.searchParams.set("session_id", session.sessionId);
-        }
-        
-        // Add user details to callback URL
-        if (session?.user) {
-          if (session.user.email) {
-            redirectUrl.searchParams.set("email", session.user.email);
-          }
-          if (session.user.name) {
-            redirectUrl.searchParams.set("name", encodeURIComponent(session.user.name));
-          }
-          if (session.user.image) {
-            redirectUrl.searchParams.set("image", session.user.image);
-          }
-          if (session.user.provider) {
-            redirectUrl.searchParams.set("provider", session.user.provider);
-          }
-          if (session.user.id) {
-            redirectUrl.searchParams.set("user_id", session.user.id);
-          }
-        }
-        
-        // Store the callback URL - user will click button to trigger redirect
-        setIdeCallbackUrl(redirectUrl.toString());
-      }
-    } catch (error) {
-      console.error("Failed to prepare IDE callback", error);
-      // On error, still set the original URL
-      setIdeCallbackUrl(url);
-    }
-  };
 
   const handleIDECallback = async (url) => {
     // Check if this is an IDE callback URL
@@ -220,8 +171,8 @@ function SignInPageContent() {
         (result?.url || callbackUrl).startsWith("cybrosys-assista://");
       
       if (isIDECallback) {
-        // Prepare IDE callback URL - user will click button to trigger redirect
-        await prepareIDECallback(result?.url || callbackUrl);
+        // Redirect immediately to IDE callback
+        await handleIDECallback(result?.url || callbackUrl);
       } else {
         // Regular redirect for non-IDE URLs
         router.replace(result?.url || callbackUrl);
@@ -234,73 +185,9 @@ function SignInPageContent() {
     }
   };
 
-  // Show loading state while checking authentication status
-  if (status === "loading") {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-          <p className="mt-4 text-gray-600">Checking authentication...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Show IDE callback button if authenticated and callback URL is ready
-  if (status === "authenticated" && ideCallbackUrl) {
-    const handleOpenIDE = () => {
-      // This must be triggered by user click to work with custom URL schemes
-      window.location.href = ideCallbackUrl;
-    };
-
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md space-y-6 rounded-2xl bg-white p-8 shadow-xl">
-          <div className="text-center space-y-4">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100">
-              <svg
-                className="w-8 h-8 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-semibold text-gray-900">Successfully signed in!</h1>
-            <p className="text-sm text-gray-500">
-              Click the button below to open Assista IDE with your account.
-            </p>
-            <button
-              onClick={handleOpenIDE}
-              className="w-full rounded-full bg-(--primary-color) px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
-            >
-              Open Assista IDE
-            </button>
-            <p className="text-xs text-gray-400 mt-4">
-              If the IDE doesn&apos;t open automatically, make sure it&apos;s installed and running.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Show loading if authenticated but callback URL not ready yet
+  // Don't render form if already authenticated (redirect will happen)
   if (status === "authenticated") {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
-          <p className="mt-4 text-gray-600">Preparing redirect...</p>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (

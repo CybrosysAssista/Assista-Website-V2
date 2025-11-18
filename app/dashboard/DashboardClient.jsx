@@ -35,11 +35,7 @@ const baseNavigationItems = [
   { id: "overview", label: "Overview", icon: MdAccessTime },
   { id: "activity", label: "Activity", icon: MdShowChart },
   { id: "settings", label: "Settings", icon: MdSettings },
-  { id: "integrations", label: "Integrations", icon: MdIntegrationInstructions },
-  { id: "cloudagents", label: "Cloud Agents", icon: MdCloud },
-  { id: "bugbot", label: "Bugbot", icon: MdBugReport },
   { id: "usage", label: "Usage", icon: MdBarChart },
-  { id: "billing", label: "Billing & Invoices", icon: MdPayment },
 ];
 
 export default function DashboardClient({ user }) {
