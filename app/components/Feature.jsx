@@ -38,13 +38,12 @@ function Feature() {
           </div>
           <div className="flex flex-col justify-center">
             <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
-              Streamline your <br /> Wrok with smart features
+              Odoo’s first IDE with <br /> An intelligent coding agent
             </h2>
 
             <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
-              Automate repetitive tasks connect your favorite apps, and gain
-              real-time insights to make smarter decisions helping your team
-              work faster and more efficiently.
+              Assista IDE is the first development environment built exclusively
+              for Odoo, combining advanced tooling with smart AI agent.
             </p>
             <a
               href=""
@@ -57,13 +56,13 @@ function Feature() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-20 md:py-30 max-w-[90%] mx-auto">
           <div className="lg:order-1 order-2 flex flex-col justify-center">
             <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
-              Empower your <br /> Development with Assista
+              The Smartest Way
+              <br /> To interact with your Odoo
             </h2>
 
             <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
-              Code smarter with built-in Odoo support, intelligent suggestions,
-              and seamless integrations that simplify your workflow and boost
-              productivity at every step.
+              Assista X lets you query, analyze, and manage your Odoo database
+              using simple natural language with no technical skills needed.
             </p>
             <a
               href=""
@@ -94,13 +93,12 @@ function Feature() {
           </div>
           <div className="flex flex-col justify-center">
             <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
-              Accelerate your <br /> Odoo Projects with Ease
+              Understand your Odoo <br /> Instance like never before
             </h2>
 
             <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
-              Streamline module creation, manage instances effortlessly, and
-              collaborate in real time all within a unified platform designed
-              for Odoo professionals.
+              Track server health, diagnose performance issues, and optimize
+              custom modules with intelligent analytics from Assista Performance.
             </p>
 
             <a

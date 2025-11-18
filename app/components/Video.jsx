@@ -21,8 +21,8 @@ function Video() {
         </h2>
 
         <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
-          Watch how Assista streamlines workflows, automates repetitive tasks,
-          and boosts Odoo performance all in one smooth experience.
+         Experience the complete power of Cybrosys Assista through this immersive walkthrough demonstrating every intelligent Odoo tool
+
         </p>
 
         <video

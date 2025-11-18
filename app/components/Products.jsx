@@ -17,13 +17,13 @@ function Products() {
     },
     {
       title: "Assista X",
-      description: "Talk with Odoo assistant",
+      description: "Talk with Odoo database",
       icon: "/img/assista-x.svg",
       link: "/assista-x",
     },
     {
       title: "Assista Performance",
-      description: "Monitor the Odoo Instance",
+      description: "Analyze your Odoo Instance",
       icon: "/img/assista-performance.svg",
       link: "/assista-performance",
     },
@@ -47,7 +47,7 @@ function Products() {
     },
     {
       title: " Assista Builder",
-      description: "Odoo Helper for Pycharm",
+      description: "No code Odoo App Builder",
       icon: "/img/assista-builder.svg",
       link: "/assista-builder",
     },

@@ -59,7 +59,7 @@ function Page() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-10 items-center">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <Image src="/img/idelogo.svg" alt="" width={50} height={50} />
+                <Image src="/img/icon1.svg" alt="" width={50} height={50} />
                 <span className="font-semibold text-4xl text-[#818181]">
                   Assista IDE
                 </span>
