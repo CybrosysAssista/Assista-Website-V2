@@ -17,7 +17,7 @@ const authSecret = process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET;
 const backendApiBase =
   process.env.BACKEND_API_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "http://10.0.20.51:5173";
+  "http://localhost:3001";
 
 function resolveDeviceLabel(userAgent = "") {
   if (!userAgent) return "Web";

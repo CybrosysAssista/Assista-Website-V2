@@ -1,7 +1,7 @@
 services:
   web:
     build:
-      context: /Users/jestinjoseph/Documents/personal/assista-al/assista-main
+      context: .
       dockerfile: Dockerfile
     container_name: assista-main
     ports:
@@ -9,5 +9,16 @@ services:
     env_file:
       - .env.local
     environment:
-      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://10.0.20.51:3000}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      BACKEND_API_URL: ${BACKEND_API_URL:-http://assistax-backend:3001}
+    networks:
+      - default
+      - assita-builder_default
+      - assista-wiki_assista-network
     restart: unless-stopped
+
+networks:
+  assita-builder_default:
+    external: true
+  assista-wiki_assista-network:
+    external: true
