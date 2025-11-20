@@ -15,9 +15,8 @@ const githubProvider = GitHub({
 
 const authSecret = process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET;
 const backendApiBase =
-  process.env.BACKEND_API_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "http://10.0.20.51:5173";
+  "http://localhost:5173";
 
 function resolveDeviceLabel(userAgent = "") {
   if (!userAgent) return "Web";
@@ -128,18 +127,25 @@ const credentialsProvider = Credentials({
 
 async function userExists(email) {
   try {
-    const response = await fetch(`${backendApiBase}/api/users/${encodeURIComponent(email)}`, {
+    const url = `${backendApiBase}/api/users/${encodeURIComponent(email)}`;
+    console.log(`[Auth] Checking if user exists: ${url}`);
+
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
 
+    console.log(`[Auth] User exists check response: ${response.status}`);
+
     if (response.status === 404) {
       return false;
     }
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`[Auth] User lookup failed with status ${response.status}:`, errorText);
       throw new Error(`Lookup failed with status ${response.status}`);
     }
 

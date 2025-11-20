@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 
 import { authConfig } from "@/auth.config";
 import DashboardClient from "./DashboardClient";
-import { API_BASE_URL } from "../config/api";
+import { NEXT_PUBLIC_API_URL, API_BASE_URL } from "../config/api";
 
 async function syncUser(user) {
   if (!user?.email) {
@@ -11,7 +11,7 @@ async function syncUser(user) {
   }
 
   try {
-    await fetch(`${API_BASE_URL}/api/users`, {
+    await fetch(`${NEXT_PUBLIC_API_URL}/api/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

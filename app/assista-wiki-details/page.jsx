@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 // API base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://10.0.20.51:5173";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5173";
 
 function page() {
   const [activeSection, setActiveSection] = useState("");
@@ -724,8 +724,8 @@ function page() {
             typeof children === "string"
               ? children
               : Array.isArray(children)
-              ? children.map((c) => (typeof c === "string" ? c : "")).join("")
-              : "";
+                ? children.map((c) => (typeof c === "string" ? c : "")).join("")
+                : "";
           if (childText) {
             finalHref = childText;
           }
@@ -1121,9 +1121,8 @@ function page() {
 
         // Convert unknown opening tags to div with data attribute
         const cleanAttributes = attributes.trim();
-        return `<div data-original-tag="${lowerTagName}"${
-          cleanAttributes ? " " + cleanAttributes : ""
-        }>`;
+        return `<div data-original-tag="${lowerTagName}"${cleanAttributes ? " " + cleanAttributes : ""
+          }>`;
       }
     );
 
@@ -1546,9 +1545,8 @@ function page() {
                             setActivePageId(page.id);
                             setShowDiagramsView(false);
                           }}
-                          className={`nav-link w-full text-left ${
-                            activePageId === page.id ? "nav-link-main" : ""
-                          }`}
+                          className={`nav-link w-full text-left ${activePageId === page.id ? "nav-link-main" : ""
+                            }`}
                         >
                           {page.title}
                         </button>
@@ -1737,16 +1735,15 @@ function page() {
               <nav className="page-nav">
                 <ul className="page-nav-list">
                   {sections.filter((s) => s.pageId === activePageId).length >
-                  0 ? (
+                    0 ? (
                     sections
                       .filter((s) => s.pageId === activePageId)
                       .map((section, index) => (
                         <li key={`page-nav-${section.id}-${index}`}>
                           <a
                             href={`#${section.id}`}
-                            className={`page-nav-link ${
-                              activeSection === section.id ? "active" : ""
-                            }`}
+                            className={`page-nav-link ${activeSection === section.id ? "active" : ""
+                              }`}
                           >
                             {section.title}
                           </a>
