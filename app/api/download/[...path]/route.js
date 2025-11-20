@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 const API_BASE_URL =
   process.env.API_BASE_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:3001";
+  "http://localhost:5173";
 
 export async function GET(_request, { params }) {
   const { path } = params || {};

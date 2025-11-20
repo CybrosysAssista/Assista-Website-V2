@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { API_BASE_URL } from "../config/api";
+import { API_BASE_URL, AUTH_API_URL } from "../config/api";
 
 /**
  * Register a new user
@@ -9,7 +9,7 @@ import { API_BASE_URL } from "../config/api";
 export function useRegister() {
   return useMutation({
     mutationFn: async ({ email, password, name }) => {
-      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+      const response = await fetch(`${AUTH_API_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export function useSyncUser() {
         return null;
       }
 
-      const response = await fetch(`${API_BASE_URL}/api/users`, {
+      const response = await fetch(`${AUTH_API_URL}/api/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
