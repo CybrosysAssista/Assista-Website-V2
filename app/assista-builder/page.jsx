@@ -118,11 +118,10 @@ function Page() {
               {inputValue === "" && !isFocused && (
                 <div className="absolute inset-0 px-6 pt-6 pointer-events-none">
                   <span
-                    className={`text-[#a5a5a5] block transition-transform duration-300 ease-in-out transform ${
-                      isFlipping
+                    className={`text-[#a5a5a5] block transition-transform duration-300 ease-in-out transform ${isFlipping
                         ? "translate-y-2 opacity-0"
                         : "translate-y-0 opacity-100"
-                    }`}
+                      }`}
                     aria-hidden="true"
                   >
                     {placeholders[phIndex]}
@@ -146,7 +145,18 @@ function Page() {
                   </svg>
                 </button>
                 <div>
-                  <button className="flex items-center gap-3 cursor-pointer bg-[var(--primary-color)] text-white px-6 py-3 rounded-full hover:bg-[#666] transition duration-300">
+                  <button
+                    onClick={() => {
+                      if (!inputValue.trim()) {
+                        alert('Please enter a prompt to generate a workflow');
+                        return;
+                      }
+                      // Redirect to Assista-builder with the prompt
+                      const builderUrl = `http://localhost:8080?prompt=${encodeURIComponent(inputValue)}`;
+                      window.open(builderUrl, '_blank');
+                    }}
+                    className="flex items-center gap-3 cursor-pointer bg-[var(--primary-color)] text-white px-6 py-3 rounded-full hover:bg-[#666] transition duration-300"
+                  >
                     Generate Workflow{" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
