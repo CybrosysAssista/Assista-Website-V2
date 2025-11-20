@@ -17,8 +17,8 @@ function Hero() {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 w-full">
             <div>
               <h1 className="text-[35px] sm:text-[45px] font-medium mb-3 leading-12 md:leading-15">
-                Your smart partner to
-                <br className="hidden md:block" /> Learn more
+                Smarter Odoo development
+                <br className="hidden md:block" /> With a unified
                 {/* <span className="underlineimg">
                   <Image
                     src="/img/arrow.svg"
@@ -37,13 +37,11 @@ function Hero() {
                     height={100}
                     className="absolute -right-25 -top-6"
                   />
-                  build faster.
+                  ecosystem
                 </span>
               </h1>
               <p className="max-w-[600px] leading-6 md:leading-7 text-[#7e7e7e]">
-                A platform that offers a range of utilities including
-                development plugins a learning hub ready to use installation
-                scripts cheat sheets and more.
+                Experience a unified ecosystem with intelligent and integrated tools designed to enhance productivity across the entire Odoo lifecycle.
               </p>
               <div className="flex gap-2 mt-10 mb-3 md:mb-15">
                 <a
@@ -77,9 +75,9 @@ function Hero() {
                 <div className="divider"></div>
 
                 <div className="trust-text">
-                  <div className="trust-number">Trusted by 20k+</div>
+                  <div className="trust-number">Trusted by 4k+</div>
                   <div className="trust-description">
-                    Total Clients Across the Globe
+                    Odoo peoples across the globe
                   </div>
                 </div>
               </div>
