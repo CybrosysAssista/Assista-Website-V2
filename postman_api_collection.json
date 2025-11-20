@@ -21,16 +21,11 @@
           "raw": "{\n  \"repo\": \"odoo/odoo\"\n}"
         },
         "url": {
-          "raw": "http://10.0.20.95:5173/api/generate",
+          "raw": "http://localhost:3001/api/generate",
           "protocol": "http",
-          "host": [
-            "localhost"
-          ],
+          "host": ["localhost"],
           "port": "5173",
-          "path": [
-            "api",
-            "generate"
-          ]
+          "path": ["api", "generate"]
         },
         "description": "Generate documentation for the odoo/odoo repository"
       },
@@ -51,16 +46,11 @@
               "raw": "{\n  \"repo\": \"odoo/odoo\"\n}"
             },
             "url": {
-              "raw": "http://10.0.20.95:5173/api/generate",
+              "raw": "http://localhost:3001/api/generate",
               "protocol": "http",
-              "host": [
-                "localhost"
-              ],
+              "host": ["localhost"],
               "port": "5173",
-              "path": [
-                "api",
-                "generate"
-              ]
+              "path": ["api", "generate"]
             }
           },
           "status": "OK",
@@ -97,16 +87,11 @@
           }
         },
         "url": {
-          "raw": "http://10.0.20.95:5173/api/generate",
+          "raw": "http://localhost:3001/api/generate",
           "protocol": "http",
-          "host": [
-            "localhost"
-          ],
+          "host": ["localhost"],
           "port": "5173",
-          "path": [
-            "api",
-            "generate"
-          ]
+          "path": ["api", "generate"]
         },
         "description": "Generate documentation for any GitHub repository. Use variables: {{owner}} and {{repo_name}}"
       }
@@ -115,7 +100,7 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://10.0.20.95:5173",
+      "value": "http://localhost:3001",
       "type": "string"
     },
     {
@@ -130,4 +115,3 @@
     }
   ]
 }
-

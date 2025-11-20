@@ -16,6 +16,36 @@ function Page() {
 
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
+  // animated cycling placeholder for the textarea
+  const placeholders = [
+    "Automate invoice processing",
+    "Customer onboarding flow",
+    "Generate scheduled reports",
+    "Sync product catalog & inventory",
+    "Conditional overdue invoice actions",
+    "Multi step hiring workflow",
+    "Cross team handoff automation",
+    "Auto import & reconcile bank statements",
+    "Marketing funnel automation",
+    "Provision customer environments",
+  ];
+  const [phIndex, setPhIndex] = useState(0);
+  const [isFlipping, setIsFlipping] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // quick "flip" out, change text, flip in
+      setIsFlipping(true);
+      setTimeout(() => {
+        setPhIndex((i) => (i + 1) % placeholders.length);
+        setIsFlipping(false);
+      }, 350);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     const observedSections = tabs
       .map((t) => document.getElementById(t.id))
@@ -54,362 +84,107 @@ function Page() {
   return (
     <div>
       <Header />
-      <div className="">
-        <div className="cmpad pt-40 slider inslider vscodeslider lg:h-screen">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-10 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <Image src="/img/assista-builder.svg" alt="" width={50} height={50} />
-                <span className="font-semibold text-4xl text-[#818181]">
-                  Assista Builder
-                </span>
+      <div className="bg-[url('/img/bgbuilder.svg')] bg-cover bg-center bg-no-repeat pt-15">
+        <div className="cmpad pt-20 lg:pt-40 pb-30 inslider">
+          <div className="backdrop-blur-sm lg:backdrop-blur-3xl p-5 md:p-13  rounded-xl bg-[#ffffff8a] border border-gray-200">
+            <div className="flex gap-2 justify-between flex-row-reverse items-center mb-10">
+              <div className="">
+                <img src="/img/assista-builder.svg" alt="" width={80} />
               </div>
-
-              <h1 className="text-[35px] sm:text-[45px] font-medium mb-3 leading-12 md:leading-15">
-                Turn ideas into
-                <br className="hidden lg:block" />intelligent
-                <span className="brush brushbuilder">workflows.</span>
-              </h1>
-              <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
-                Build and automate tasks visually with Assista Builder a simple way to create smart, connected workflows in seconds.
-              </p>
-
-              <div className="flex gap-2 mt-10 mb-3 md:mb-15">
-                <a
-                  href=""
-                  className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
-                >
-                  Get Started
-                </a>
-                <a
-                  href=""
-                  className="text-center w-45 py-3 text-[#333] bg-[#94939328] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
-                >
-                  Contact Us
-                </a>
+              <div>
+                <h1 className="text-3xl mb-2 font-semibold bg-gradient-to-r from-[#11ccf1] to-[#04a4ef] bg-clip-text text-transparent inline-block">
+                  Hello, Designer
+                </h1>
+                <h2 className="text-2xl text-[#666] font-medium">
+                  Welcome Back to Assista Builder
+                </h2>
               </div>
             </div>
-            <div>
-              <Image
-                src="/img/banner.webp"
-                alt=""
-                width={600}
-                height={600}
-                className="w-full"
-              />
+
+            <p className="text-[#333] mb-5">
+              Explore the world of Assista Builder to turn your ideas into
+              intelligent workflows.
+            </p>
+
+            <div className="relative mb-3">
+              <textarea
+                rows={6}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                className="bg-[#ffffff45] w-full p-5 pb-20 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:black focus:border-black resize-none transition duration-300"
+              ></textarea>
+              {inputValue === "" && !isFocused && (
+                <div className="absolute inset-0 px-6 pt-6 pointer-events-none">
+                  <span
+                    className={`text-[#a5a5a5] block transition-transform duration-300 ease-in-out transform ${
+                      isFlipping
+                        ? "translate-y-2 opacity-0"
+                        : "translate-y-0 opacity-100"
+                    }`}
+                    aria-hidden="true"
+                  >
+                    {placeholders[phIndex]}
+                  </span>
+                </div>
+              )}
+              <div className="flex justify-between absolute bottom-6 left-4 right-4 items-center">
+                <button className="cursor-pointer">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      d="M12 4a5 5 0 0 0-5 5v6a1 1 0 1 1-2 0V9a7 7 0 1 1 14 0v8a5 5 0 0 1-10 0V9a3 3 0 0 1 6 0v8a1 1 0 1 1-2 0V9a1 1 0 1 0-2 0v8a3 3 0 0 0 6 0V9a5 5 0 0 0-5-5"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <div>
+                  <button className="flex items-center gap-3 cursor-pointer bg-[var(--primary-color)] text-white px-6 py-3 rounded-full hover:bg-[#666] transition duration-300">
+                    Generate Workflow{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="m476.59 227.05l-.16-.07L49.35 49.84A23.56 23.56 0 0 0 27.14 52A24.65 24.65 0 0 0 16 72.59v113.29a24 24 0 0 0 19.52 23.57l232.93 43.07a4 4 0 0 1 0 7.86L35.53 303.45A24 24 0 0 0 16 327v113.31A23.57 23.57 0 0 0 26.59 460a23.94 23.94 0 0 0 13.22 4a24.55 24.55 0 0 0 9.52-1.93L476.4 285.94l.19-.09a32 32 0 0 0 0-58.8"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <p>Start Searching :</p>
+              <div className="flex flex-wrap gap-2 items-center">
+                <button className="cursor-pointer px-3 py-1 text-sm text-[#666]  border border-gray-300 hover:border-gray-600 transition duration-300 rounded-2xl">
+                  Tipping Calculator
+                </button>
+                <button className="cursor-pointer px-3 py-1 text-sm text-[#666]  border border-gray-300 hover:border-gray-600 transition duration-300 rounded-2xl">
+                  Recipie Generator
+                </button>
+                <button className="cursor-pointer px-3 py-1 text-sm text-[#666]  border border-gray-300 hover:border-gray-600 transition duration-300 rounded-2xl">
+                  ERP Dashboard
+                </button>
+                <button className="cursor-pointer px-3 py-1 text-sm text-[#666]  border border-gray-300 hover:border-gray-600 transition duration-300 rounded-2xl">
+                  Expense Tracker
+                </button>
+                <button className="cursor-pointer px-3 py-1 text-sm text-[#666]  border border-gray-300 hover:border-gray-600 transition duration-300 rounded-2xl">
+                  Landing Page
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Tab Navigation */}
-
-        <div className="sticky top-22 z-10 overflow-hidden overflow-x-auto pt-4 md:mb-4">
-          <nav className="bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-1 lg:mb-20">
-            {tabs.map((t) => (
-              <a
-                key={t.id}
-                href={`#${t.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollTo(t.id);
-                }}
-                aria-current={activeTab === t.id ? "true" : "false"}
-                className={`text-md font-medium px-8 py-3 rounded-full transition duration-200 ${
-                  activeTab === t.id
-                    ? "bg-[black] text-white"
-                    : "bg-[#f7f7f7] text-gray-700 hover:bg-[#333] hover:text-white"
-                }`}
-              >
-                {t.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-
-        <div className="cmpad pt-10 pb-10 md:pt-0 md:pb-10">
-          <section id="ide-docs" className="mb-16">
-            <div className="text-center">
-              <span className="badge">IDE Docs</span>
-            </div>
-
-            <h2 className="mainhead relative w-max m-auto">
-              Grow business with{" "}
-              <span className="underlineimg underlinebuilder">automation tools</span>
-            </h2>
-
-            <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
-              Simplify your workflows, boost productivity, and manage every
-              process with ease all from one intuitive dashboard built to scale
-              with your business.
-            </p>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
-              <div>
-                <Image
-                  src="/img/banner1.webp"
-                  alt=""
-                  width={600}
-                  height={600}
-                  className="m-auto"
-                />
-              </div>
-              <div className="flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-medium mb-3 leading-10 md:leading-13">
-                  Streamline your <br /> Wrok with smart features
-                </h2>
-
-                <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
-                  Automate repetitive tasks connect your favorite apps, and gain
-                  real-time insights to make smarter decisions helping your team
-                  work faster and more efficiently.
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
-              <div className="order-2 lg:order-1 flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-medium mb-3 leading-10 md:leading-13">
-                  Streamline your <br /> Wrok with smart features
-                </h2>
-
-                <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
-                  Automate repetitive tasks connect your favorite apps, and gain
-                  real-time insights to make smarter decisions helping your team
-                  work faster and more efficiently.
-                </p>
-              </div>
-              <div className="order-1 lg:order-2">
-                <Image
-                  src="/img/banner1.webp"
-                  alt=""
-                  width={600}
-                  height={600}
-                  className="m-auto"
-                />
-              </div>
-            </div>
-          </section>
-
-          <section id="create" className="mb-16">
-            <div className="text-center">
-              <span className="badge">Create</span>
-            </div>
-
-            <h2 className="mainhead relative w-max m-auto">
-              Grow business with{" "}
-              <span className="underlineimg underlinebuilder">automation tools</span>
-            </h2>
-
-            <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
-              Simplify your workflows, boost productivity, and manage every
-              process with ease all from one intuitive dashboard built to scale
-              with your business.
-            </p>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
-              <div>
-                <Image
-                  src="/img/banner1.webp"
-                  alt=""
-                  width={600}
-                  height={600}
-                  className="m-auto"
-                />
-              </div>
-              <div className="flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-medium mb-3 leading-10 md:leading-13">
-                  Streamline your <br /> Wrok with smart features
-                </h2>
-
-                <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
-                  Automate repetitive tasks connect your favorite apps, and gain
-                  real-time insights to make smarter decisions helping your team
-                  work faster and more efficiently.
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
-              <div className="order-2 lg:order-1 flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-medium mb-3 leading-10 md:leading-13">
-                  Streamline your <br /> Wrok with smart features
-                </h2>
-
-                <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
-                  Automate repetitive tasks connect your favorite apps, and gain
-                  real-time insights to make smarter decisions helping your team
-                  work faster and more efficiently.
-                </p>
-              </div>
-              <div className="order-1 lg:order-2">
-                <Image
-                  src="/img/banner1.webp"
-                  alt=""
-                  width={600}
-                  height={600}
-                  className="m-auto"
-                />
-              </div>
-            </div>
-          </section>
-
-          <section id="collaborate" className="mb-16">
-            <div className="text-center">
-              <span className="badge">Collaborate</span>
-            </div>
-
-            <h2 className="mainhead relative w-max m-auto">
-              Work together with{" "}
-              <span className="underlineimg underlinebuilder">
-                real-time collaboration
-              </span>
-            </h2>
-
-            <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
-              Enable seamless teamwork with real-time editing, instant
-              messaging, and shared workspaces that keep your entire team in
-              sync.
-            </p>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
-              <div>
-                <Image
-                  src="/img/banner1.webp"
-                  alt=""
-                  width={600}
-                  height={600}
-                  className="m-auto"
-                />
-              </div>
-              <div className="flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-medium mb-3 leading-10 md:leading-13">
-                  Real-time <br /> Collaboration tools
-                </h2>
-
-                <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
-                  Share your workspace, edit code together, and communicate
-                  seamlessly with built-in chat and video calling features.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section id="security" className="mb-16">
-            <div className="text-center">
-              <span className="badge">Security</span>
-            </div>
-
-            <h2 className="mainhead relative w-max m-auto">
-              Enterprise grade{" "}
-              <span className="underlineimg underlinebuilder">security features</span>
-            </h2>
-
-            <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
-              Protect your code and data with advanced security measures,
-              encryption, and compliance standards.
-            </p>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[90%] mx-auto">
-              <div className="flex flex-col justify-center">
-                <h2 className="text-3xl md:text-4xl font-medium mb-3 leading-10 md:leading-13">
-                  Secure your <br /> Development environment
-                </h2>
-
-                <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
-                  Advanced encryption, secure authentication, and compliance
-                  with industry standards to keep your projects safe.
-                </p>
-              </div>
-              <div>
-                <Image
-                  src="/img/banner1.webp"
-                  alt=""
-                  width={600}
-                  height={600}
-                  className="m-auto"
-                />
-              </div>
-            </div>
-          </section>
-
-          <section id="customers" className="mb-16">
-            <div className="text-center">
-              <span className="badge">Customers</span>
-            </div>
-
-            <h2 className="mainhead relative w-max m-auto">
-              Trusted by thousands of
-              <span className="underlineimg underlinebuilder"> developers</span>
-            </h2>
-
-            <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
-              Join thousands of developers and teams who trust Assista IDE for
-              their development needs.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[90%] mx-auto">
-              <div className="text-center p-6 bg-white rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                <h3 className="text-3xl font-semibold mb-2">10,000+</h3>
-                <p className="text-[#7e7e7e]">Active Developers</p>
-              </div>
-              <div className="text-center p-6 bg-white rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                <h3 className="text-3xl font-semibold mb-2">500+</h3>
-                <p className="text-[#7e7e7e]">Enterprise Teams</p>
-              </div>
-              <div className="text-center p-6 bg-white rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                <h3 className="text-3xl font-semibold mb-2">99.9%</h3>
-                <p className="text-[#7e7e7e]">Customer Satisfaction</p>
-              </div>
-            </div>
-          </section>
-
-          <section id="faq" className="mb-16">
-            <div className="text-center">
-              <span className="badge">FAQ</span>
-            </div>
-
-            <h2 className="mainhead relative w-max m-auto">
-              Frequently Asked{" "}
-              <span className="underlineimg underlinebuilder">Questions</span>
-            </h2>
-
-            <p className="leading-7 text-[#7e7e7e] text-center max-w-[750px] mx-auto mb-15 text-lg">
-              Find answers to common queries about features, setup, and how
-              Assista enhances your Odoo development experience.
-            </p>
-
-            <div className="max-w-[800px] mx-auto">
-              <div className="space-y-6">
-                <div className="bg-white p-6 rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                  <h3 className="text-xl font-semibold mb-3">
-                    What is Assista IDE?
-                  </h3>
-                  <p className="text-[#7e7e7e]">
-                    Assista IDE is an AI-powered integrated development
-                    environment that combines intelligent code assistance with
-                    real-time collaboration features.
-                  </p>
-                </div>
-                <div className="bg-white p-6 rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                  <h3 className="text-xl font-semibold mb-3">
-                    How does the AI assistance work?
-                  </h3>
-                  <p className="text-[#7e7e7e]">
-                    Our AI analyzes your code patterns and provides intelligent
-                    suggestions, auto-completion, and error detection to help
-                    you code faster and more efficiently.
-                  </p>
-                </div>
-                <div className="bg-white p-6 rounded-lg [box-shadow:0px_0px_20px_#0000000d]">
-                  <h3 className="text-xl font-semibold mb-3">
-                    Is there a free trial available?
-                  </h3>
-                  <p className="text-[#7e7e7e]">
-                    Yes, we offer a 14-day free trial with full access to all
-                    features. No credit card required.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
       <Footer />

@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 // API base URL
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://10.0.20.95:5173";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5173";
 
 function page() {
   const [activeSection, setActiveSection] = useState("");
@@ -384,15 +384,20 @@ function page() {
       .map((segment) => encodeURIComponent(segment))
       .join("/");
     const safeBaseName =
-      repoSegments[repoSegments.length - 1]?.replace(/[^a-zA-Z0-9._-]+/g, "-") ||
-      "documentation";
+      repoSegments[repoSegments.length - 1]?.replace(
+        /[^a-zA-Z0-9._-]+/g,
+        "-"
+      ) || "documentation";
 
     try {
       setDownloadMenuOpen(false);
-      const response = await fetch(`/api/download/${encodedRepo}/${normalizedFormat}`, {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetch(
+        `/api/download/${encodedRepo}/${normalizedFormat}`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -412,11 +417,17 @@ function page() {
 
         // If the PDF generation fails, fall back to Markdown and create a PDF client-side
         if (normalizedFormat === "pdf") {
-          console.warn("PDF download failed, falling back to Markdown", errorText);
-          const markdownResponse = await fetch(`/api/download/${encodedRepo}/md`, {
-            method: "GET",
-            credentials: "include",
-          });
+          console.warn(
+            "PDF download failed, falling back to Markdown",
+            errorText
+          );
+          const markdownResponse = await fetch(
+            `/api/download/${encodedRepo}/md`,
+            {
+              method: "GET",
+              credentials: "include",
+            }
+          );
 
           if (markdownResponse.ok) {
             const markdownText = await markdownResponse.text();
@@ -572,14 +583,12 @@ function page() {
           return (
             <button
               onClick={() => setShowDiagramsView(true)}
-              className="w-fit flex items-center justify-center gap-2 px-4 py-2 text-sm text-blue-600 hover:text-blue-800 border border-blue-200 rounded-lg transition my-4 cursor-pointer"
-            >
+              className="w-fit flex items-center justify-center gap-2 px-4 py-2 text-sm text-blue-600 hover:text-blue-800 border border-blue-200 rounded-lg transition my-4 cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
-                viewBox="0 0 24 24"
-              >
+                viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
                   d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12c0 1.11-.89 2-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m9 17v-6H6v6h9m-9 2h9v2H6v-2Z"
@@ -771,8 +780,7 @@ function page() {
             target="_blank"
             rel="noopener noreferrer"
             href={finalHref}
-            {...props}
-          >
+            {...props}>
             {children}
           </a>
         );
@@ -910,8 +918,7 @@ function page() {
                           className="inline-link"
                           target="_blank"
                           rel="noopener noreferrer"
-                          href={link.href}
-                        >
+                          href={link.href}>
                           {link.text}
                         </a>
                       </li>
@@ -1441,8 +1448,7 @@ function page() {
                 className="w-16 h-16 mx-auto"
                 fill="none"
                 stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+                viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -1459,8 +1465,7 @@ function page() {
             </p>
             <a
               href="/assista-wiki"
-              className="px-6 py-3 bg-(--primary-color) text-white rounded-full hover:bg-[#666] transition duration-300 inline-block"
-            >
+              className="px-6 py-3 bg-(--primary-color) text-white rounded-full hover:bg-[#666] transition duration-300 inline-block">
               Go Back
             </a>
           </div>
@@ -1485,14 +1490,12 @@ function page() {
                     href={`https://github.com/${repo}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title="View on GitHub"
-                  >
+                    title="View on GitHub">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
                       height="20"
-                      viewBox="0 0 24 24"
-                    >
+                      viewBox="0 0 24 24">
                       <path
                         fill="currentColor"
                         d="M18.364 15.536L16.95 14.12l1.414-1.414a5 5 0 0 0-7.071-7.071L9.878 7.05L8.464 5.636l1.414-1.414a7 7 0 0 1 9.9 9.9zm-2.829 2.828l-1.414 1.414a7 7 0 0 1-9.9-9.9l1.415-1.414L7.05 9.88l-1.414 1.414a5 5 0 0 0 7.07 7.071l1.415-1.414zm-.707-10.607l1.415 1.415l-7.072 7.07l-1.414-1.414z"
@@ -1548,8 +1551,7 @@ function page() {
                           }}
                           className={`nav-link w-full text-left ${
                             activePageId === page.id ? "nav-link-main" : ""
-                          }`}
-                        >
+                          }`}>
                           {page.title}
                         </button>
                       </li>
@@ -1589,8 +1591,7 @@ function page() {
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           rehypePlugins={[rehypeRaw]}
-                          components={components}
-                        >
+                          components={components}>
                           {sanitizeMarkdown(activePage.content)}
                         </ReactMarkdown>
                       </div>
@@ -1617,14 +1618,12 @@ function page() {
                                   });
                                 }
                               }}
-                              className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition"
-                            >
+                              className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="20"
                                 height="20"
-                                viewBox="0 0 24 24"
-                              >
+                                viewBox="0 0 24 24">
                                 <path
                                   fill="currentColor"
                                   d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.42Z"
@@ -1657,8 +1656,7 @@ function page() {
                                   });
                                 }
                               }}
-                              className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition"
-                            >
+                              className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition">
                               <span className="font-medium">
                                 {pages[currentIndex + 1].title}
                               </span>
@@ -1666,8 +1664,7 @@ function page() {
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="20"
                                 height="20"
-                                viewBox="0 0 24 24"
-                              >
+                                viewBox="0 0 24 24">
                                 <path
                                   fill="currentColor"
                                   d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6-6 6-1.41-1.42Z"
@@ -1709,14 +1706,12 @@ function page() {
                     className="cursor-pointer shrink-0"
                     onClick={handleAsk}
                     disabled={!question.trim()}
-                    aria-label="Ask documentation assistant"
-                  >
+                    aria-label="Ask documentation assistant">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="28"
                       height="28"
-                      viewBox="0 0 24 24"
-                    >
+                      viewBox="0 0 24 24">
                       <path
                         fill="currentColor"
                         fillRule="evenodd"
@@ -1746,8 +1741,7 @@ function page() {
                             href={`#${section.id}`}
                             className={`page-nav-link ${
                               activeSection === section.id ? "active" : ""
-                            }`}
-                          >
+                            }`}>
                             {section.title}
                           </a>
                         </li>
@@ -2057,8 +2051,7 @@ function DiagramsView({ pages, activePageId, onClose }) {
         <h2 className="text-2xl font-bold text-gray-800">Diagrams & Graphs</h2>
         <button
           onClick={onClose}
-          className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition"
-        >
+          className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition">
           Back to Content
         </button>
       </div>
@@ -2075,8 +2068,7 @@ function DiagramsView({ pages, activePageId, onClose }) {
             width="64"
             height="64"
             viewBox="0 0 24 24"
-            className="mx-auto mb-4 text-gray-400"
-          >
+            className="mx-auto mb-4 text-gray-400">
             <path
               fill="currentColor"
               d="M13 9h5.5L13 3.5V9M6 2h8l6 6v12c0 1.11-.89 2-2 2H6a2 2 0 0 1-2-2V4c0-1.11.89-2 2-2m0 10v2h8v-2H6Z"
@@ -2094,8 +2086,7 @@ function DiagramsView({ pages, activePageId, onClose }) {
               <div
                 key={`curr-${idx}`}
                 id={`diagram-${diagramId}`}
-                className="border border-gray-200 rounded-lg p-4 bg-white"
-              >
+                className="border border-gray-200 rounded-lg p-4 bg-white">
                 <div className="flex justify-between items-center mb-3">
                   <h4 className="text-lg font-semibold text-gray-800">
                     {diagram.title}
@@ -2106,8 +2097,7 @@ function DiagramsView({ pages, activePageId, onClose }) {
                         downloadDiagram(diagramId, diagram.title, "svg")
                       }
                       className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
-                      title="Download as SVG"
-                    >
+                      title="Download as SVG">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -2117,8 +2107,7 @@ function DiagramsView({ pages, activePageId, onClose }) {
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
+                        strokeLinejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
                         <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -2130,8 +2119,7 @@ function DiagramsView({ pages, activePageId, onClose }) {
                         downloadDiagram(diagramId, diagram.title, "png")
                       }
                       className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
-                      title="Download as PNG"
-                    >
+                      title="Download as PNG">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -2141,8 +2129,7 @@ function DiagramsView({ pages, activePageId, onClose }) {
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
+                        strokeLinejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
                         <line x1="12" y1="15" x2="12" y2="3"></line>

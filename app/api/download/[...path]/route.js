@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 const API_BASE_URL =
   process.env.API_BASE_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "http://10.0.20.95:5173";
+  "http://localhost:5173";
 
 export async function GET(_request, { params }) {
   const { path } = params || {};
@@ -49,8 +49,7 @@ export async function GET(_request, { params }) {
       response.headers.get("content-type") || "application/octet-stream";
     headers.set("content-type", contentType);
 
-    const repoName =
-      repoSegments[repoSegments.length - 1] || "documentation";
+    const repoName = repoSegments[repoSegments.length - 1] || "documentation";
     const safeBaseName = repoName.replace(/[^a-zA-Z0-9._-]+/g, "-");
     const downloadFilename = `${safeBaseName}.${normalizedFormat}`;
 
@@ -71,4 +70,3 @@ export async function GET(_request, { params }) {
     );
   }
 }
-
