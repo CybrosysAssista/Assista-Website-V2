@@ -3,14 +3,14 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="h-screen mt-40 md:mt-50 xl:mt-0 slider mb-40 xl:mb-0">
+    <div className="xl:h-screen mt-40 md:mt-50 xl:mt-0 slider mb-20 xl:mb-0">
       <div className="cmpad sm:h-full flex items-center relative">
         <Image
           src="/img/globe.svg"
           alt="Globe"
           width={300}
           height={300}
-          className="globe"
+          className="globe hidden md:block"
         />
 
         <div className="w-full">
@@ -35,7 +35,7 @@ function Hero() {
                     alt=""
                     width={100}
                     height={100}
-                    className="absolute -right-25 -top-6"
+                    className="absolute right-0 sm:-right-25 -top-30 sm:-top-6"
                   />
                   ecosystem
                 </span>
@@ -43,7 +43,7 @@ function Hero() {
               <p className="max-w-[600px] leading-6 md:leading-7 text-[#7e7e7e]">
                 Experience a unified ecosystem with intelligent and integrated tools designed to enhance productivity across the entire Odoo lifecycle.
               </p>
-              <div className="flex gap-2 mt-10 mb-3 md:mb-15">
+              <div className="flex gap-2 mt-10 mb-10 md:mb-15">
                 <a
                   href=""
                   className="flex justify-center items-center w-45 py-3 bg-[var(--primary-color)] text-white rounded-full hover:bg-[#666] transition duration-300"
@@ -58,7 +58,7 @@ function Hero() {
                 </a>
               </div>
 
-              <div className="trust-container">
+              <div className="trust-container  flex-wrap sm:flex-auto">
                 <div className="avatars">
                   <div className="avatar avatar-1">
                     <Image src="/img/user1.png" alt="" width={60} height={60} />
@@ -72,7 +72,7 @@ function Hero() {
                   <div className="plus-badge">98+</div>
                 </div>
 
-                <div className="divider"></div>
+                <div className="divider hidden sm:block"></div>
 
                 <div className="trust-text">
                   <div className="trust-number">Trusted by 4k+</div>
@@ -82,7 +82,7 @@ function Hero() {
                 </div>
               </div>
             </div>
-            <div className="relative h-[400px] lg:h-[300px] xl:h-auto">
+            <div className="relative hidden xl:block h-[400px] lg:h-[300px] xl:h-auto">
               <div className="icon">
                 <Image src="/img/icon1.svg" alt="JS" width={40} height={40} />
               </div>

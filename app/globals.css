@@ -148,7 +148,7 @@ body {
 
 .brush {
   color: #fff;
-  background-image: url(/img/brush.svg);
+  background-image: url(/img/brushide.svg);
   background-position: center;
   background-repeat: no-repeat;
   padding: 4px 10px 5px 28px;
@@ -2163,4 +2163,11 @@ input::placeholder {
   /* p{
     font-size: 1.1rem;
   } */
+}
+
+
+@media(max-width: 767px){
+  .underlineimg{
+    display: inline-flex;
+  }
 }

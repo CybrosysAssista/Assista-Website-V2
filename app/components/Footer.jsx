@@ -10,7 +10,7 @@ function Footer() {
 
       <div className="footer-container cmpad">
         <div className="footer-content">
-          <div className="footer-section">
+          <div className="footer-section mb-5 md:mb-0">
             <div className="footer-logo">
               <Link href="/">
               <Image
@@ -125,7 +125,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="footer-section ps-0 lg:ps-10">
+          <div className="footer-section ps-0 lg:ps-10 hidden md:block">
             <h3>Quick Links</h3>
             <ul>
               <li>
@@ -149,7 +149,7 @@ function Footer() {
             </ul>
           </div>
 
-          <div className="footer-section">
+          <div className="footer-section hidden md:block">
             <h3>Resources</h3>
             <ul>
               <li>

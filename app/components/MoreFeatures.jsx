@@ -79,7 +79,7 @@ function CaseStudies() {
       <div className="cmpad bg-[#3e78c90c] rounded-2xl pb-15 px-10">
         {/* Tabs */}
         <div className="sticky top-12 z-10 overflow-hidden overflow-x-auto pt-15">
-          <nav className="bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-4 lg:mb-20">
+          <nav className="hidden md:flex bg-white flex flex-wrap gap-3 justify-center [box-shadow:0px_0px_20px_#00000014] p-3 rounded-full w-max mx-auto mb-4 lg:mb-20">
             {tabs.map((t) => (
               <button
                 key={t.id}
@@ -116,6 +116,7 @@ function CaseStudies() {
               Streamline your <br /> Work with smart features
             </>
           }
+          badge="Assista Wiki"
           desc="Quickly create, modify, and organize tasks with a clean, intuitive interface that enhances productivity and clarity."
           img="/img/banner2.png"
           flip={true}
@@ -128,6 +129,7 @@ function CaseStudies() {
               Streamline your <br /> Work with smart features
             </>
           }
+          badge="Assista News"
           desc="Work together in real time, share ideas, and track progress effortlessly with built-in collaboration tools."
           img="/img/banner3.png"
           flip={false}
@@ -140,6 +142,7 @@ function CaseStudies() {
               Streamline your <br /> Work with smart features
             </>
           }
+          badge="Assista Air"
           desc="Sync discussions, documents, and progress updates across teams — ensuring everyone stays aligned at every step."
           img="/img/banner1.png"
           flip={true}
@@ -152,6 +155,7 @@ function CaseStudies() {
               Streamline your <br /> Work with smart features
             </>
           }
+          badge="Assista Builder"
           desc="Work together in real time, share ideas, and track progress effortlessly with built-in collaboration tools."
           img="/img/banner2.png"
           flip={false}
@@ -189,7 +193,7 @@ function CaseStudies() {
 }
 
 // Reusable section component
-function Section({ id, title, desc, img, flip }) {
+function Section({ id, title, desc, img, flip, badge }) {
   return (
     <section id={id} className="scroll-mt-[180px] mb-15 last:mb-0">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -198,6 +202,7 @@ function Section({ id, title, desc, img, flip }) {
             flip ? "lg:order-2" : "lg:order-1"
           }`}
         >
+          <span className="badge w-max block md:!hidden">{badge}</span>
           <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
             {title}
           </h2>

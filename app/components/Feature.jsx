@@ -15,7 +15,7 @@ function Feature() {
             alt=""
             width={100}
             height={100}
-            className="absolute -right-30 -top-6"
+            className="absolute right-0 lg:-right-30 -top-20 lg:-top-6"
           />
           Grow with <span className="underlineimg">automation tools</span>
         </h2>
@@ -38,10 +38,10 @@ function Feature() {
           </div>
           <div className="flex flex-col justify-center">
             <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
-              Odoo’s first IDE with <br /> An intelligent coding agent
+              Odoo’s first IDE with <br className="hidden md:block" /> An intelligent coding agent
             </h2>
 
-            <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
+            <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
               Assista IDE is the first development environment built exclusively
               for Odoo, combining advanced tooling with smart AI agent.
             </p>
@@ -57,10 +57,10 @@ function Feature() {
           <div className="lg:order-1 order-2 flex flex-col justify-center">
             <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
               The Smartest Way
-              <br /> To interact with your Odoo
+              <br className="hidden md:block" /> To interact with your Odoo
             </h2>
 
-            <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
+            <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
               Assista X lets you query, analyze, and manage your Odoo database
               using simple natural language with no technical skills needed.
             </p>
@@ -93,12 +93,13 @@ function Feature() {
           </div>
           <div className="flex flex-col justify-center">
             <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
-              Understand your Odoo <br /> Instance like never before
+              Understand your Odoo <br className="hidden md:block" /> Instance like never before
             </h2>
 
-            <p className="leading-7 text-[#7e7e7e] max-w-[700px] mx-auto mb-8 text-lg">
+            <p className="leading-7 text-[#7e7e7e] max-w-[700px] lg:mx-auto mb-8 text-lg">
               Track server health, diagnose performance issues, and optimize
-              custom modules with intelligent analytics from Assista Performance.
+              custom modules with intelligent analytics from Assista
+              Performance.
             </p>
 
             <a
