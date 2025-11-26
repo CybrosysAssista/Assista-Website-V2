@@ -74,6 +74,13 @@ function CaseStudies() {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
+  const badgeThemes = {
+    "assista-wiki": "bg-[#24bebe26] text-[#24bebe]",
+    "assista-news": "bg-[#fdb80026] text-[#fdb800]",
+    "assista-air": "bg-[#74a9af2b] text-[#74a9af]",
+    "assista-builder": "bg-[#019aeb24] text-[#019aeb]",
+  };
+
   return (
     <div className="pb-10 pt-10">
       <div className="cmpad bg-[#3e78c90c] rounded-2xl pb-15 px-10">
@@ -96,19 +103,6 @@ function CaseStudies() {
           </nav>
         </div>
 
-        {/* Sections */}
-        {/* <Section
-          id="easy-instance"
-          title={
-            <>
-              Streamline your <br /> Work with smart features
-            </>
-          }
-          desc="Automate repetitive tasks, connect your favorite apps, and gain real-time insights to make smarter decisions."
-          img="/img/banner1.png"
-          flip={false}
-        /> */}
-
         <Section
           id="assista-wiki"
           title={
@@ -120,6 +114,7 @@ function CaseStudies() {
           desc="Quickly create, modify, and organize tasks with a clean, intuitive interface that enhances productivity and clarity."
           img="/img/banner2.png"
           flip={true}
+          badgeClassName={badgeThemes["assista-wiki"]}
         />
 
         <Section
@@ -133,6 +128,7 @@ function CaseStudies() {
           desc="Work together in real time, share ideas, and track progress effortlessly with built-in collaboration tools."
           img="/img/banner3.png"
           flip={false}
+          badgeClassName={badgeThemes["assista-news"]}
         />
 
         <Section
@@ -146,6 +142,7 @@ function CaseStudies() {
           desc="Sync discussions, documents, and progress updates across teams — ensuring everyone stays aligned at every step."
           img="/img/banner1.png"
           flip={true}
+          badgeClassName={badgeThemes["assista-air"]}
         />
 
         <Section
@@ -159,31 +156,9 @@ function CaseStudies() {
           desc="Work together in real time, share ideas, and track progress effortlessly with built-in collaboration tools."
           img="/img/banner2.png"
           flip={false}
+          badgeClassName={badgeThemes["assista-builder"]}
         />
 
-         {/* <Section
-          id="helper-for-vs-code"
-          title={
-            <>
-              Streamline your <br /> Work with smart features
-            </>
-          }
-          desc="Sync discussions, documents, and progress updates across teams — ensuring everyone stays aligned at every step."
-          img="/img/banner3.png"
-          flip={true}
-        />
-
-        <Section
-          id="helper-for-pycharm"
-          title={
-            <>
-              Streamline your <br /> Work with smart features
-            </>
-          }
-          desc="Work together in real time, share ideas, and track progress effortlessly with built-in collaboration tools."
-          img="/img/banner1.png"
-          flip={false}
-        /> */}
 
         
 
@@ -193,7 +168,7 @@ function CaseStudies() {
 }
 
 // Reusable section component
-function Section({ id, title, desc, img, flip, badge }) {
+function Section({ id, title, desc, img, flip, badge, badgeClassName = "" }) {
   return (
     <section id={id} className="scroll-mt-[180px] mb-15 last:mb-0">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -202,7 +177,9 @@ function Section({ id, title, desc, img, flip, badge }) {
             flip ? "lg:order-2" : "lg:order-1"
           }`}
         >
-          <span className="badge w-max block md:!hidden">{badge}</span>
+          <span className={`text-sm px-3 font-medium py-[8px] mb-3 rounded-full w-max block md:!hidden ${badgeClassName}`}>
+            {badge}
+          </span>
           <h2 className="text-4xl font-medium mb-3 leading-12 md:leading-13">
             {title}
           </h2>

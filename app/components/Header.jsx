@@ -417,7 +417,7 @@ function Header() {
             <button
               aria-label="Toggle menu"
               aria-expanded={isMobileOpen}
-              className="lg:hidden text-[var(--primary-color)] inline-flex items-center justify-center w-10 h-10 rounded-full border border-[var(--primary-color)] hover:bg-[var(--primary-color)] hover:text-white transition duration-300"
+              className="cursor-pointer lg:hidden text-[var(--primary-color)] inline-flex items-center justify-center w-10 h-10 rounded-full border border-[var(--primary-color)] hover:bg-[var(--primary-color)] hover:text-white transition duration-300"
               onClick={() => setIsMobileOpen((v) => !v)}
             >
               <svg
@@ -589,7 +589,7 @@ function Header() {
             <button
               type="button"
               onClick={handleCallToAction}
-              className="mt-4 w-full gap-3 inline-flex justify-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-full items-center hover:bg-[#454685] transition duration-300 disabled:opacity-70"
+              className="cursor-pointer mt-4 w-full gap-3 inline-flex justify-center px-6 py-3 bg-[var(--primary-color)] text-white rounded-full items-center hover:bg-[#666] transition duration-300 disabled:opacity-70"
               disabled={isProcessing || isLoadingSession}
             >
               {renderCallToActionIcon()}

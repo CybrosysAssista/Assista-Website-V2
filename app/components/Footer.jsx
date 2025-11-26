@@ -193,7 +193,7 @@ function Footer() {
             <div className="copyright">
               © 2025 Cybrosys Assista. All rights reserved.
             </div>
-            <div className="footer-links">
+            <div className="footer-links !hidden md:block">
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Service</a>
               <a href="#">Cookie Policy</a>

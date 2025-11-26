@@ -154,7 +154,7 @@ body {
   padding: 4px 10px 5px 28px;
   /* font-size: 2.8rem; */
   display: inline-flex;
-  justify-content: center;
+  justify-content: center;  
 }
 .brush.brushide {
   background-image: url(/img/brushide.svg);
