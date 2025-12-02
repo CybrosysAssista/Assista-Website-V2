@@ -59,7 +59,12 @@ function Page() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-10 items-center">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <Image src="/img/assista-performance.svg" alt="" width={50} height={50} />
+                <Image
+                  src="/img/assista-performance.svg"
+                  alt=""
+                  width={50}
+                  height={50}
+                />
                 <span className="font-semibold text-4xl text-[#818181]">
                   Assista Performance
                 </span>
@@ -71,7 +76,9 @@ function Page() {
                 <span className="brush brushp">efficiency.</span>
               </h1>
               <p className="max-w-[600px] leading-7 text-[#7e7e7e]">
-                Assista Performance empowers you with real-time insights, analytics, and optimization tools to monitor efficiency and enhance system reliability.
+                Assista Performance empowers you with real-time insights,
+                analytics, and optimization tools to monitor efficiency and
+                enhance system reliability.
               </p>
 
               <div className="flex gap-2 mt-10 mb-3 md:mb-15">
@@ -82,7 +89,7 @@ function Page() {
                   Get Started
                 </a>
                 <a
-                  href=""
+                  href="/contact"
                   className="text-center w-45 py-3 text-[#333] bg-[#94939328] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
                 >
                   Contact Us

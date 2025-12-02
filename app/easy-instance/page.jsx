@@ -89,7 +89,7 @@ function Page() {
                   Get Started
                 </a>
                 <a
-                  href=""
+                  href="/contact"
                   className="text-center w-45 py-3 text-[#333] bg-[#94939328] border-[#88848425] border-2 rounded-full hover:bg-[#666] hover:border-[#666] hover:text-white transition duration-300"
                 >
                   Contact Us
